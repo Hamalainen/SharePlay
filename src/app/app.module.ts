@@ -5,10 +5,13 @@ import { YoutubePlayerModule } from 'ngx-youtube-player';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {PlayerComponent} from './main/player/player.component'
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,

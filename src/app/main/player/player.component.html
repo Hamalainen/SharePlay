@@ -1,0 +1,11 @@
+<div id="player-div" style="text-align:center; background-color:#202020">
+  <youtube-player
+  [videoId]="id"
+  (ready)="savePlayer($event)"
+  (change)="onStateChange($event)"
+  ></youtube-player>
+</div>
+
+
+
+
