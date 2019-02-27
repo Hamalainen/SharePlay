@@ -18,6 +18,7 @@ import { VideoDurationPipe } from './shared/pipes/video-duration.pipe';
 import { VideoLikesViewsPipe } from './shared/pipes/video-likes-views.pipe';
 import { VideoNamePipe } from './shared/pipes/video-name.pipe';
 import { LazyScrollDirective } from './shared/directives/lazy-scroll/lazy-scroll.directive';
+import { VideoListComponent } from './main/video-list/video-list.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { LazyScrollDirective } from './shared/directives/lazy-scroll/lazy-scroll
     VideoDurationPipe,
     VideoLikesViewsPipe,
     VideoNamePipe,
-    LazyScrollDirective
+    LazyScrollDirective,
+    VideoListComponent
   ],
   imports: [
     BrowserModule,
