@@ -11,7 +11,7 @@ export class AppComponent {
 
 
   player: YT.Player;
-  private id: string = 'qDuKsiwS5xw';
+  id: string = 'qDuKsiwS5xw';
 
   savePlayer(player) {
     this.player = player;
