@@ -11,13 +11,15 @@ import { BrowserNotificationService } from './shared/services/browser-notificati
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {PlayerComponent} from './main/player/player.component'
+import {PlayerComponent} from './main/player/player.component';
+import { MainComponent } from './main//main.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerComponent
+    PlayerComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
