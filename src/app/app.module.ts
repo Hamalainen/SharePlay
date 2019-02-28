@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Services
 import { YoutubeApiService } from './shared/services/youtube-api.service';
@@ -19,6 +20,7 @@ import { VideoLikesViewsPipe } from './shared/pipes/video-likes-views.pipe';
 import { VideoNamePipe } from './shared/pipes/video-name.pipe';
 import { LazyScrollDirective } from './shared/directives/lazy-scroll/lazy-scroll.directive';
 import { VideoListComponent } from './main/video-list/video-list.component';
+import { VideoSearchComponent } from './main/video-search/video-search.component';
 
 
 @NgModule({
@@ -31,12 +33,14 @@ import { VideoListComponent } from './main/video-list/video-list.component';
     VideoLikesViewsPipe,
     VideoNamePipe,
     LazyScrollDirective,
-    VideoListComponent
+    VideoListComponent,
+    VideoSearchComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     YoutubeApiService,
