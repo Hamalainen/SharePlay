@@ -3,6 +3,12 @@
       <div class="mdl-card__title mdl-card--expand" (click)="play(video)" [ngStyle]="{'background': '#000 url(' + video.snippet?.thumbnails.high.url + ') center center no-repeat', 'background-size': '125%'}">
         <div class="video-info-block">
           <div class="video-informations">
+
+              <span style="float: left;">
+                  <i class="material-icons">thumb_up</i>
+                  {{ video.snippet?.thumbnails.high.url }}
+                </span>
+                <div [ngStyle]="{'background': '#000 url(' + video.snippet?.thumbnails.high.url + ') center center no-repeat', 'background-size': '125%'}"></div>
             <span style="float: left;">
               <i class="material-icons">thumb_up</i>
               {{ video.statistics?.likeCount | videoLikesViews }}
