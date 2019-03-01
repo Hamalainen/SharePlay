@@ -52,12 +52,14 @@
   padding: 6px 2px 2px 2px;
   color: rgb(196, 48, 43);
   text-align: right;
-  width: 97%;
+  width: 100%;
+  background-color: #404040; 
 }
 
 .mdl-card__supporting-text .material-icons {
   cursor: pointer;
   font-size: 20px;
+  padding-right: 3%;
 }
 
 .video-name-block {
@@ -92,10 +94,8 @@
 }
 
 .video-play-button {
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  text-align: center;
+  padding-top: 22%;
   margin: auto;
 }
 

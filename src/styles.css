@@ -1,17 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-/* @import '~bootstrap/dist/css/bootstrap.min.css'; */
-/* div{
-    background-color: #202020;
-}
-html{
-    background-color: #202020;
-}
-body{
-    background-color: #202020;
-}
-h3{
-    color: azure;
-} */
+@import '~bootstrap/dist/css/bootstrap.min.css';
   
   .loader {
     width: 40px;

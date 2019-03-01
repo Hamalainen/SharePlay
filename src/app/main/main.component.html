@@ -1,15 +1,22 @@
-<app-player></app-player>
-
-<app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div>
+  <app-player></app-player>
+</div>
+<div>
+  <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
+</div>
 
 <!-- <app-video-list [videoList]="videoList"></app-video-list> -->
 
-<main class="mdl-layout__content" LazyScroll (OnScrollMethod)="searchMore()" ScrollDistance="3">
-    <div class="page-content" [ngClass]="{'blur-main-playlist-opened': playlistToggle}">
-      <app-video-list *ngIf="videoList.length" class="mdl-grid" (videoPlaylist)="checkAddToPlaylist($event)" [videoList]="videoList" [loadingInProgress]="loadingInProgress">
-      </app-video-list>
-      <div class="loader" *ngIf="!videoList.length">
-        <div class="loading"></div>
-      </div>
-    </div>
-  </main>
+  <main class="mdl-layout__content" LazyScroll (OnScrollMethod)="searchMore()" ScrollDistance="3">
+     <div class="page-content" [ngClass]="{'blur-main-playlist-opened': playlistToggle}">
+       <app-video-list *ngIf="videoList.length" class="mdl-grid" (videoPlaylist)="checkAddToPlaylist($event)" [videoList]="videoList" [loadingInProgress]="loadingInProgress">
+       </app-video-list>
+       <div class="loader" *ngIf="!videoList.length">
+         <div class="loading"></div>
+       </div>
+     </div>
+   </main>
+ 
+</div> 
+
