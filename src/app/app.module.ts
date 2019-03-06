@@ -21,6 +21,7 @@ import { VideoNamePipe } from './shared/pipes/video-name.pipe';
 import { LazyScrollDirective } from './shared/directives/lazy-scroll/lazy-scroll.directive';
 import { VideoListComponent } from './main/video-list/video-list.component';
 import { VideoSearchComponent } from './main/video-search/video-search.component';
+import { PlayListComponent } from './main/play-list/play-list.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { VideoSearchComponent } from './main/video-search/video-search.component
     VideoNamePipe,
     LazyScrollDirective,
     VideoListComponent,
-    VideoSearchComponent
+    VideoSearchComponent,
+    PlayListComponent
   ],
   imports: [
     BrowserModule,

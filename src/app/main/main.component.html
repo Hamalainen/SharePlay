@@ -1,34 +1,42 @@
 <div class="ml-4 mr-4">
   <div class="row">
     <div class="col-md-12  border-bottom">
-      <h4 style="color:aliceblue" >
+      <h4 style="color:aliceblue">
         Shareplay
       </h4>
-    </div>  
-  </div>
-
-
-  <div class="row col-md-8 mt-3 mb-3 mr-4" style="margin-left:70px">
-      <app-player></app-player>
-    
-  </div>
-    
-    <div class="row col-md-8 border-top mr-4">
-     <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
     </div>
+  </div>
 
-    <div class="col-md-8 row" style="height:25vh; overflow-y: auto;"> 
-         
-      <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)" [videoList]="videoList" [loadingInProgress]="loadingInProgress">
-      </app-video-list>
+  <div class="row">
+    <div class="col-md-7 mt-3 mb-3 mr-5" style="margin-left:70px">
+      <app-player></app-player>
+
+    </div>
+    <div class="col-md-4 mt-3 mb-3 mr-4">
+        <h2 style="color:aliceblue">
+          Playlist
+        </h2>
+  <div class="border-left border-top" style="height:50vh; overflow-y: auto;">
+      <app-play-list [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle" [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
+  </div>
+          
+        
+    </div>
+  </div>
+  <div class="row col-md-8 border-top mr-4">
+    <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
+  </div>
+
+  <div class="col-md-8 row" style="height:25vh; overflow-y: auto;">
+
+    <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
+      [videoList]="videoList" [loadingInProgress]="loadingInProgress">
+    </app-video-list>
 
     <div class="loader mt-5" *ngIf="!videoList.length">
       <div class="loading"></div>
     </div>
-         
-       
+
+
+  </div>
 </div>
-
- 
-</div> 
-
