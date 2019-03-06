@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../../shared/services/playlist-store.service';
+import { identifierModuleUrl } from '@angular/compiler';
+import { constructDependencies } from '@angular/core/src/di/reflective_provider';
 
 @Component({
   selector: 'app-play-list',
@@ -38,6 +40,9 @@ export class PlayListComponent {
   }
 
   removeFromPlaylist(video: Object): void {
+    if(this.youtubePlayer.getCurrentVideo() === video["id"]){
+      this.youtubePlayer.pausePlayingVideo();
+    }
     this.videoPlaylist.splice(this.videoPlaylist.indexOf(video), 1);
     this.playlistService.removeFromPlaylist(video);
   }
