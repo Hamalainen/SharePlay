@@ -1,20 +1,22 @@
+<div class="row" *ngFor="let video of videoPlaylist; let i = index;" id="{{video.id}}" class="playist-item"
+  (click)="play(video.id)" [ngClass]="{'playing': currentPlaying(video.id)}">
+  <div class="col-md-12">
+    <div class="playlist-thumbnail"
+      [ngStyle]="{'background': '#000 url(' + video.snippet.thumbnails.default.url + ') center center no-repeat', 'background-size': '100%'}">
+      <span class="video-duration">{{ video.contentDetails.duration | videoDuration }}</span>
+      <i class="material-icons delete-from-playlist" (click)="removeFromPlaylist(video)">cancel</i>
+    </div>
+    <div class="opened-item-info mr-4 ml-4">
+      {{ video.snippet.title | videoName: [65, 62] }}
+    </div>
+  </div>
+</div>
 
-    <div *ngFor="let video of videoPlaylist; let i = index;" id="{{video.id}}" class="playist-item" (click)="play(video.id)" [ngClass]="{'playing': currentPlaying(video.id)}">
-      <div class="playlist-thumbnail" [ngStyle]="{'background': '#000 url(' + video.snippet.thumbnails.default.url + ') center center no-repeat', 'background-size': '100%'}">
-        <span class="video-duration">{{ video.contentDetails.duration | videoDuration }}</span>
-        <i class="material-icons delete-from-playlist" (click)="removeFromPlaylist(video)">cancel</i>
-      </div>
-  
-      <div class="opened-item-info mr-4 ml-4">
-        {{ video.snippet.title | videoName: [65, 62] }}
-      </div>
-    </div>
-  
-    <div class="playist-item-empty" *ngIf="!videoPlaylist.length">
-      <div class="playlist-thumbnail" [ngStyle]="{'background': '#000'}">
-        <i class="material-icons">block</i>
-      </div>
-      <div class="opened-item-info mr-4 ml-4">
-        Playlist is empty
-      </div>
-    </div>
+<div class="playist-item-empty" *ngIf="!videoPlaylist.length">
+  <div class="playlist-thumbnail" [ngStyle]="{'background': '#000'}">
+    <i class="material-icons">block</i>
+  </div>
+  <div class="opened-item-info mr-4 ml-4">
+    Playlist is empty
+  </div>
+</div>
