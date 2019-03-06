@@ -1,28 +1,34 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-<div>
-  <app-player></app-player>
-</div>
-<div>
-  <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
-</div>
+<div class="ml-4 mr-4">
+  <div class="row">
+    <div class="col-md-12  border-bottom">
+      <h4 style="color:aliceblue" >
+        Shareplay
+      </h4>
+    </div>  
+  </div>
 
-<!-- <app-video-list [videoList]="videoList"></app-video-list> -->
 
-  <!-- <main class="mdl-layout__content" LazyScroll (OnScrollMethod)="searchMore()" ScrollDistance="3">
-     <div class="page-content" [ngClass]="{'blur-main-playlist-opened': playlistToggle}"> -->
-       <div *ngIf="videoList.length"> 
+  <div class="row col-md-8 mt-3 mb-3 mr-4" style="margin-left:70px">
+      <app-player></app-player>
+    
+  </div>
+    
+    <div class="row col-md-8 border-top mr-4">
+     <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
+    </div>
+
+    <div class="col-md-8 row" style="height:25vh; overflow-y: auto;"> 
          
-           <app-video-list class="row" (videoPlaylist)="checkAddToPlaylist($event)" [videoList]="videoList" [loadingInProgress]="loadingInProgress">
-           </app-video-list>
+      <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)" [videoList]="videoList" [loadingInProgress]="loadingInProgress">
+      </app-video-list>
+
+    <div class="loader mt-5" *ngIf="!videoList.length">
+      <div class="loading"></div>
+    </div>
          
-         
-       </div>
        
-       <div class="loader" *ngIf="!videoList.length">
-         <div class="loading"></div>
-       </div>
-     <!-- </div>
-   </main> -->
+</div>
+
  
 </div> 
 
