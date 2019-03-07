@@ -40,11 +40,11 @@ export class PlayListComponent {
   }
 
   removeFromPlaylist(video: Object): void {
+    this.videoPlaylist.splice(this.videoPlaylist.indexOf(video), 1);
+    this.playlistService.removeFromPlaylist(video);
     if(this.youtubePlayer.getCurrentVideo() === video["id"]){
       this.youtubePlayer.pausePlayingVideo();
     }
-    this.videoPlaylist.splice(this.videoPlaylist.indexOf(video), 1);
-    this.playlistService.removeFromPlaylist(video);
   }
 
   playNextVideo(): void {

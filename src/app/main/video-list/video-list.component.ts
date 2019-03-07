@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../../shared/services/playlist-store.service';
-import { delay } from 'q';
+import { timeout, delay } from 'q';
 
 @Component({
   selector: 'app-video-list',
@@ -11,6 +11,7 @@ import { delay } from 'q';
 export class VideoListComponent {
   @Input() videoList;
   @Input() loadingInProgress;
+
   @Output() videoPlaylist = new EventEmitter();
 
   constructor(
@@ -25,5 +26,19 @@ export class VideoListComponent {
   
     addToPlaylist(video: any): void {
       this.videoPlaylist.emit(video);
+    }
+
+    playing(): void{
+      console.log(this.isPlaying());
+    }
+
+    isPlaying(): boolean{
+      var list = new Array(this.playlistService.retrieveStorage()["playlists"]["0"]);
+      if(list["0"] === undefined){
+        return false;
+      }
+      else{
+        return true;
+      }
     }
   }
