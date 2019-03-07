@@ -26,6 +26,7 @@ export class MainComponent implements AfterViewInit {
     private playlistService: PlaylistStoreService,
     private notificationService: NotificationService
   ) {
+    this.playlistService.clearPlaylist();
     this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
   }
 
