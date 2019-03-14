@@ -26,6 +26,7 @@ export class VideoListComponent {
   
     addToPlaylist(video: any): void {
       this.videoPlaylist.emit(video);
+      
     }
 
     playing(): void{

@@ -1,26 +1,40 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../../shared/services/playlist-store.service';
 import { identifierModuleUrl } from '@angular/compiler';
 import { constructDependencies } from '@angular/core/src/di/reflective_provider';
+import { Subscription } from 'rxjs';
+import { SyncService } from 'src/app/shared/services/sync.service';
+import { startWith } from 'rxjs/operators';
+import { PlayList } from 'src/app/shared/models/playlist';
+import { YoutubeClip } from 'src/app/shared/models/YoutubeClip';
 
 @Component({
   selector: 'app-play-list',
   templateUrl: './play-list.component.html',
   styleUrls: ['./play-list.component.css']
 })
-export class PlayListComponent {
+export class PlayListComponent implements OnInit {
   @Input() playlistToggle;
   @Input() videoPlaylist;
   @Input() playlistNames;
   @Input() repeat;
   @Input() shuffle;
+  private _listSub: Subscription;
+  playlist: PlayList;
 
   constructor(
     private youtubePlayer: YoutubePlayerService,
-    private playlistService: PlaylistStoreService
+    private playlistService: PlaylistStoreService,
+    private syncService: SyncService
   ) {
     this.youtubePlayer.videoChangeEvent.subscribe(event => event ? this.playNextVideo() : false);
+  }
+
+  ngOnInit(){
+    this._listSub = this.syncService.currentPlayList.pipe(
+      startWith({ id: '', list: []})
+    ).subscribe(playlist => this.playlist = playlist);
   }
 
   play(id: string): void {

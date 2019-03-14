@@ -28,10 +28,12 @@ export class MainComponent implements AfterViewInit {
   ) {
     this.playlistService.clearPlaylist();
     this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
+    
   }
 
   ngAfterViewInit() {
     this.playlistElement = document.getElementById('playlist');
+    console.log(this.playlistElement);
   }
 
   playFirstInPlaylist(): void {
