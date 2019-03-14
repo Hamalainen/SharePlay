@@ -12,7 +12,7 @@ import { BrowserNotificationService } from './shared/services/browser-notificati
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {PlayerComponent} from './main/player/player.component';
+import { PlayerComponent } from './main/player/player.component';
 import { MainComponent } from './main//main.component'
 // Pipes
 import { VideoDurationPipe } from './shared/pipes/video-duration.pipe';
@@ -23,9 +23,6 @@ import { VideoListComponent } from './main/video-list/video-list.component';
 import { VideoSearchComponent } from './main/video-search/video-search.component';
 import { PlayListComponent } from './main/play-list/play-list.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
-
-const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
 
 
 @NgModule({
@@ -48,7 +45,6 @@ const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-	  SocketIoModule.forRoot(config)
   ],
   providers: [
     YoutubeApiService,
