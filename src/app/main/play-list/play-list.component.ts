@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs';
 import { SyncService } from 'src/app/shared/services/sync.service';
 import { startWith } from 'rxjs/operators';
 import { PlayList } from 'src/app/shared/models/playlist';
-import { YoutubeClip } from 'src/app/shared/models/YoutubeClip';
 
 @Component({
   selector: 'app-play-list',
