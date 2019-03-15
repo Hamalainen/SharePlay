@@ -24,7 +24,7 @@ import { VideoSearchComponent } from './main/video-search/video-search.component
 import { PlayListComponent } from './main/play-list/play-list.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: window.location.href + ':3000', options: {} };
 
 @NgModule({
   declarations: [
