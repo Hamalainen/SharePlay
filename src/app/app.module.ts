@@ -24,7 +24,11 @@ import { VideoSearchComponent } from './main/video-search/video-search.component
 import { PlayListComponent } from './main/play-list/play-list.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: window.location.href + ':' + window.location.port+1 || '3000', options: {} };
+ const socketUrl = window.location.href === 'http://localhost:8080/' ? 'http://localhost:3000/' : 'https://hamalainen-server.herokuapp.com/';
+const config: SocketIoConfig = { url: socketUrl, options: {} };
+console.log("searching socket at: " + socketUrl);
+
+console.log("location: " + window.location.href);
 
 @NgModule({
   declarations: [
