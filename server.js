@@ -20,9 +20,6 @@ app.listen(clientPort);
 console.log("clientport: " + clientPort)
 
 
-
-'use strict';
-
 // const express = require('express');
 const socketIO = require('socket.io');
 // const path = require('path');
@@ -37,8 +34,8 @@ const server = express()
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
-  console.log('Client connected');
-  socket.on('disconnect', () => console.log('Client disconnected'));
+  console.log(`Client ${socket.id} connected`);
+  socket.on('disconnect', () => console.log(`Client ${socket.id} disconnected`));
 });
 
 setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
