@@ -22,9 +22,12 @@ export class SyncService {
     this.socket.emit('addDoc', { id: this.docId(), doc: '' });
   }
 
-  getPlaylist(playlist: PlayList) {
-      console.log("get playlist");
-    this.socket.emit('getPlayList', playlist);
+
+  getPlaylist() {
+    console.log("get playlist");
+    return this.socket
+      .fromEvent('getPlayList')
+      .map(data => data);
   }
 
   private docId() {

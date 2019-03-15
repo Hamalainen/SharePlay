@@ -3,6 +3,7 @@ import { YoutubeApiService } from '../shared/services/youtube-api.service';
 import { YoutubePlayerService } from '../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../shared/services/playlist-store.service';
 import { NotificationService } from '../shared/services/notification.service';
+import{ SyncService } from '../shared/services/sync.service';
 
 @Component({
   selector: 'app-main',
@@ -24,16 +25,27 @@ export class MainComponent implements AfterViewInit {
     private youtubeService: YoutubeApiService,
     private youtubePlayer: YoutubePlayerService,
     private playlistService: PlaylistStoreService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private syncService: SyncService
   ) {
     this.playlistService.clearPlaylist();
     this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
+    let socketPlaylist = this.syncService.getPlaylist().data;
+    console.log(socketPlaylist);
+    // for(var i = 0; i < socketPlaylist.length; i++){
+
+    //    this.playlistService.addToPlaylist(socketPlaylist[i]);
+    //    console.log('added: ' + socketPlaylist[i]);
+    // }
     
-  }
+      
+     }
+    
+    
+  
 
   ngAfterViewInit() {
     this.playlistElement = document.getElementById('playlist');
-    console.log(this.playlistElement);
   }
 
   playFirstInPlaylist(): void {
