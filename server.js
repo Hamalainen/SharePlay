@@ -18,24 +18,3 @@ const clientPort = process.env.PORT || 8080;
 app.listen(clientPort);
 
 console.log("clientport: " + clientPort)
-
-
-const expressSocket = require('express');
-const socketIO = require('socket.io');
-const pathSocket = require('path');
-
-const PORT = process.env.PORT || 3000;
-// const INDEX = path.join(__dirname, '/dist/SharePlay/index.html');
-
-const server = expressSocket()
-//   .use((req, res) => res.sendFile(INDEX) )
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-
-const io = socketIO(server);
-
-io.on('connection', (socket) => {
-  console.log(`Client ${socket.id} connected`);
-  socket.on('disconnect', () => console.log(`Client ${socket.id} disconnected`));
-});
-
-setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
