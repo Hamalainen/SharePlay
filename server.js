@@ -20,14 +20,14 @@ app.listen(clientPort);
 console.log("clientport: " + clientPort)
 
 
-// const express = require('express');
+const expressSocket = require('express');
 const socketIO = require('socket.io');
-// const path = require('path');
+const pathSocket = require('path');
 
-const PORT = process.env.PORT+1 || 3000;
+const PORT = process.env.PORT || 3000;
 // const INDEX = path.join(__dirname, '/dist/SharePlay/index.html');
 
-const server = express()
+const server = expressSocket()
 //   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
