@@ -24,11 +24,11 @@ console.log("clientport: " + clientPort)
 const socketIO = require('socket.io');
 // const path = require('path');
 
-const PORT = process.env.PORT || 3000;
-const INDEX = path.join(__dirname, '/dist/SharePlay/index.html');
+const PORT = process.env.PORT+1 || 3000;
+// const INDEX = path.join(__dirname, '/dist/SharePlay/index.html');
 
 const server = express()
-  .use((req, res) => res.sendFile(INDEX) )
+//   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const io = socketIO(server);
