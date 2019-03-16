@@ -23,6 +23,7 @@ import { VideoListComponent } from './main/video-list/video-list.component';
 import { VideoSearchComponent } from './main/video-search/video-search.component';
 import { PlayListComponent } from './main/play-list/play-list.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { UserlistComponent } from './main/user-list/userlist.component';
 
  const socketUrl = window.location.href === 'http://localhost:8080/' ? 'http://localhost:3000/' : 'https://hamalainen-server.herokuapp.com/';
 const config: SocketIoConfig = { url: socketUrl, options: {} };
@@ -42,7 +43,8 @@ console.log("location: " + window.location.href);
     LazyScrollDirective,
     VideoListComponent,
     VideoSearchComponent,
-    PlayListComponent
+    PlayListComponent,
+    UserlistComponent
   ],
   imports: [
     BrowserModule,

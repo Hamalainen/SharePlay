@@ -30,15 +30,6 @@ export class MainComponent implements AfterViewInit {
   ) {
     this.playlistService.clearPlaylist();
     this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
-    let socketPlaylist = this.syncService.getPlaylist().data;
-    console.log(socketPlaylist);
-    // for(var i = 0; i < socketPlaylist.length; i++){
-
-    //    this.playlistService.addToPlaylist(socketPlaylist[i]);
-    //    console.log('added: ' + socketPlaylist[i]);
-    // }
-    
-      
      }
     
     

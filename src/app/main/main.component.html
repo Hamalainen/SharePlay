@@ -9,22 +9,25 @@
   <div [hidden]="!videoPlaylist.length" class="row">
     <div class="col-md-7 mt-3 mb-3 mr-5" style="margin-left:70px">
       <app-player></app-player>
-      
     </div>
     <div class="col-md-4 mt-3 mb-3 mr-4">
-        <h2 style="color:aliceblue">
-          Playlist
-        </h2>
-  <div class="border-left border-top" style="height:50vh; overflow-y: auto;">
-      <app-play-list [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle" [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
-  </div>
+      <h2 style="color:aliceblue">
+        Playlist
+      </h2>
+      <div class="border-left border-top" style="height:50vh; overflow-y: auto;">
+        <app-play-list [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle" [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
+      </div>
 
-        
     </div>
   </div>
   <div [hidden]="!videoPlaylist.length" class="row col-md-8 mr-4 border-top"></div>
-  <div class="row col-md-8 mr-4">
-    <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
+  <div class="row">
+    <div class="col-md-2 mr-4">
+      <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
+    </div>
+    <div class="col-md-2 mr-4">
+      <app-userlist></app-userlist>
+    </div>
   </div>
 
   <div *ngIf="videoPlaylist.length" class="col-md-8 row" style="height:25vh; overflow-y: auto;">
