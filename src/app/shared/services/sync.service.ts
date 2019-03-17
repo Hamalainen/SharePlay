@@ -53,7 +53,7 @@ export class SyncService {
 
   getPlaylist() {
     this.socket.fromEvent('playlist').subscribe(res => {
-      var videos = res.playlist;
+      var videos = res['playlist'];
       this.add(videos);
       console.log("på init")
     });
