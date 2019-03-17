@@ -1,16 +1,17 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { YoutubeApiService } from '../shared/services/youtube-api.service';
 import { YoutubePlayerService } from '../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../shared/services/playlist-store.service';
 import { NotificationService } from '../shared/services/notification.service';
 import{ SyncService } from '../shared/services/sync.service';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements AfterViewInit {
+export class MainComponent implements AfterViewInit, OnInit {
   public videoList = [];
   public videoPlaylist = [];
   public loadingInProgress = false;
@@ -26,14 +27,17 @@ export class MainComponent implements AfterViewInit {
     private youtubePlayer: YoutubePlayerService,
     private playlistService: PlaylistStoreService,
     private notificationService: NotificationService,
-    private syncService: SyncService
+    private syncService: SyncService,
+    private socket: Socket
+
   ) {
-    this.playlistService.clearPlaylist();
     this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
-    console.log(this.syncService.getPlaylist());
-     }
     
-    
+  }
+    ngOnInit(){
+     this.playlistService.clearPlaylist();
+     this.syncService.getPlaylist();
+    }
   
 
   ngAfterViewInit() {

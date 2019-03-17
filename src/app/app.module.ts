@@ -25,11 +25,11 @@ import { PlayListComponent } from './main/play-list/play-list.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { UserlistComponent } from './main/user-list/userlist.component';
 
- const socketUrl = window.location.href === 'http://localhost:8080/' ? 'http://localhost:3000/' : 'https://hamalainen-server.herokuapp.com/';
+ const socketUrl = window.location.href === 'http://localhost:4200/' ? 'http://localhost:3000/' : 'https://hamalainen-server.herokuapp.com/';
 const config: SocketIoConfig = { url: socketUrl, options: {} };
-console.log("searching socket at: " + socketUrl);
+// console.log("searching socket at: " + socketUrl);
 
-console.log("location: " + window.location.href);
+// console.log("location: " + window.location.href);
 
 @NgModule({
   declarations: [
