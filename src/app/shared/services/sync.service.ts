@@ -20,14 +20,7 @@ export class SyncService {
     private socket: Socket,
     private youtubeApiService: YoutubeApiService,
     private playlistStoreService: PlaylistStoreService
-  ) {
-    // socket.on('addedToPlaylist', function(video){
-    //   var videos = [];
-    //   videos.push(video.id);
-    //    this.add(videos);
-    //   socket.emit("updatePlayList", video);
-    // });
-   }
+  ) {}
    ngAfterViewInit(){
     this.socket.on('addedToPlaylist', function(video){
       var videos = [];
@@ -55,7 +48,6 @@ export class SyncService {
     this.socket.fromEvent('playlist').subscribe(res => {
       var videos = res['playlist'];
       this.add(videos);
-      console.log("på init")
     });
   }
 

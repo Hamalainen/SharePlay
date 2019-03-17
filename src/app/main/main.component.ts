@@ -55,19 +55,19 @@ export class MainComponent implements AfterViewInit, OnInit {
     this.videoList = videos;
   }
 
-  checkAddToPlaylist(video: any): void {
-    if (!this.videoPlaylist.some((e) => e.id === video.id)) {
-      this.videoPlaylist.push(video);
-      this.playlistService.addToPlaylist(video);
+  // checkAddToPlaylist(video: any): void {
+  //   if (!this.videoPlaylist.some((e) => e.id === video.id)) {
+  //     this.videoPlaylist.push(video);
+  //     this.playlistService.addToPlaylist(video);
 
-      let inPlaylist = this.videoPlaylist.length - 1;
+  //     let inPlaylist = this.videoPlaylist.length - 1;
 
-      setTimeout(() => {
-        let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
-        this.playlistElement.scrollTop = topPos - 100;
-      });
-    }
-  }
+  //     setTimeout(() => {
+  //       let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
+  //       this.playlistElement.scrollTop = topPos - 100;
+  //     });
+  //   }
+  // }
 
   repeatActive(val: boolean): void {
     this.repeat = val;

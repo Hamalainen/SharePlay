@@ -23,22 +23,42 @@ export class VideoListComponent {
     private socket: Socket
     ) {
 
-      socket.on('updateplaylist', function(video){
-        console.log('videolist update');
-        this.videoPlaylist.emit(video);
-    });
+    //   socket.on('updateplaylist', function(video){
+    //     console.log('videolist update');
+    //     this.videoPlaylist.emit(video);
+    // });
      }
 
+     ngAfterViewInit(){
+    //   this.socket.on('added', function(video){
+        
+    //     console.log('videolist update');
+    //     // this.videoPlaylist.emit(video);
+    // });
+      // this.socket.on('addedToPlaylist', function(video){
+      //   var videos = [];
+      //   videos.push(video.id);
+      //    this.add(videos);
+      //   this.socket.emit("updatePlayList", video);
+      // });
+     }
+     
     play(video: any): void {
       this.addToPlaylist(video);
       this.youtubePlayer.playVideo(video.id, video.snippet.title);
     }
   
     addToPlaylist(video: any): void {
-      this.videoPlaylist.emit(video);
       this.syncService.addedToPlaylist(video);
-      
+      var videon;
+      this.socket.on('added', function(video){
+        console.log('videolist update');
+        this.videon = video;
+        // this.videoPlaylist.emit(videon);
+      });
+      this.videoPlaylist.emit(videon);
     }
+    
 
     playing(): void{
       console.log(this.isPlaying());
