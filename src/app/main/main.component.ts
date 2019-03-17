@@ -30,6 +30,7 @@ export class MainComponent implements AfterViewInit {
   ) {
     this.playlistService.clearPlaylist();
     this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
+    console.log(this.syncService.getPlaylist());
      }
     
     
