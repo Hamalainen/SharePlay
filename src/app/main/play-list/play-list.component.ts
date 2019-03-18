@@ -48,15 +48,15 @@ export class PlayListComponent implements OnInit {
   }
 
   play(id: string): void {
-    let videoText = 'None';
+    let videon;
 
     this.videoPlaylist.forEach((video, index) => {
       if (video.id === id) {
-        videoText = video.snippet.title;
+        videon = video;
       }
     });
-
-    this.youtubePlayer.playVideo(id, videoText);
+    this.youtubePlayer.playVideo(id, videon.snippet.title);
+    this.syncService.playVideo(videon);
   }
 
   currentPlaying(id: string): boolean {

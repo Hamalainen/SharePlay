@@ -40,35 +40,6 @@ export class MainComponent implements AfterViewInit, OnInit {
     ngOnInit(){
      this.playlistService.clearPlaylist();
      this.syncService.getPlaylist();
-
-
-    //  this.socket.on('added', function(video){
-    //   console.log('innuti '+video);
-    //   // this.videon = video;
-    //   // this.videoPlaylist.emit(video);
-    //   var tmp = document.getElementById("playlist");
-    //   // for (var i in data.playersId)
-    //       tmp.innerHTML += 
-    //       '<div class="row" id="' + video.id + '" class="playist-item" (click)="play(' + video.id + ')" [ngClass]="{' +"'playing': currentPlaying(" + video.id + ')}">'+
-    //         '<div class="col-md-12">'+
-    //           '<div class="playlist-thumbnail"'+
-    //             '[ngStyle]="{'+ "background" +': ' +"#000 url(" + video.snippet.thumbnails.default.url + ") center center no-repeat"+', '+"background-size': '100%'}" + '>'+
-    //             '<span class="video-duration">'+
-    //             //  this.videoDurationPipe.transform(video.contentDetails.duration) +
-    //             video.contentDetails.duration +
-    //             '</span>'+
-    //             '<i class="material-icons delete-from-playlist" (click)="removeFromPlaylist(video)">cancel</i>'+
-    //           '</div>'+
-    //           '<div class="opened-item-info mr-4 ml-4">' +
-    //             //  this.videoNamePipe.transform(video.snippet.title, [65, 62] ) +
-    //             video.snippet.title +
-    //           '</div>'+
-    //         '</div>'+
-    //       '</div>';
-      
-
-    // });
-
     }
   
 

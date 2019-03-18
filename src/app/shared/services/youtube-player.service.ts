@@ -2,6 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NotificationService } from './notification.service';
 import { BrowserNotificationService } from './browser-notification.service';
+import { SyncService } from './sync.service';
 
 let _window: any = window;
 
@@ -16,7 +17,8 @@ export class YoutubePlayerService {
 
   constructor(
     public notificationService: NotificationService,
-    public browserNotification: BrowserNotificationService
+    public browserNotification: BrowserNotificationService,
+    private syncService: SyncService
   ) { }
 
   createPlayer(): void {
@@ -32,6 +34,7 @@ export class YoutubePlayerService {
           events: {
             onStateChange: (ev) => {
               this.onPlayerStateChange(ev);
+              this.syncService.playerEvent(ev);
             }
           }
         });

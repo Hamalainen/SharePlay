@@ -22,22 +22,34 @@ export class SyncService {
     private socket: Socket,
     private youtubeApiService: YoutubeApiService,
     private playlistStoreService: PlaylistStoreService
-  ) {}
-   ngAfterViewInit(){
+  ) { }
+  ngAfterViewInit() {
 
-   
+
   }
 
-  getAddedVideo(){
+  getAddedVideo() {
     return this.socket.fromEvent('added');
   }
 
-  getRemovedVideo(){
+  getRemovedVideo() {
     return this.socket.fromEvent('removed');
   }
 
-  removeFromPlaylist(video: any){
-  this.socket.emit('removedFromPlaylist', video);
+  playingVideo() {
+    return this.socket.fromEvent('playing');
+  }
+
+  playerState(){
+    return this.socket.fromEvent('playerState');
+  }
+
+  playVideo(video: any) {
+    this.socket.emit('play', video);
+  }
+
+  removeFromPlaylist(video: any) {
+    this.socket.emit('removedFromPlaylist', video);
   }
 
   getRoom(id: string) {
@@ -48,12 +60,12 @@ export class SyncService {
     this.socket.emit('addDoc', { id: this.docId(), doc: '' });
   }
 
-  addedToPlaylist(video: any){
+  addedToPlaylist(video: any) {
     this.socket.emit('addedToPlaylist', video);
   }
 
   getPlaylist() {
-    this.socket.fromEvent('playlist').subscribe(res => {
+    this.socket.fromEvent('room').subscribe(res => {
       var videos = res['playlist'];
       this.add(videos);
     });
@@ -69,12 +81,16 @@ export class SyncService {
 
     return text;
   }
-  
-  private add(videos): void{
+
+  private add(videos): void {
     this.youtubeApiService.getVideos(videos).then(res => {
       for (let i = 0; i < res.length; i++) {
         this.playlistStoreService.addToPlaylist(res[i]);
       }
     });
+  }
+
+  playerEvent(event: any) {
+    this.socket.emit('playerEvent', event);
   }
 }
