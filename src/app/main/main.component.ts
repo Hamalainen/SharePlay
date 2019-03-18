@@ -5,7 +5,8 @@ import { PlaylistStoreService } from '../shared/services/playlist-store.service'
 import { NotificationService } from '../shared/services/notification.service';
 import{ SyncService } from '../shared/services/sync.service';
 import { Socket } from 'ngx-socket-io';
-
+import { VideoDurationPipe } from '../shared/pipes/video-duration.pipe';
+import { VideoNamePipe } from '../shared/pipes/video-name.pipe';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -28,7 +29,9 @@ export class MainComponent implements AfterViewInit, OnInit {
     private playlistService: PlaylistStoreService,
     private notificationService: NotificationService,
     private syncService: SyncService,
-    private socket: Socket
+    private socket: Socket,
+    private videoDurationPipe: VideoDurationPipe,
+    private videoNamePipe: VideoNamePipe
 
   ) {
     this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
@@ -37,6 +40,35 @@ export class MainComponent implements AfterViewInit, OnInit {
     ngOnInit(){
      this.playlistService.clearPlaylist();
      this.syncService.getPlaylist();
+
+
+    //  this.socket.on('added', function(video){
+    //   console.log('innuti '+video);
+    //   // this.videon = video;
+    //   // this.videoPlaylist.emit(video);
+    //   var tmp = document.getElementById("playlist");
+    //   // for (var i in data.playersId)
+    //       tmp.innerHTML += 
+    //       '<div class="row" id="' + video.id + '" class="playist-item" (click)="play(' + video.id + ')" [ngClass]="{' +"'playing': currentPlaying(" + video.id + ')}">'+
+    //         '<div class="col-md-12">'+
+    //           '<div class="playlist-thumbnail"'+
+    //             '[ngStyle]="{'+ "background" +': ' +"#000 url(" + video.snippet.thumbnails.default.url + ") center center no-repeat"+', '+"background-size': '100%'}" + '>'+
+    //             '<span class="video-duration">'+
+    //             //  this.videoDurationPipe.transform(video.contentDetails.duration) +
+    //             video.contentDetails.duration +
+    //             '</span>'+
+    //             '<i class="material-icons delete-from-playlist" (click)="removeFromPlaylist(video)">cancel</i>'+
+    //           '</div>'+
+    //           '<div class="opened-item-info mr-4 ml-4">' +
+    //             //  this.videoNamePipe.transform(video.snippet.title, [65, 62] ) +
+    //             video.snippet.title +
+    //           '</div>'+
+    //         '</div>'+
+    //       '</div>';
+      
+
+    // });
+
     }
   
 
@@ -55,19 +87,19 @@ export class MainComponent implements AfterViewInit, OnInit {
     this.videoList = videos;
   }
 
-  // checkAddToPlaylist(video: any): void {
-  //   if (!this.videoPlaylist.some((e) => e.id === video.id)) {
-  //     this.videoPlaylist.push(video);
-  //     this.playlistService.addToPlaylist(video);
+  checkAddToPlaylist(video: any): void {
+    if (!this.videoPlaylist.some((e) => e.id === video.id)) {
+      this.videoPlaylist.push(video);
+      this.playlistService.addToPlaylist(video);
 
-  //     let inPlaylist = this.videoPlaylist.length - 1;
+      let inPlaylist = this.videoPlaylist.length - 1;
 
-  //     setTimeout(() => {
-  //       let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
-  //       this.playlistElement.scrollTop = topPos - 100;
-  //     });
-  //   }
-  // }
+      setTimeout(() => {
+        let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
+        this.playlistElement.scrollTop = topPos - 100;
+      });
+    }
+  }
 
   repeatActive(val: boolean): void {
     this.repeat = val;

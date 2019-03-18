@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { YoutubeApiService } from './youtube-api.service';
 import { PlaylistStoreService } from './playlist-store.service';
 import { subscribeOn } from 'rxjs/operators';
+import { PlayListComponent } from 'src/app/main/play-list/play-list.component';
+import { VideoListComponent } from 'src/app/main/video-list/video-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +24,21 @@ export class SyncService {
     private playlistStoreService: PlaylistStoreService
   ) {}
    ngAfterViewInit(){
-    this.socket.on('addedToPlaylist', function(video){
-      var videos = [];
-      videos.push(video.id);
-       this.add(videos);
-      this.socket.emit("updatePlayList", video);
-    });
-   }
 
+   
+  }
 
+  getAddedVideo(){
+    return this.socket.fromEvent('added');
+  }
+
+  getRemovedVideo(){
+    return this.socket.fromEvent('removed');
+  }
+
+  removeFromPlaylist(video: any){
+  this.socket.emit('removedFromPlaylist', video);
+  }
 
   getRoom(id: string) {
     this.socket.emit('getDoc', id);

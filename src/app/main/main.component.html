@@ -15,7 +15,7 @@
         Playlist
       </h2>
       <div class="border-left border-top" style="height:50vh; overflow-y: auto;">
-        <app-play-list [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle" [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
+        <app-play-list id="playlist" [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle" [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
       </div>
 
     </div>
@@ -32,8 +32,7 @@
 
   <div *ngIf="videoPlaylist.length" class="col-md-8 row" style="height:25vh; overflow-y: auto;">
 
-    <!-- <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)" -->
-    <app-video-list *ngIf="videoList.length" class="row" 
+    <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
       [videoList]="videoList" [loadingInProgress]="loadingInProgress">
     </app-video-list>
 
@@ -46,8 +45,7 @@
 
   <div *ngIf="!videoPlaylist.length" class="col-md-12 row" style="height:85vh; overflow-y: auto;">
 
-      <!-- <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)" -->
-          <app-video-list *ngIf="videoList.length" class="row"
+      <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
         [videoList]="videoList" [loadingInProgress]="loadingInProgress">
       </app-video-list>
   

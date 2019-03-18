@@ -59,7 +59,9 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     YoutubePlayerService,
     PlaylistStoreService,
     NotificationService,
-    BrowserNotificationService
+    BrowserNotificationService,
+    VideoNamePipe,
+    VideoDurationPipe
   ],
   bootstrap: [AppComponent]
 })

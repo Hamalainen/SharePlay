@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, AfterViewChecked } from '@angular/core';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../../shared/services/playlist-store.service';
 import { identifierModuleUrl } from '@angular/compiler';
@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { SyncService } from 'src/app/shared/services/sync.service';
 import { startWith } from 'rxjs/operators';
 import { PlayList } from 'src/app/shared/models/playlist';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-play-list',
@@ -25,15 +26,25 @@ export class PlayListComponent implements OnInit {
   constructor(
     private youtubePlayer: YoutubePlayerService,
     private playlistService: PlaylistStoreService,
-    private syncService: SyncService
+    private syncService: SyncService,
+    private socket: Socket
   ) {
     this.youtubePlayer.videoChangeEvent.subscribe(event => event ? this.playNextVideo() : false);
   }
+
 
   ngOnInit(){
     this._listSub = this.syncService.currentPlayList.pipe(
       startWith({ id: '', list: []})
     ).subscribe(playlist => this.playlist = playlist);
+
+    this.syncService.getRemovedVideo().subscribe(res =>{
+      this.videoPlaylist.splice(this.videoPlaylist.indexOf(res), 1);
+      this.playlistService.removeFromPlaylist(res);
+      if(this.youtubePlayer.getCurrentVideo() === res["id"]){
+        this.youtubePlayer.pausePlayingVideo();
+      }
+    });
   }
 
   play(id: string): void {
@@ -58,6 +69,7 @@ export class PlayListComponent implements OnInit {
     if(this.youtubePlayer.getCurrentVideo() === video["id"]){
       this.youtubePlayer.pausePlayingVideo();
     }
+    this.syncService.removeFromPlaylist(video);
   }
 
   playNextVideo(): void {
