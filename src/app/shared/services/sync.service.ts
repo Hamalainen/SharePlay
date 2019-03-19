@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 
 import { YoutubeClip } from '../models/youtubeclip';
@@ -10,22 +10,25 @@ import { PlaylistStoreService } from './playlist-store.service';
 import { subscribeOn } from 'rxjs/operators';
 import { PlayListComponent } from 'src/app/main/play-list/play-list.component';
 import { VideoListComponent } from 'src/app/main/video-list/video-list.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SyncService {
-  currentPlayList = this.socket.fromEvent<PlayList>('playlist');
-  //   documents = this.socket.fromEvent<string[]>('documents');
+export class SyncService  {
+  private roomId = null;
 
   constructor(
     private socket: Socket,
     private youtubeApiService: YoutubeApiService,
-    private playlistStoreService: PlaylistStoreService
-  ) { }
-  ngAfterViewInit() {
+    private playlistStoreService: PlaylistStoreService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) 
+  {}
 
-
+  getRoom() {
+    return this.socket.fromEvent('room');
   }
 
   getAddedVideo() {
@@ -40,55 +43,54 @@ export class SyncService {
     return this.socket.fromEvent('playing');
   }
 
-  playerState(){
+  playerState() {
     return this.socket.fromEvent('playerState');
   }
 
   playVideo(video: any) {
-    this.socket.emit('play', video);
+    this.socket.emit('play', 
+    {
+      video: video,
+      roomId: this.roomId
+    });
   }
 
   removeFromPlaylist(video: any) {
-    this.socket.emit('removedFromPlaylist', video);
+    this.socket.emit('removedFromPlaylist', 
+    {
+      video: video,
+      roomId: this.roomId
+    });
   }
 
-  getRoom(id: string) {
-    this.socket.emit('getDoc', id);
-  }
-
-  newRoom() {
-    this.socket.emit('addDoc', { id: this.docId(), doc: '' });
+  joinroom(roomId: string) {
+    this.roomId = roomId;
+    console.log(this.roomId);
+    this.socket.emit('joinroom', this.roomId);
   }
 
   addedToPlaylist(video: any) {
-    this.socket.emit('addedToPlaylist', video);
-  }
-
-  getPlaylist() {
-    this.socket.fromEvent('room').subscribe(res => {
-      var videos = res['playlist'];
-      this.add(videos);
+    this.socket.emit('addedToPlaylist', 
+    {
+      video: video,
+      roomId: this.roomId
     });
   }
 
-  private docId() {
-    let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  // getPlaylist() {
+  //   this.socket.fromEvent('room').subscribe(res => {
+  //     var videos = res['playlist'];
+  //     this.add(videos);
+  //   });
+  // }
 
-    for (let i = 0; i < 5; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-
-    return text;
-  }
-
-  private add(videos): void {
-    this.youtubeApiService.getVideos(videos).then(res => {
-      for (let i = 0; i < res.length; i++) {
-        this.playlistStoreService.addToPlaylist(res[i]);
-      }
-    });
-  }
+  // private add(videos): void {
+  //   this.youtubeApiService.getVideos(videos).then(res => {
+  //     for (let i = 0; i < res.length; i++) {
+  //       this.playlistStoreService.addToPlaylist(res[i]);
+  //     }
+  //   });
+  // }
 
   playerEvent(event: any) {
     this.socket.emit('playerEvent', event);

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnChanges, AfterViewChecked } from '@angular/core';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
-import { PlaylistStoreService } from '../../shared/services/playlist-store.service';
 import { identifierModuleUrl } from '@angular/compiler';
 import { constructDependencies } from '@angular/core/src/di/reflective_provider';
 import { Subscription } from 'rxjs';
@@ -20,12 +19,10 @@ export class PlayListComponent implements OnInit {
   @Input() playlistNames;
   @Input() repeat;
   @Input() shuffle;
-  private _listSub: Subscription;
   playlist: PlayList;
 
   constructor(
     private youtubePlayer: YoutubePlayerService,
-    private playlistService: PlaylistStoreService,
     private syncService: SyncService,
     private socket: Socket
   ) {
@@ -34,13 +31,8 @@ export class PlayListComponent implements OnInit {
 
 
   ngOnInit(){
-    this._listSub = this.syncService.currentPlayList.pipe(
-      startWith({ id: '', list: []})
-    ).subscribe(playlist => this.playlist = playlist);
-
     this.syncService.getRemovedVideo().subscribe(res =>{
       this.videoPlaylist.splice(this.videoPlaylist.indexOf(res), 1);
-      this.playlistService.removeFromPlaylist(res);
       if(this.youtubePlayer.getCurrentVideo() === res["id"]){
         this.youtubePlayer.pausePlayingVideo();
       }
@@ -65,7 +57,6 @@ export class PlayListComponent implements OnInit {
 
   removeFromPlaylist(video: Object): void {
     this.videoPlaylist.splice(this.videoPlaylist.indexOf(video), 1);
-    this.playlistService.removeFromPlaylist(video);
     if(this.youtubePlayer.getCurrentVideo() === video["id"]){
       this.youtubePlayer.pausePlayingVideo();
     }

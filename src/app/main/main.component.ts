@@ -3,10 +3,13 @@ import { YoutubeApiService } from '../shared/services/youtube-api.service';
 import { YoutubePlayerService } from '../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../shared/services/playlist-store.service';
 import { NotificationService } from '../shared/services/notification.service';
-import{ SyncService } from '../shared/services/sync.service';
+import { SyncService } from '../shared/services/sync.service';
 import { Socket } from 'ngx-socket-io';
 import { VideoDurationPipe } from '../shared/pipes/video-duration.pipe';
 import { VideoNamePipe } from '../shared/pipes/video-name.pipe';
+import { ActivatedRoute, Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -22,6 +25,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   public shuffle = false;
   public playlistElement: any;
   private pageLoadingFinished = false;
+  private roomId = null;
 
   constructor(
     private youtubeService: YoutubeApiService,
@@ -29,22 +33,35 @@ export class MainComponent implements AfterViewInit, OnInit {
     private playlistService: PlaylistStoreService,
     private notificationService: NotificationService,
     private syncService: SyncService,
-    private socket: Socket,
-    private videoDurationPipe: VideoDurationPipe,
-    private videoNamePipe: VideoNamePipe
+    private route: ActivatedRoute,
+    private router: Router
 
   ) {
-    this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
-    
+    // this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
+
   }
-    ngOnInit(){
-     this.playlistService.clearPlaylist();
-     this.syncService.getPlaylist();
-    }
-  
+  ngOnInit() {
+    // this.playlistService.clearPlaylist();
+    // this.syncService.getPlaylist();
+
+    this.route.params.subscribe(params => {
+      this.roomId = params['room'];
+      if (this.roomId == null) {
+        this.router.navigate(['', this.newRoomId()]);
+
+      }
+    });
+  }
+
 
   ngAfterViewInit() {
     this.playlistElement = document.getElementById('playlist');
+
+    if(this.roomId != null){
+      this.syncService.joinroom(this.roomId);
+    }
+    
+
   }
 
   playFirstInPlaylist(): void {
@@ -61,7 +78,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   checkAddToPlaylist(video: any): void {
     if (!this.videoPlaylist.some((e) => e.id === video.id)) {
       this.videoPlaylist.push(video);
-      this.playlistService.addToPlaylist(video);
+      // this.playlistService.addToPlaylist(video);
 
       let inPlaylist = this.videoPlaylist.length - 1;
 
@@ -70,23 +87,6 @@ export class MainComponent implements AfterViewInit, OnInit {
         this.playlistElement.scrollTop = topPos - 100;
       });
     }
-  }
-
-  repeatActive(val: boolean): void {
-    this.repeat = val;
-    this.shuffle = false;
-  }
-
-  shuffleActive(val: boolean): void {
-    this.shuffle = val;
-    this.repeat = false;
-  }
-
-  togglePlaylist(): void {
-    this.playlistToggle = !this.playlistToggle;
-    setTimeout(() => {
-      this.playlistNames = !this.playlistNames;
-    }, 200);
   }
 
   searchMore(): void {
@@ -165,35 +165,20 @@ export class MainComponent implements AfterViewInit, OnInit {
     }
   }
 
-  closePlaylist(): void {
-    this.playlistToggle = false;
-    this.playlistNames = false;
-  }
-
   clearPlaylist(): void {
     this.videoPlaylist = [];
     this.playlistService.clearPlaylist();
     this.notificationService.showNotification('Playlist cleared.');
   }
 
-  exportPlaylist(): void {
-    if (this.videoPlaylist.length < 1) {
-      this.notificationService.showNotification('Nothing to export.');
-      return;
+  private newRoomId() {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (let i = 0; i < 5; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
 
-    let data = JSON.stringify(this.videoPlaylist);
-    let a = document.createElement('a');
-    let file = new Blob([data], { type: 'text/json' });
-
-    a.href = URL.createObjectURL(file);
-    a.download = 'playlist.json';
-    a.click();
-    this.notificationService.showNotification('Playlist exported.');
-  }
-
-  importPlaylist(playlist: any): void {
-    this.videoPlaylist = playlist;
-    this.playlistService.importPlaylist(this.videoPlaylist);
+    return text;
   }
 }
