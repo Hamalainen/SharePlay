@@ -27,9 +27,9 @@ import { UserlistComponent } from './main/user-list/userlist.component';
 
  const socketUrl = window.location.href.includes('localhost') ? 'http://localhost:3000/' : 'https://hamalainen-server.herokuapp.com/';
 const config: SocketIoConfig = { url: socketUrl, options: {} };
-// console.log("searching socket at: " + socketUrl);
+ console.log("searching socket at: " + socketUrl);
 
-// console.log("client location: " + window.location.href);
+ console.log("client location: " + window.location.href);
 
 @NgModule({
   declarations: [
