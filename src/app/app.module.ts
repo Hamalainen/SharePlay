@@ -26,7 +26,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { UserlistComponent } from './main/user-list/userlist.component';
 
 //  const socketUrl = window.location.href.includes('localhost') ? 'http://localhost:3000/' : 'https://hamalainen-server.herokuapp.com:50300/';
- const socketUrl = 'https://hamalainen-server.herokuapp.com:50300/';
+const socketUrl = 'https://hamalainen-server.herokuapp.com/';
 const config: SocketIoConfig = { url: socketUrl, options: {} };
  console.log("searching socket at: " + socketUrl);
 
