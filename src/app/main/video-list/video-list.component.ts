@@ -11,43 +11,39 @@ import { MainComponent } from '../main.component';
   templateUrl: './video-list.component.html',
   styleUrls: ['./video-list.component.css']
 })
-export class VideoListComponent implements OnInit, AfterViewInit
- {
+export class VideoListComponent implements OnInit, AfterViewInit {
   @Input() videoList;
   @Input() loadingInProgress;
   @Output() videoPlaylist = new EventEmitter();
-  
+
   constructor(
     private youtubePlayer: YoutubePlayerService,
     private syncService: SyncService,
     private youtubeApiService: YoutubeApiService,
     private mainComponent: MainComponent
-
-
-
-    ) {
-    }
-     
-    ngOnInit(){
-
-      this.syncService.getAddedVideo().subscribe(res =>{
-        this.videoPlaylist.emit(res);
-      });
-    }
-
-    ngAfterViewInit(){
-      
-    }
-
-    play(video: any): void {
-      this.addToPlaylist(video);
-      this.youtubePlayer.playVideo(video.id, video.snippet.title);
-      this.syncService.playVideo(video);
-    }
-   
-    addToPlaylist(video: any): void {
-      this.videoPlaylist.emit(video);
-      this.syncService.addedToPlaylist(video);
-    }
-  
+  ) {
   }
+
+  ngOnInit() {
+    this.syncService.getAddedVideo().subscribe(res => {
+      this.videoPlaylist.emit(res);
+    });
+  }
+
+  ngAfterViewInit() {
+
+  }
+
+  play(video: any): void {
+    console.log('adding');
+    this.addToPlaylist(video);
+    this.youtubePlayer.playVideo(video.id, video.snippet.title);
+    this.syncService.playVideo(video);
+  }
+
+  addToPlaylist(video: any): void {
+    this.videoPlaylist.emit(video);
+    this.syncService.addedToPlaylist(video);
+  }
+
+}

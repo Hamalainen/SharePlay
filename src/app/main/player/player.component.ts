@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit,  } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
 import { SyncService } from '../../shared/services/sync.service';
 
@@ -15,46 +15,24 @@ export class PlayerComponent implements AfterContentInit, OnInit {
     private syncService: SyncService
   ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.syncService.playingVideo().subscribe(res => {
       this.youtubePlayer.playVideo(res['id'], res['snippet']['title'])
     });
 
     this.syncService.playerState().subscribe(res => {
-
-      
-      console.log(res);
-      switch (res['data']) {
-        case -1:
-        //unstarted
+      console.log("res: " + res);
+      switch (res) {
+        case 'play':
           this.youtubePlayer.playPausedVideo();
           break;
-        case 0:
-        //ended
-          break;
-        case 1:
-        //playing
-          this.youtubePlayer.playPausedVideo();
-          break;
-        case 2:
-        //paused
+        case 'pause':
           this.youtubePlayer.pausePlayingVideo();
-          break;
-        case 3:
-        //buffering
-          this.youtubePlayer.pausePlayingVideo();
-          break;
-        case 5:
-        //video cued
-  
           break;
       }
-
     });
-
-
   }
-  
+
   ngAfterContentInit() {
     let doc = window.document;
     let playerApi = doc.createElement('script');

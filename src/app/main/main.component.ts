@@ -44,15 +44,15 @@ export class MainComponent implements AfterViewInit, OnInit {
       if (this.roomId == null) {
         this.router.navigate(['', this.newRoomId()]);
       }
-      else{
+      else {
         this.syncService.joinroom(this.roomId);
       }
     });
 
     this.syncService.getRoom().subscribe(res => {
-        this.youtubeService.getVideos(res['playlist']).then(res => {
-          this.videoPlaylist = res;
-        });
+      this.youtubeService.getVideos(res['playlist']).then(res => {
+        this.videoPlaylist = res;
+      });
     });
   }
 
@@ -75,7 +75,6 @@ export class MainComponent implements AfterViewInit, OnInit {
   checkAddToPlaylist(video: any): void {
     if (!this.videoPlaylist.some((e) => e.id === video.id)) {
       this.videoPlaylist.push(video);
-      // this.playlistService.addToPlaylist(video);
 
       let inPlaylist = this.videoPlaylist.length - 1;
 
@@ -84,7 +83,6 @@ export class MainComponent implements AfterViewInit, OnInit {
         this.playlistElement.scrollTop = topPos - 100;
       });
     }
-    console.log(this.videoPlaylist.length);
   }
 
   searchMore(): void {

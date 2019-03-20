@@ -77,6 +77,10 @@ export class SyncService  {
   }
 
   playerEvent(event: any) {
-    this.socket.emit('playerEvent', event);
+    this.socket.emit('playerEvent', 
+    {
+      event: event,
+      roomId: this.roomId
+    });
   }
 }
