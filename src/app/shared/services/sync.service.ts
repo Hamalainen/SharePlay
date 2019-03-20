@@ -44,6 +44,7 @@ export class SyncService  {
   }
 
   playerState() {
+    console.log('hmm');
     return this.socket.fromEvent('playerState');
   }
 
