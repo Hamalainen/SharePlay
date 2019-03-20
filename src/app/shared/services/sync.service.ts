@@ -25,7 +25,7 @@ export class SyncService  {
     private route: ActivatedRoute,
     private router: Router
   ) 
-  {}
+  {  }
 
   getRoom() {
     return this.socket.fromEvent('room');
@@ -65,7 +65,6 @@ export class SyncService  {
 
   joinroom(roomId: string) {
     this.roomId = roomId;
-    console.log(this.roomId);
     this.socket.emit('joinroom', this.roomId);
   }
 
@@ -76,21 +75,6 @@ export class SyncService  {
       roomId: this.roomId
     });
   }
-
-  // getPlaylist() {
-  //   this.socket.fromEvent('room').subscribe(res => {
-  //     var videos = res['playlist'];
-  //     this.add(videos);
-  //   });
-  // }
-
-  // private add(videos): void {
-  //   this.youtubeApiService.getVideos(videos).then(res => {
-  //     for (let i = 0; i < res.length; i++) {
-  //       this.playlistStoreService.addToPlaylist(res[i]);
-  //     }
-  //   });
-  // }
 
   playerEvent(event: any) {
     this.socket.emit('playerEvent', event);

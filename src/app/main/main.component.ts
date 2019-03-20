@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { YoutubeApiService } from '../shared/services/youtube-api.service';
 import { YoutubePlayerService } from '../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../shared/services/playlist-store.service';
@@ -36,32 +36,29 @@ export class MainComponent implements AfterViewInit, OnInit {
     private route: ActivatedRoute,
     private router: Router
 
-  ) {
-    // this.videoPlaylist = this.playlistService.retrieveStorage().playlists;
+  ) { }
 
-  }
   ngOnInit() {
-    // this.playlistService.clearPlaylist();
-    // this.syncService.getPlaylist();
-
     this.route.params.subscribe(params => {
       this.roomId = params['room'];
       if (this.roomId == null) {
         this.router.navigate(['', this.newRoomId()]);
-
       }
+      else{
+        this.syncService.joinroom(this.roomId);
+      }
+    });
+
+    this.syncService.getRoom().subscribe(res => {
+        this.youtubeService.getVideos(res['playlist']).then(res => {
+          this.videoPlaylist = res;
+        });
     });
   }
 
 
   ngAfterViewInit() {
     this.playlistElement = document.getElementById('playlist');
-
-    if(this.roomId != null){
-      this.syncService.joinroom(this.roomId);
-    }
-    
-
   }
 
   playFirstInPlaylist(): void {
@@ -87,6 +84,7 @@ export class MainComponent implements AfterViewInit, OnInit {
         this.playlistElement.scrollTop = topPos - 100;
       });
     }
+    console.log(this.videoPlaylist.length);
   }
 
   searchMore(): void {

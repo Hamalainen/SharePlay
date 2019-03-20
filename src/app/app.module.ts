@@ -61,7 +61,9 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     NotificationService,
     BrowserNotificationService,
     VideoNamePipe,
-    VideoDurationPipe
+    VideoDurationPipe,
+    VideoListComponent,
+    PlayListComponent
   ],
   bootstrap: [AppComponent]
 })

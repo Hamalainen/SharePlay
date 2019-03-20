@@ -31,6 +31,9 @@ export class PlayListComponent implements OnInit {
 
 
   ngOnInit(){
+
+    this.videoPlaylist = [];
+
     this.syncService.getRemovedVideo().subscribe(res =>{
       this.videoPlaylist.splice(this.videoPlaylist.indexOf(res), 1);
       if(this.youtubePlayer.getCurrentVideo() === res["id"]){
@@ -63,6 +66,10 @@ export class PlayListComponent implements OnInit {
     this.syncService.removeFromPlaylist(video);
   }
 
+  getPlayList(){
+    console.log(this.videoPlaylist);
+    return this.videoPlaylist;
+  }
   playNextVideo(): void {
     let current = this.youtubePlayer.getCurrentVideo();
     let inPlaylist;
