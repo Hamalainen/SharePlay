@@ -34,9 +34,9 @@ import { UserlistComponent } from './main/user-list/userlist.component';
 const socketUrl = 'https://hamalainen-server.herokuapp.com/';
 
 const config: SocketIoConfig = { url: socketUrl, options: {} };
- console.log("searching socket at: " + socketUrl);
-
- console.log("client location: " + window.location.href);
+ 
+// console.log("searching socket at: " + socketUrl);
+// console.log("client location: " + window.location.href);
 
 @NgModule({
   declarations: [

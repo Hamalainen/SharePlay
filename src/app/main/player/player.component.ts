@@ -8,18 +8,15 @@ import { SyncService } from '../../shared/services/sync.service';
   styleUrls: ['./player.component.css']
 })
 
-export class PlayerComponent implements AfterContentInit, OnInit {
+export class PlayerComponent implements AfterContentInit {
 
   constructor(
     private youtubePlayer: YoutubePlayerService,
     private syncService: SyncService
   ) { }
 
-  ngOnInit() {   
-  }
-
   ngAfterContentInit() {
-    
+
     let doc = window.document;
     let playerApi = doc.createElement('script');
     playerApi.type = 'text/javascript';
@@ -32,7 +29,6 @@ export class PlayerComponent implements AfterContentInit, OnInit {
     });
 
     this.syncService.playerState().subscribe(res => {
-      console.log("res: " + res['playerState']);
       switch (res['playerState']) {
         case 1:
           this.youtubePlayer.playPausedVideo();
