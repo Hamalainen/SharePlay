@@ -41,6 +41,9 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   addToPlaylist(video: any): void {
+    if(this.mainComponent.videoPlaylist.length < 1){
+      this.youtubePlayer.loadVideo(video);
+    }
     this.videoPlaylist.emit(video);
     this.syncService.addedToPlaylist(video);
   }

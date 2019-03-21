@@ -1,4 +1,4 @@
-import { Injectable, Output, EventEmitter, OnInit } from '@angular/core';
+import { Injectable, Output, EventEmitter, OnInit, AfterContentInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NotificationService } from './notification.service';
 import { BrowserNotificationService } from './browser-notification.service';
@@ -7,7 +7,7 @@ import { SyncService } from './sync.service';
 let _window: any = window;
 
 @Injectable()
-export class YoutubePlayerService {
+export class YoutubePlayerService implements AfterContentInit{
   public yt_player;
   private currentVideoId: string;
 
@@ -21,7 +21,13 @@ export class YoutubePlayerService {
     private syncService: SyncService
   ) { }
 
- 
+ ngAfterContentInit(){
+  setInterval(function () {
+    this.syncService.sendRealTime(this.getRealTime());
+  }, 100);
+ }
+
+
   createPlayer(): void {
     let interval = setInterval(() => {
       if ((typeof _window.YT !== 'undefined') && _window.YT && _window.YT.Player) {
@@ -35,7 +41,7 @@ export class YoutubePlayerService {
           events: {
             onStateChange: (ev) => {
               this.onPlayerStateChange(ev);
-              this.syncService.playerEvent(ev);
+              this.onChangeSync(ev);
             }
           }
         });
@@ -43,6 +49,14 @@ export class YoutubePlayerService {
       }
     }, 100);
   }
+
+  onChangeSync(ev: any){
+    var time = this.yt_player.getCurrentTime();
+    var video = this.yt_player.getVideoData()['video_id'];
+
+    this.syncService.playerEvent(ev, video, time);
+  }
+
 
   onPlayerStateChange(event: any) {
     const state = event.data;
@@ -71,11 +85,23 @@ export class YoutubePlayerService {
     this.browserNotification.show(videoText);
   }
 
-  pausePlayingVideo(): void {
+  pausePlayingVideo(video?: any, time?: any): void {
+    if(video != null){
+      this.yt_player.loadVideoById(video['id']);
+    }
+    if(time != null){
+      this.yt_player.seekTo(time);
+    }
     this.yt_player.pauseVideo();
   }
 
-  playPausedVideo(): void {
+  playPausedVideo(video?: any, time?: any): void {
+    if(video != null){
+      this.yt_player.loadVideoById(video['id']);
+    }
+    if(time != null){
+      this.yt_player.seekTo(time);
+    }
     this.yt_player.playVideo();
   }
 
@@ -87,6 +113,11 @@ export class YoutubePlayerService {
     this.yt_player.setSize(width, height);
   }
 
+  loadVideo(video: any){
+    this.yt_player.loadVideoById(video['id']);
+    this.yt_player.pauseVideo();
+  }
+
   getShuffled(index: number, max: number): number {
     if (max < 2) {
       return;
@@ -94,5 +125,11 @@ export class YoutubePlayerService {
 
     let i = Math.floor(Math.random() * max);
     return i !== index ? i : this.getShuffled(index, max);
+  }
+
+  getRealTime(){
+    var time = this.yt_player.getCurrentTime();
+    var video = this.yt_player.getVideoData()['video_id'];
+    return {time: time, video: video};
   }
 }

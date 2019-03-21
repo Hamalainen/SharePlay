@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 
 import { YoutubeClip } from '../models/youtubeclip';
@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class SyncService  {
+export class SyncService {
   private roomId = null;
 
   constructor(
@@ -24,8 +24,16 @@ export class SyncService  {
     private playlistStoreService: PlaylistStoreService,
     private route: ActivatedRoute,
     private router: Router
-  ) 
-  {  }
+  ) { }
+
+  sendRealTime(realtime: any) {
+    this.socket.emit('realTime',
+      {
+        roomId: this.roomId,
+        video: realtime.video,
+        currentTime: realtime.time
+      });
+  }
 
   getRoom() {
     return this.socket.fromEvent('room');
@@ -44,24 +52,23 @@ export class SyncService  {
   }
 
   playerState() {
-    console.log('hmm');
     return this.socket.fromEvent('playerState');
   }
 
   playVideo(video: any) {
-    this.socket.emit('play', 
-    {
-      video: video,
-      roomId: this.roomId
-    });
+    this.socket.emit('play',
+      {
+        video: video,
+        roomId: this.roomId
+      });
   }
 
   removeFromPlaylist(video: any) {
-    this.socket.emit('removedFromPlaylist', 
-    {
-      video: video,
-      roomId: this.roomId
-    });
+    this.socket.emit('removedFromPlaylist',
+      {
+        video: video,
+        roomId: this.roomId
+      });
   }
 
   joinroom(roomId: string) {
@@ -70,18 +77,20 @@ export class SyncService  {
   }
 
   addedToPlaylist(video: any) {
-    this.socket.emit('addedToPlaylist', 
-    {
-      video: video,
-      roomId: this.roomId
-    });
+    this.socket.emit('addedToPlaylist',
+      {
+        video: video,
+        roomId: this.roomId
+      });
   }
 
-  playerEvent(event: any) {
-    this.socket.emit('playerEvent', 
-    {
-      event: event,
-      roomId: this.roomId
-    });
+  playerEvent(event: any, video: any, currentTime: any) {
+    this.socket.emit('playerEvent',
+      {
+        event: event,
+        roomId: this.roomId,
+        video: video,
+        currentTime: currentTime
+      });
   }
 }
