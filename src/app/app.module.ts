@@ -28,10 +28,10 @@ import { UserlistComponent } from './main/user-list/userlist.component';
 //  const socketUrl = window.location.href.includes('localhost') ? 'http://localhost:3000/' : 'https://hamalainen-server.herokuapp.com:50300/';
 
 //dev url
-const socketUrl = 'http://localhost:3000/';
+// const socketUrl = 'http://localhost:3000/';
 
 //prod url
-// const socketUrl = 'https://hamalainen-server.herokuapp.com/';
+const socketUrl = 'https://hamalainen-server.herokuapp.com/';
 
 const config: SocketIoConfig = { url: socketUrl, options: {} };
  
