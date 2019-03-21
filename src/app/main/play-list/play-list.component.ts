@@ -67,7 +67,6 @@ export class PlayListComponent implements OnInit {
   }
 
   getPlayList(){
-    console.log(this.videoPlaylist);
     return this.videoPlaylist;
   }
   playNextVideo(): void {

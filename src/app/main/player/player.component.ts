@@ -15,7 +15,18 @@ export class PlayerComponent implements AfterContentInit, OnInit {
     private syncService: SyncService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {   
+    let doc = window.document;
+    let playerApi = doc.createElement('script');
+    playerApi.type = 'text/javascript';
+    playerApi.src = 'https://www.youtube.com/iframe_api';
+    doc.body.appendChild(playerApi);
+    this.youtubePlayer.createPlayer();
+  }
+
+  ngAfterContentInit() {
+
+
     this.syncService.playingVideo().subscribe(res => {
       this.youtubePlayer.playVideo(res['id'], res['snippet']['title'])
     });
@@ -31,15 +42,6 @@ export class PlayerComponent implements AfterContentInit, OnInit {
           break;
       }
     });
-  }
-
-  ngAfterContentInit() {
-    let doc = window.document;
-    let playerApi = doc.createElement('script');
-    playerApi.type = 'text/javascript';
-    playerApi.src = 'https://www.youtube.com/iframe_api';
-    doc.body.appendChild(playerApi);
-    this.youtubePlayer.createPlayer();
   }
 
 }

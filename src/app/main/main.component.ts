@@ -49,11 +49,11 @@ export class MainComponent implements AfterViewInit, OnInit {
       }
     });
 
-    this.syncService.getRoom().subscribe(res => {
-      this.youtubeService.getVideos(res['playlist']).then(res => {
-        this.videoPlaylist = res;
-      });
-    });
+    // this.syncService.getRoom().subscribe(res => {
+    //   this.youtubeService.getVideos(res['playlist']).then(res => {
+    //     this.videoPlaylist = res;
+    //   });
+    // });
   }
 
 
