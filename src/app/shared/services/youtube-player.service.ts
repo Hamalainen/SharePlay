@@ -23,10 +23,7 @@ export class YoutubePlayerService {
 
  
   createPlayer(): void {
-    console.log("creating player");
     let interval = setInterval(() => {
-      console.log("creating player");
-      console.log(_window.YT);
       if ((typeof _window.YT !== 'undefined') && _window.YT && _window.YT.Player) {
         this.yt_player = new _window.YT.Player('yt-player', {
           width: '1000',
@@ -38,7 +35,7 @@ export class YoutubePlayerService {
           events: {
             onStateChange: (ev) => {
               this.onPlayerStateChange(ev);
-              // this.syncService.playerEvent(ev);
+              this.syncService.playerEvent(ev);
             }
           }
         });
@@ -66,10 +63,8 @@ export class YoutubePlayerService {
   playVideo(videoId: string, videoText?: string): void {
     if (!this.yt_player) {
       console.error('Player not ready.');
-      this.notificationService.showNotification('Player not ready.');
       return;
     }
-    console.log(this.yt_player);
     this.yt_player.loadVideoById(videoId);
     this.currentVideoId = videoId;
     this.currentVideoText.emit(videoText);

@@ -25,9 +25,9 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // this.syncService.getAddedVideo().subscribe(res => {
-    //   this.videoPlaylist.emit(res);
-    // });
+    this.syncService.getAddedVideo().subscribe(res => {
+      this.videoPlaylist.emit(res);
+    });
   }
 
   ngAfterViewInit() {
@@ -35,14 +35,14 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   play(video: any): void {
-    // this.addToPlaylist(video);
+    this.addToPlaylist(video);
     this.youtubePlayer.playVideo(video.id, video.snippet.title);
-    // this.syncService.playVideo(video);
+    this.syncService.playVideo(video);
   }
 
   addToPlaylist(video: any): void {
     this.videoPlaylist.emit(video);
-    // this.syncService.addedToPlaylist(video);
+    this.syncService.addedToPlaylist(video);
   }
 
 }

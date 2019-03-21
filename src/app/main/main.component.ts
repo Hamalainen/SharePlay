@@ -39,25 +39,24 @@ export class MainComponent implements AfterViewInit, OnInit {
   ) { }
 
   ngOnInit() {
+    this.syncService.getRoom().subscribe(res => {
+      this.youtubeService.getVideos(res['playlist']).then(res => {
+        this.videoPlaylist = res;
+      });
+    });
+  }
+
+
+  ngAfterViewInit() {
     this.route.params.subscribe(params => {
       this.roomId = params['room'];
       if (this.roomId == null) {
-        this.router.navigate(['', this.newRoomId()]);
+        window.location.href = window.location.href + this.newRoomId();
       }
       else {
         this.syncService.joinroom(this.roomId);
       }
     });
-
-    // this.syncService.getRoom().subscribe(res => {
-    //   this.youtubeService.getVideos(res['playlist']).then(res => {
-    //     this.videoPlaylist = res;
-    //   });
-    // });
-  }
-
-
-  ngAfterViewInit() {
     this.playlistElement = document.getElementById('playlist');
   }
 
