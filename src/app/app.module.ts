@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // Services
 import { YoutubeApiService } from './shared/services/youtube-api.service';
@@ -9,6 +10,7 @@ import { YoutubePlayerService } from './shared/services/youtube-player.service';
 import { PlaylistStoreService } from './shared/services/playlist-store.service';
 import { NotificationService } from './shared/services/notification.service';
 import { BrowserNotificationService } from './shared/services/browser-notification.service';
+import { UserNameService } from './shared/services/user-name.service';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -64,7 +66,8 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    HttpClientModule
   ],
   providers: [
     YoutubeApiService,
@@ -75,7 +78,9 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     VideoNamePipe,
     VideoDurationPipe,
     VideoListComponent,
-    PlayListComponent
+    PlayListComponent,
+    UserNameService,
+    UserlistComponent
   ],
   bootstrap: [AppComponent]
 })

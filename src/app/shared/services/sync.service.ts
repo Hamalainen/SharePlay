@@ -71,9 +71,13 @@ export class SyncService {
       });
   }
 
-  joinroom(roomId: string) {
+  joinroom(roomId: string, userName: any) {
     this.roomId = roomId;
-    this.socket.emit('joinroom', this.roomId);
+    this.socket.emit('joinroom', 
+    {
+      roomId: this.roomId,
+      userName: userName
+    });
   }
 
   addedToPlaylist(video: any) {
