@@ -22,16 +22,21 @@ import { LazyScrollDirective } from './shared/directives/lazy-scroll/lazy-scroll
 import { VideoListComponent } from './main/video-list/video-list.component';
 import { VideoSearchComponent } from './main/video-search/video-search.component';
 import { PlayListComponent } from './main/play-list/play-list.component';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io';
 import { UserlistComponent } from './main/user-list/userlist.component';
+import { environment } from '../environments/environment'
 
 //  const socketUrl = window.location.href.includes('localhost') ? 'http://localhost:3000/' : 'https://hamalainen-server.herokuapp.com:50300/';
 
 //dev url
 // const socketUrl = 'http://localhost:3000/';
 
+const socketUrl = environment.socketUrl;
+
+console.log(socketUrl);
+
 //prod url
-const socketUrl = 'https://hamalainen-server.herokuapp.com/';
+// const socketUrl = 'https://hamalainen-server.herokuapp.com/';
 
 const config: SocketIoConfig = { url: socketUrl, options: {} };
  
