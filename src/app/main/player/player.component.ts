@@ -40,6 +40,9 @@ export class PlayerComponent implements AfterContentInit {
           break;
       }
     });
-  }
 
+    setInterval(() => {
+      this.syncService.sendRealTime(this.youtubePlayer.getRealTime());
+    }, 500);
+  }
 }

@@ -24,6 +24,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   public playlistElement: any;
   private pageLoadingFinished = false;
   private roomId = null;
+  private numberOfUsers = 0;
 
   constructor(
     private youtubeService: YoutubeApiService,
@@ -44,7 +45,6 @@ export class MainComponent implements AfterViewInit, OnInit {
     });
   }
 
-
   ngAfterViewInit() {
     this.route.params.subscribe(params => {
       this.roomId = params['room'];
@@ -52,9 +52,17 @@ export class MainComponent implements AfterViewInit, OnInit {
         window.location.href = window.location.href + this.newRoomId();
       }
       else {
-        this.syncService.joinroom(this.roomId, this.userListComponent.getUserName());
+        this.userListComponent.createUser();
+        setTimeout(() => {
+          this.syncService.joinroom(this.roomId, this.userListComponent.getUserName());
+        }, 1000);
       }
     });
+    setInterval(() => {
+      console.log('call');
+      this.numberOfUsers = this.userListComponent.getNumberofUsers();
+    }, 1000);
+
     this.playlistElement = document.getElementById('playlist');
   }
 

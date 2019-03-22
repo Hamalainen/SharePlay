@@ -30,8 +30,9 @@ export class SyncService {
     this.socket.emit('realTime',
       {
         roomId: this.roomId,
-        video: realtime.video,
-        currentTime: realtime.time
+        currentVideo: realtime.video,
+        currentTime: realtime.time,
+        currentState: realtime.state
       });
   }
 

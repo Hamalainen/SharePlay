@@ -1,3 +1,18 @@
-<p style="color:aliceblue">
-  {{username}}
-</p>
+<div>
+  <span>
+    {{this.username}}
+  </span>
+  <div *ngFor="let user of userList; let i = index;">
+    <div>
+      <span>
+        {{user.userName}}
+      </span>
+      <span>
+        {{user.socketId}}
+      </span>
+      <span>
+        {{user.master}}
+      </span>
+    </div>
+  </div>
+</div>
