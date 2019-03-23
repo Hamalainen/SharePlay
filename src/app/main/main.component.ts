@@ -24,7 +24,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   public playlistElement: any;
   private pageLoadingFinished = false;
   private roomId = null;
-  private numberOfUsers = 0;
+  public numberOfUsers = 4;
 
   constructor(
     private youtubeService: YoutubeApiService,
@@ -53,9 +53,9 @@ export class MainComponent implements AfterViewInit, OnInit {
       }
       else {
         this.userListComponent.createUser();
-        setTimeout(() => {
+        
           this.syncService.joinroom(this.roomId, this.userListComponent.getUserName());
-        }, 1000);
+        
       }
     });
     setInterval(() => {

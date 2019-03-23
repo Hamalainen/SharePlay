@@ -98,4 +98,13 @@ export class SyncService {
         currentTime: currentTime
       });
   }
+
+  addUserName(userName: any){
+    console.log('server: '+userName);
+    this.socket.emit('addedUsername',
+    {
+      userName: userName,
+      roomId: this.roomId
+    })
+  }
 }

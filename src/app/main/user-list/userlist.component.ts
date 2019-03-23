@@ -7,8 +7,8 @@ import { SyncService } from '../../shared/services/sync.service'
   templateUrl: './userlist.component.html',
   styleUrls: ['./userlist.component.css']
 })
-export class UserlistComponent implements OnInit{
-  public username = "";
+export class UserlistComponent implements OnInit {
+  username: string;
   public userList = [];
 
   constructor(
@@ -16,16 +16,35 @@ export class UserlistComponent implements OnInit{
     private syncService: SyncService
   ) { }
 
-    ngOnInit(){
-      this.syncService.getRoom().subscribe(res =>{
-        this.userList = res['users'];
-      });
-    }
-
-  public createUser() {
+  ngOnInit() {
     this.userNameService.getRandomUserName().subscribe(res => {
       this.username = res['name'] + " " + res['surname'];
+      console.log("username set");
     });
+
+setTimeout(() => {
+  console.log("sending username");
+  console.log(this.username);
+   this.syncService.addUserName(this.username);
+}, 1000);
+
+   
+
+
+    this.syncService.getRoom().subscribe(res => {
+      this.userList = res['users'];
+      console.log('rooming');
+    });
+
+
+
+  }
+
+  public createUser() {
+    // this.userNameService.getRandomUserName().subscribe(res => {
+    //   this.username = res['name'] + " " + res['surname'];
+    //   console.log(this.username);
+    // });
   }
 
   public getUserName() {
@@ -39,6 +58,9 @@ export class UserlistComponent implements OnInit{
   public getNumberofUsers() {
     console.log(this.userList.length);
     return this.userList.length;
+  }
+  public getUserName2() {
+    console.log('username: ' + this.username);
   }
 
 }
