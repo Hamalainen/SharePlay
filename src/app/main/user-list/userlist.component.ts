@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserNameService } from '../../shared/services/user-name.service'
 import { SyncService } from '../../shared/services/sync.service'
 import { MainComponent } from '../main.component'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-userlist',
@@ -12,7 +11,6 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 export class UserlistComponent implements OnInit {
   username: string;
   public userList = [];
-  faCoffee = faCoffee;
 
   constructor(
     private userNameService: UserNameService,
