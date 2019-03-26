@@ -1,16 +1,25 @@
-<div>
+<div *ngIf="this.mainComponent.videoPlaylist.length">
   <span>you are known as {{username}}.</span>
-  <div *ngFor="let user of userList; let i = index;">
-    <div>
-      <span>
-        {{user.userName}}
-      </span>
-      <span>
-        {{user.socketId}}
-      </span>
-      <span>
-        {{user.master}}
-      </span>
+  <div style="height:20vh; overflow-y: auto;">
+    <div *ngFor="let user of userList; let i = index;">
+      <div>
+        <span style="display: inline-block; position: relative; top:4px">
+          <i *ngIf="user.master" class="material-icons">
+            person
+          </i>
+          <i *ngIf="!user.master" class="material-icons">
+            person_outline
+          </i>
+        </span>
+        <span>
+          {{user.userName}}
+        </span>
+      </div>
     </div>
   </div>
+</div>
+
+
+<div *ngIf="!this.mainComponent.videoPlaylist.length">
+  <span>{{userList.length}} People in room including you.</span>
 </div>

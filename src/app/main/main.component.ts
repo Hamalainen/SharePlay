@@ -4,7 +4,7 @@ import { YoutubePlayerService } from '../shared/services/youtube-player.service'
 import { PlaylistStoreService } from '../shared/services/playlist-store.service';
 import { NotificationService } from '../shared/services/notification.service';
 import { SyncService } from '../shared/services/sync.service';
-import { UserlistComponent } from './user-list/userlist.component'
+// import { UserlistComponent } from './user-list/userlist.component'
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -33,7 +33,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     private notificationService: NotificationService,
     private syncService: SyncService,
     private route: ActivatedRoute,
-    private userListComponent: UserlistComponent
+    // private userListComponent: UserlistComponent
 
   ) { }
 
@@ -52,16 +52,14 @@ export class MainComponent implements AfterViewInit, OnInit {
         window.location.href = window.location.href + this.newRoomId();
       }
       else {
-        this.userListComponent.createUser();
-        
-          this.syncService.joinroom(this.roomId, this.userListComponent.getUserName());
+        this.syncService.joinroom(this.roomId, '');
         
       }
     });
-    setInterval(() => {
-      console.log('call');
-      this.numberOfUsers = this.userListComponent.getNumberofUsers();
-    }, 1000);
+    // setInterval(() => {
+    //   console.log('call');
+    //   this.numberOfUsers = this.userListComponent.getNumberofUsers();
+    // }, 1000);
 
     this.playlistElement = document.getElementById('playlist');
   }

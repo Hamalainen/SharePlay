@@ -32,9 +32,7 @@
     </div>
   </div>
   <div [hidden]="videoPlaylist.length" class="col-md-3 mt-3 mr-4" style="color:aliceblue">
-    <p>
-      <!-- {{this.numberOfUsers}} persons in room including you. -->
-      <p>
+      <app-userlist></app-userlist>
   </div>
   </div>
   
@@ -43,10 +41,12 @@
 <div class="row">
   <div *ngIf="videoPlaylist.length" class="col-md-8">
     <div style="height:25vh; overflow-y: auto;">
-
-      <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
-        [videoList]="videoList" [loadingInProgress]="loadingInProgress">
-      </app-video-list>
+      <div class="ml-3 mr-3">
+        <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
+          [videoList]="videoList" [loadingInProgress]="loadingInProgress">
+        </app-video-list>
+      </div>
+      
 
       <div class="loader mt-5" *ngIf="!videoList.length">
         <div class="loading"></div>
@@ -55,17 +55,19 @@
     
   </div>
   <div [hidden]="!videoPlaylist.length"  class="col-md-4 " style="color:aliceblue">
-        <app-userlist></app-userlist>
+      <app-userlist></app-userlist>  
+    
     </div>
 </div>
 
   
 
   <div *ngIf="!videoPlaylist.length" class="col-md-12 row" style="height:85vh; overflow-y: auto;">
-
-    <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
+      <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
       [videoList]="videoList" [loadingInProgress]="loadingInProgress">
     </app-video-list>
+   
+    
 
     <div class="loader mt-5" *ngIf="!videoList.length">
       <div class="loading"></div>

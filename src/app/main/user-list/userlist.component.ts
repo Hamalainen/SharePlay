@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserNameService } from '../../shared/services/user-name.service'
 import { SyncService } from '../../shared/services/sync.service'
+import { MainComponent } from '../main.component'
 
 @Component({
   selector: 'app-userlist',
@@ -13,7 +14,8 @@ export class UserlistComponent implements OnInit {
 
   constructor(
     private userNameService: UserNameService,
-    private syncService: SyncService
+    private syncService: SyncService,
+    private mainComponent: MainComponent
   ) { }
 
   ngOnInit() {
@@ -38,29 +40,6 @@ setTimeout(() => {
 
 
 
-  }
-
-  public createUser() {
-    // this.userNameService.getRandomUserName().subscribe(res => {
-    //   this.username = res['name'] + " " + res['surname'];
-    //   console.log(this.username);
-    // });
-  }
-
-  public getUserName() {
-    return this.username;
-  }
-
-  public getUsers() {
-    return this.userList;
-  }
-
-  public getNumberofUsers() {
-    console.log(this.userList.length);
-    return this.userList.length;
-  }
-  public getUserName2() {
-    console.log('username: ' + this.username);
   }
 
 }
