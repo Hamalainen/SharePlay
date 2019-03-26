@@ -21,25 +21,14 @@ export class UserlistComponent implements OnInit {
   ngOnInit() {
     this.userNameService.getRandomUserName().subscribe(res => {
       this.username = res['name'] + " " + res['surname'];
-      console.log("username set");
     });
 
-setTimeout(() => {
-  console.log("sending username");
-  console.log(this.username);
-   this.syncService.addUserName(this.username);
-}, 1000);
-
-   
-
+    setTimeout(() => {
+      this.syncService.addUserName(this.username);
+    }, 1000);
 
     this.syncService.getRoom().subscribe(res => {
       this.userList = res['users'];
-      console.log('rooming');
     });
-
-
-
   }
-
 }

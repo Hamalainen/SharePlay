@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 
@@ -100,7 +100,6 @@ export class SyncService {
   }
 
   addUserName(userName: any){
-    console.log('server: '+userName);
     this.socket.emit('addedUsername',
     {
       userName: userName,

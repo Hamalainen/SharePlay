@@ -29,13 +29,17 @@ export class PlayerComponent implements AfterContentInit {
     });
 
     this.syncService.playerState().subscribe(res => {
+      console.log('player');
+      console.log(res['playerState']);
       var video = res['currentVideo'];
       var time = res['currentTime'];
       switch (res['playerState']) {
         case 1:
+        console.log('STATE 1');
           this.youtubePlayer.playPausedVideo(video, time);
           break;
         case 2:
+        console.log('STATE 2');
           this.youtubePlayer.pausePlayingVideo(video, time);
           break;
       }
