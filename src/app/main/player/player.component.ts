@@ -24,22 +24,42 @@ export class PlayerComponent implements AfterContentInit {
     doc.body.appendChild(playerApi);
     this.youtubePlayer.createPlayer();
 
+    setTimeout(() => {
+      this.syncService.getRoom().subscribe(res => {
+        this.youtubePlayer.yt_player.loadVideoById(res['currentVideo']);
+        var video = res['currentVideo'];
+        var time = res['currentTime']+1;
+
+        console.log('time: ' + time);
+        console.log('video: ' + video);
+
+        setTimeout(() => {
+          switch (res['playerState']) {
+            case 1:
+              this.youtubePlayer.playPausedVideo(video, time);
+              break;
+            case 2:
+              this.youtubePlayer.pausePlayingVideo(video, time);
+              break;
+          }
+        }, 500);
+
+      });
+    }, 500);
+
+
     this.syncService.playingVideo().subscribe(res => {
       this.youtubePlayer.playVideo(res['id'], res['snippet']['title'])
     });
 
     this.syncService.playerState().subscribe(res => {
-      console.log('player');
-      console.log(res['playerState']);
       var video = res['currentVideo'];
       var time = res['currentTime'];
       switch (res['playerState']) {
         case 1:
-        console.log('STATE 1');
           this.youtubePlayer.playPausedVideo(video, time);
           break;
         case 2:
-        console.log('STATE 2');
           this.youtubePlayer.pausePlayingVideo(video, time);
           break;
       }

@@ -17,7 +17,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SyncService {
   private roomId = null;
-
   constructor(
     private socket: Socket,
     private youtubeApiService: YoutubeApiService,
@@ -74,11 +73,11 @@ export class SyncService {
 
   joinroom(roomId: string, userName: any) {
     this.roomId = roomId;
-    this.socket.emit('joinroom', 
-    {
-      roomId: this.roomId,
-      userName: userName
-    });
+    this.socket.emit('joinroom',
+      {
+        roomId: this.roomId,
+        userName: userName
+      });
   }
 
   addedToPlaylist(video: any) {
@@ -99,11 +98,11 @@ export class SyncService {
       });
   }
 
-  addUserName(userName: any){
+  addUserName(userName: any) {
     this.socket.emit('addedUsername',
-    {
-      userName: userName,
-      roomId: this.roomId
-    })
+      {
+        userName: userName,
+        roomId: this.roomId
+      })
   }
 }
