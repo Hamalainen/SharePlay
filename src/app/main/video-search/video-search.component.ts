@@ -47,6 +47,7 @@ export class VideoSearchComponent {
         if (data.length < 1) {
           this.notificationService.showNotification('No matches found.');
         }
+        console.log(JSON.stringify(data));
         this.videosUpdated.emit(data);
       })
   }
