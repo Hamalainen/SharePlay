@@ -1,8 +1,6 @@
 
 'use strict';
 
-console.log("första raden");
-
 //Install express server
 const express = require('express');
 const path = require('path');
@@ -34,10 +32,15 @@ console.log("clientport: " + clientPort)
 const socketIO = require('socket.io');
 //const path = require('path');
 
+console.log("socket env port: " + process.env.PORT);
+
 const PORT = process.env.PORT+1 || 3000;
+
+console.log("socketport: " + PORT);
+
 // const PORT = 3000;
 const INDEX = path.join(__dirname, 'index.html');
-
+console.log("1");
 const server = express()
   .use((req, res) => res.sendFile(INDEX))
   .listen(PORT, () => console.log(`socket server is listening on port ${PORT}`));
