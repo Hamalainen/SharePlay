@@ -34,7 +34,7 @@ console.log("clientport: " + clientPort)
 const socketIO = require('socket.io');
 //const path = require('path');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT+1 || 3000;
 // const PORT = 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
