@@ -34,7 +34,8 @@ const socketIO = require('socket.io');
 
 console.log("socket env port: " + process.env.PORT);
 
-const PORT = process.env.PORT+1 || 3000;
+//const PORT = process.env.PORT+1 || 3000;
+const PORT = 80;
 
 console.log("socketport: " + PORT);
 
