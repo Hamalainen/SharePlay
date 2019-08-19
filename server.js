@@ -1,6 +1,8 @@
 
 'use strict';
 
+console.log("första raden");
+
 //Install express server
 const express = require('express');
 const path = require('path');
@@ -22,7 +24,7 @@ app.listen(clientPort);
 console.log("clientport: " + clientPort)
 
 
-/* 
+
 //nedan är socketservern
 /////////////////////////////////////////////////
 
@@ -262,4 +264,3 @@ setInterval(() => function () {
   io.emit('time', new Date().toTimeString());
 }
   , 1000);
- */
