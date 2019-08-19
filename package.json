@@ -1,6 +1,6 @@
 {
   "name": "share-play",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
@@ -8,10 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "debug": "ng serve & node socket-server/src/app.js",
-    "starting": "node server.js"
+    "debug": "ng serve & node socket-server/src/app.js"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
     "@angular/cli": "^7.3.3",
