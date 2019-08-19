@@ -22,7 +22,7 @@ app.listen(clientPort);
 console.log("clientport: " + clientPort)
 
 
-
+/* 
 //nedan är socketservern
 /////////////////////////////////////////////////
 
@@ -262,3 +262,4 @@ setInterval(() => function () {
   io.emit('time', new Date().toTimeString());
 }
   , 1000);
+ */
