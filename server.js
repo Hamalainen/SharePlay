@@ -14,12 +14,12 @@ app.get('/*', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/SharePlay/index.html'));
 });
-const PORT = process.env.PORT || 8080;
+const clientPort = process.env.PORT || 8080;
 
 // Start the app by listening on the default Heroku port
-app.listen(PORT);
+app.listen(clientPort);
 
-
+console.log("clientport: " + clientPort);
 
 
 
@@ -29,22 +29,22 @@ app.listen(PORT);
 
 
 //const express = require("express");
-//const socketIO = require('socket.io');
+const socketIO = require('socket.io');
 //const path = require('path');
 
 console.log("socket env port: " + process.env.PORT);
 
 //const PORT = process.env.PORT+1 || 3000;
-//const PORT = 3000;
+const PORT = 3000;
 
 console.log("socketport: " + PORT);
 
 // const PORT = 3000;
-//const INDEX = path.join(__dirname, 'index.html');
+const INDEX = path.join(__dirname, 'index.html');
 console.log("1");
-//const server = express()
-//  .use((req, res) => res.sendFile(INDEX))
-//  .listen(PORT, () => console.log(`socket server is listening on port ${PORT}`));
+const server = express()
+  .use((req, res) => res.sendFile(INDEX))
+  .listen(PORT, () => console.log(`socket server is listening on port ${PORT}`));
 
 const io = socketIO(server);
 
@@ -66,6 +66,8 @@ let rooms = [
 ]
 
 io.on('connection', (socket) => {
+
+  console.log("connicting");
 
   socket.on('joinroom', (res) => {
     var roomExist = false;

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  socketUrl: 'https://hamalainen.herokuapp.com'
+  socketUrl: 'https://hamalainen.herokuapp.com:3000'
 };
