@@ -14,10 +14,10 @@ app.get('/*', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/SharePlay/index.html'));
 });
-const clientPort = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 // Start the app by listening on the default Heroku port
-app.listen(clientPort);
+app.listen(PORT);
 
 console.log("clientport: " + clientPort);
 
@@ -35,7 +35,7 @@ const socketIO = require('socket.io');
 console.log("socket env port: " + process.env.PORT);
 
 //const PORT = process.env.PORT+1 || 3000;
-const PORT = 3000;
+//const PORT = 3000;
 
 console.log("socketport: " + PORT);
 
