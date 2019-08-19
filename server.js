@@ -29,7 +29,7 @@ app.listen(PORT);
 
 
 //const express = require("express");
-const socketIO = require('socket.io');
+//const socketIO = require('socket.io');
 //const path = require('path');
 
 console.log("socket env port: " + process.env.PORT);
@@ -40,11 +40,11 @@ console.log("socket env port: " + process.env.PORT);
 console.log("socketport: " + PORT);
 
 // const PORT = 3000;
-const INDEX = path.join(__dirname, 'index.html');
+//const INDEX = path.join(__dirname, 'index.html');
 console.log("1");
-const server = express()
-  .use((req, res) => res.sendFile(INDEX))
-  .listen(PORT, () => console.log(`socket server is listening on port ${PORT}`));
+//const server = express()
+//  .use((req, res) => res.sendFile(INDEX))
+//  .listen(PORT, () => console.log(`socket server is listening on port ${PORT}`));
 
 const io = socketIO(server);
 
