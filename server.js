@@ -19,7 +19,7 @@ const clientPort = process.env.PORT || 8080;
 // Start the app by listening on the default Heroku port
 app.listen(clientPort);
 
-console.log("clientport: " + clientPort)
+console.log("clientport: " + clientPort);
 
 
 
