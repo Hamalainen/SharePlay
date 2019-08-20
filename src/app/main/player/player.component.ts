@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
 import { SyncService } from '../../shared/services/sync.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-player',
@@ -26,18 +27,13 @@ export class PlayerComponent implements OnInit {
 
     this.syncService.getRoom().subscribe(res => {
       this.youtubePlayer.yt_player.loadVideoById(res['currentVideo']);
-      var video = res['currentVideo'];
-      var time = res['currentTime'];
-
-      console.log('time: ' + time);
-      console.log('video: ' + video);
-
+      
       switch (res['playerState']) {
         case 1:
-          this.youtubePlayer.playPausedVideo(video, time);
+          this.youtubePlayer.playPausedVideo(res['currentTime']);
           break;
         case 2:
-          this.youtubePlayer.pausePlayingVideo(video, time);
+          this.youtubePlayer.pausePlayingVideo(res['currentTime']);
           break;
         }
 
@@ -50,14 +46,12 @@ export class PlayerComponent implements OnInit {
     });
 
     this.syncService.playerState().subscribe(res => {
-      var video = res['currentVideo'];
-      var time = res['currentTime'];
       switch (res['playerState']) {
         case 1:
-          this.youtubePlayer.playPausedVideo(video, time);
+          this.youtubePlayer.playPausedVideo(res['currentTime']);
           break;
         case 2:
-          this.youtubePlayer.pausePlayingVideo(video, time);
+          this.youtubePlayer.pausePlayingVideo(res['currentTime']);
           break;
       }
     });
@@ -67,7 +61,18 @@ export class PlayerComponent implements OnInit {
     }, 500);
 
     setTimeout(() => {
-      this.youtubePlayer.playVideo('XnQk9kLWf3E', 'hahaha');
+      this.syncService.getCurrentPlayer().pipe(first()).subscribe(res => {
+        this.youtubePlayer.yt_player.loadVideoById(res['currentVideo']);
+        switch (res['playerState']) {
+          case 1:
+            this.youtubePlayer.playPausedVideo(res['currentTime']);
+            break;
+          case 2:
+            this.youtubePlayer.pausePlayingVideo(res['currentTime']);
+            break;
+          }
+  
+      });
     },1000);
   }
 

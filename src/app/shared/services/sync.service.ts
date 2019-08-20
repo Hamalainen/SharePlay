@@ -38,6 +38,9 @@ export class SyncService {
   getRoom() {
     return this.socket.fromEvent('room');
   }
+  getCurrentPlayer() {
+    return this.socket.fromEvent('currentPlayer');
+  }
 
   getAddedVideo() {
     return this.socket.fromEvent('added');

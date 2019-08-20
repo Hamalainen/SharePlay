@@ -96,6 +96,7 @@ io.on('connection', (socket) => {
             room.currentVideo = res.currentVideo;
             room.currentTime = res.currentTime;
             room.playerState = res.currentState;
+            socket.to(res.roomId).emit('currentPlayer', room);
           }
         }
       }
@@ -138,11 +139,24 @@ io.on('connection', (socket) => {
   socket.on('play', (res) => {
     for (var room of rooms) {
       if (room.id === res.roomId) {
-        room.currentVideo = res.video;
-        break;
+        for (var user of room.users) {
+          if (user.socketId == socket.id) {
+            if(user.master){
+              room.currentVideo = res.video;
+              io.in(res.roomId).emit('playing', res.video);
+              break;
+            }
+            else{
+              if (!room.playlist.includes(res.video)) {
+                room.playlist.push(res.video);
+                socket.to(res.roomId).emit('added', res.video);
+              }
+              break;
+            }
+          }
+        }
       }
     }
-    socket.to(res.roomId).emit('playing', res.video);
   });
 
   socket.on('playerEvent', (res) => {

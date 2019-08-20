@@ -83,20 +83,14 @@ export class YoutubePlayerService implements AfterContentInit {
     this.browserNotification.show(videoText);
   }
 
-  pausePlayingVideo(video?: any, time?: any): void {
-    if (video != null) {
-      // this.yt_player.loadVideoById(video['id']);
-    }
+  pausePlayingVideo(time?: any): void {
     if (time != null) {
       this.yt_player.seekTo(time);
     }
     this.yt_player.pauseVideo();
   }
 
-  playPausedVideo(video?: any, time?: any): void {
-    if (video != null) {
-      // this.yt_player.loadVideoById(video['id']);
-    }
+  playPausedVideo(time?: any): void {
     if (time != null) {
       this.yt_player.seekTo(time);
     }
