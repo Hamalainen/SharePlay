@@ -50,7 +50,7 @@ export class PlayListComponent implements OnInit {
         videon = video;
       }
     });
-    this.youtubePlayer.playVideo(id, videon.snippet.title);
+    // this.youtubePlayer.playVideo(id, videon.snippet.title);
     this.syncService.playVideo(videon);
   }
 
