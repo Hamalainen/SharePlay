@@ -24,7 +24,26 @@ export class PlayerComponent implements AfterContentInit {
     doc.body.appendChild(playerApi);
     this.youtubePlayer.createPlayer();
 
-    setTimeout(() => {
+
+    this.syncService.getRoom().subscribe(res => {
+      this.youtubePlayer.yt_player.loadVideoById(res['currentVideo']);
+      var video = res['currentVideo'];
+      var time = res['currentTime'];
+
+      console.log('time: ' + time);
+      console.log('video: ' + video);
+
+      switch (res['playerState']) {
+        case 1:
+          this.youtubePlayer.playPausedVideo(video, time);
+          break;
+        case 2:
+          this.youtubePlayer.pausePlayingVideo(video, time);
+          break;
+        }
+    });
+
+ /*    setTimeout(() => {
       this.syncService.getRoom().subscribe(res => {
         this.youtubePlayer.yt_player.loadVideoById(res['currentVideo']);
         var video = res['currentVideo'];
@@ -45,10 +64,11 @@ export class PlayerComponent implements AfterContentInit {
         }, 500);
 
       });
-    }, 500);
+    }, 500); */
 
 
     this.syncService.playingVideo().subscribe(res => {
+      console.log("playing video " + res['id']);
       this.youtubePlayer.playVideo(res['id'], res['snippet']['title'])
     });
 

@@ -135,16 +135,15 @@ io.on('connection', (socket) => {
     socket.to(res.roomId).emit('added', res.video);
   });
 
-  /* socket.on('play', (res) => {
+  socket.on('play', (res) => {
     for (var room of rooms) {
       if (room.id === res.roomId) {
         room.currentVideo = res.video;
         break;
       }
     }
-
     socket.to(res.roomId).emit('playing', res.video);
-  }); */
+  });
 
   socket.on('playerEvent', (res) => {
     for (var room of rooms) {
