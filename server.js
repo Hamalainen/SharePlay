@@ -103,20 +103,22 @@ io.on('connection', (socket) => {
   });
 
   socket.on('addedUsername', (res) => {
-    for(var room of rooms){
-      if(room.id == res.roomId){
-        if(room.users === undefined){
-          continue;
-        }
-        for(var user of room.users){
-          if(user.socketId == socket.id){
-            user.userName = res.userName;
-            io.in(res.roomId).emit('room', room);
-            break;
+    if(res.userName !== undefined){
+      for(var room of rooms){
+        if(room.id == res.roomId){
+          if(room.users === undefined){
+            continue;
           }
+          for(var user of room.users){
+            if(user.socketId == socket.id){
+              user.userName = res.userName;
+              io.in(res.roomId).emit('room', room);
+              break;
+            }
+          }
+          break;
         }
-        break;
-      }
+      } 
     }
   });
 
@@ -133,7 +135,7 @@ io.on('connection', (socket) => {
     socket.to(res.roomId).emit('added', res.video);
   });
 
-  socket.on('play', (res) => {
+  /* socket.on('play', (res) => {
     for (var room of rooms) {
       if (room.id === res.roomId) {
         room.currentVideo = res.video;
@@ -142,7 +144,7 @@ io.on('connection', (socket) => {
     }
 
     socket.to(res.roomId).emit('playing', res.video);
-  });
+  }); */
 
   socket.on('playerEvent', (res) => {
     for (var room of rooms) {

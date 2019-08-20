@@ -6,6 +6,6 @@ export class UserNameService {
   constructor(private http: HttpClient) { }
 
   getRandomUserName(){
-      return this.http.get('https://uinames.com/api/?region=finland');
+    return this.http.get('https://uinames.com/api/?region=finland');
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { UserNameService } from '../../shared/services/user-name.service'
 import { SyncService } from '../../shared/services/sync.service'
 import { MainComponent } from '../main.component'
@@ -19,13 +19,13 @@ export class UserlistComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userNameService.getRandomUserName().subscribe(res => {
+      console.log("usernamne " + this.username);
+      this.userNameService.getRandomUserName().subscribe(res => {
       this.username = res['name'] + " " + res['surname'];
+      this.syncService.addUserName(res['name'] + " " + res['surname']);
     });
-
-    setTimeout(() => {
-      this.syncService.addUserName(this.username);
-    }, 1000);
+    
+    
 
     this.syncService.getRoom().subscribe(res => {
       this.userList = res['users'];

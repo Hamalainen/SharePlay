@@ -1,5 +1,5 @@
 <div *ngIf="this.mainComponent.videoPlaylist.length">
-  <span>you are known as {{username}}.</span>
+ <!--  <span>you are known as {{username}}.</span> -->
   <div style="height:20vh; overflow-y: auto;">
     <div *ngFor="let user of userList; let i = index;">
       <div>
@@ -11,7 +11,10 @@
             person_outline
           </i>
         </span>
-        <span>
+        <span style="font-style:italic" *ngIf="user.userName == username" style="font-weight:bold">
+          {{user.userName}}
+        </span>
+        <span style="font-style:italic" *ngIf="user.userName != username" style="font-weight:normal">
           {{user.userName}}
         </span>
       </div>

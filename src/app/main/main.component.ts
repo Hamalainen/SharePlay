@@ -56,6 +56,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     });
 
     this.playlistElement = document.getElementById('playlist');
+    
   }
 
   playFirstInPlaylist(): void {
