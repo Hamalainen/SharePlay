@@ -2,24 +2,24 @@
 'use strict';
 
 //Install express server
-const express = require('express');
-const path = require('path');
+//const express = require('express');
+//const path = require('path');
 
-const app = express();
+//const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/SharePlay'));
+//app.use(express.static(__dirname + '/dist/SharePlay'));
 
-app.get('/*', function(req,res) {
+//app.get('/*', function(req,res) {
     
-res.sendFile(path.join(__dirname+'/dist/SharePlay/index.html'));
-});
-const clientPort = process.env.PORT || 8080;
+//res.sendFile(path.join(__dirname+'/dist/SharePlay/index.html'));
+//});
+//const clientPort = process.env.PORT || 8080;
 
 // Start the app by listening on the default Heroku port
-app.listen(clientPort);
+//app.listen(clientPort);
 
-console.log("clientport: " + clientPort);
+//console.log("clientport: " + clientPort);
 
 
 
@@ -27,24 +27,20 @@ console.log("clientport: " + clientPort);
 /////////////////////////////////////////////////
 
 
+'use strict';
 
-//const express = require("express");
+const express = require("express");
 const socketIO = require('socket.io');
-//const path = require('path');
+const path = require('path');
 
-console.log("socket env port: " + process.env.PORT);
-
-//const PORT = process.env.PORT+1 || 3000;
-const PORT = 3000;
-
-console.log("socketport: " + PORT);
-
+const PORT = process.env.PORT || 3000;
 // const PORT = 3000;
-const INDEX = path.join(__dirname, 'index.html');
-console.log("1");
+const INDEX = path.join(__dirname, '/dist/SharePlay/index.html');
+
 const server = express()
+  .use(express.static(__dirname + '/dist/SharePlay'))
   .use((req, res) => res.sendFile(INDEX))
-  .listen(PORT, () => console.log(`socket server is listening on port ${PORT}`));
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = socketIO(server);
 
@@ -66,8 +62,6 @@ let rooms = [
 ]
 
 io.on('connection', (socket) => {
-
-  console.log("connicting");
 
   socket.on('joinroom', (res) => {
     var roomExist = false;
