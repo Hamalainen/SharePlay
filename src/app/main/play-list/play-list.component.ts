@@ -89,10 +89,12 @@ export class PlayListComponent implements OnInit {
       //   playlistEl.scrollTop = document.getElementById(shuffled).offsetTop - 100;
       // } else {
         if (this.videoPlaylist.length - 1 === inPlaylist) {
+          console.log("första if");
           this.syncService.playVideo(this.videoPlaylist[0].id);
           // this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
           playlistEl.scrollTop = 0;
         } else {
+          console.log("andra if");
           this.syncService.playVideo(this.videoPlaylist[inPlaylist + 1].id);
           // this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist + 1].id, this.videoPlaylist[inPlaylist + 1].snippet.title)
           playlistEl.scrollTop = topPos - 100;

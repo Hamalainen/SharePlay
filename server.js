@@ -137,6 +137,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('play', (res) => {
+    
     for (var room of rooms) {
       if (room.id === res.roomId) {
         for (var user of room.users) {

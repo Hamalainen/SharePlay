@@ -42,7 +42,8 @@ export class PlayerComponent implements OnInit {
 
     this.syncService.playingVideo().subscribe(res => {
       console.log("playing video " + res['id']);
-      this.youtubePlayer.playVideo(res['id'], res['snippet']['title'])
+      // this.youtubePlayer.playVideo(res['id'], res['snippet']['title'])
+      this.youtubePlayer.yt_player.loadVideoById(res['id']);
     });
 
     this.syncService.playerState().subscribe(res => {
