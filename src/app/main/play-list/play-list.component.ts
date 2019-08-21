@@ -94,8 +94,10 @@ export class PlayListComponent implements OnInit {
           // this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
           playlistEl.scrollTop = 0;
         } else {
-          console.log("andra if");
+          console.log("andra if   " + inPlaylist + 1);
+          console.log(this.videoPlaylist[inPlaylist + 1].id)
           this.syncService.playVideo(this.videoPlaylist[inPlaylist + 1].id);
+
           // this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist + 1].id, this.videoPlaylist[inPlaylist + 1].snippet.title)
           playlistEl.scrollTop = topPos - 100;
         }

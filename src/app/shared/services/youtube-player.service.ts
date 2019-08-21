@@ -72,16 +72,16 @@ export class YoutubePlayerService implements AfterContentInit {
     }
   }
 
-  playVideo(videoId: string, videoText?: string): void {
-    if (!this.yt_player) {
-      console.error('Player not ready.');
-      return;
-    }
-    this.yt_player.loadVideoById(videoId);
-    this.currentVideoId = videoId;
-    this.currentVideoText.emit(videoText);
-    this.browserNotification.show(videoText);
-  }
+  // playVideo(videoId: string, videoText?: string): void {
+  //   if (!this.yt_player) {
+  //     console.error('Player not ready.');
+  //     return;
+  //   }
+  //   this.yt_player.loadVideoById(videoId);
+  //   this.currentVideoId = videoId;
+  //   this.currentVideoText.emit(videoText);
+  //   this.browserNotification.show(videoText);
+  // }
 
   pausePlayingVideo(time?: any): void {
     if (time != null) {

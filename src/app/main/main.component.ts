@@ -62,7 +62,8 @@ export class MainComponent implements AfterViewInit, OnInit {
   playFirstInPlaylist(): void {
     if (this.videoPlaylist[0]) {
       this.playlistElement.scrollTop = 0;
-      this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
+      this.syncService.playVideo(this.videoPlaylist[0].id);
+      // this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
     }
   }
 
@@ -109,55 +110,55 @@ export class MainComponent implements AfterViewInit, OnInit {
       })
   }
 
-  nextVideo(): void {
-    this.playPrevNext(true);
-  }
+  // nextVideo(): void {
+  //   this.playPrevNext(true);
+  // }
 
-  prevVideo(): void {
-    this.playPrevNext(false);
-  }
+  // prevVideo(): void {
+  //   this.playPrevNext(false);
+  // }
 
-  playPrevNext(value): void {
-    let current = this.youtubePlayer.getCurrentVideo();
-    let inPlaylist;
+  // playPrevNext(value): void {
+  //   let current = this.youtubePlayer.getCurrentVideo();
+  //   let inPlaylist;
 
-    this.videoPlaylist.forEach((video, index) => {
-      if (video.id === current) {
-        inPlaylist = index;
-      }
-    });
+  //   this.videoPlaylist.forEach((video, index) => {
+  //     if (video.id === current) {
+  //       inPlaylist = index;
+  //     }
+  //   });
 
-    // if-else hell
-    if (inPlaylist !== undefined) {
-      let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
-      if (this.shuffle) {
-        let shuffled = this.videoPlaylist[this.youtubePlayer.getShuffled(inPlaylist, this.videoPlaylist.length)];
-        this.youtubePlayer.playVideo(shuffled.id, shuffled.snippet.title);
-        this.playlistElement.scrollTop = document.getElementById(shuffled.id).offsetTop - 100;
-      } else {
-        if (value) {
-          if (this.videoPlaylist.length - 1 === inPlaylist) {
-            this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
-            this.playlistElement.scrollTop = 0;
-          } else {
-            this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist + 1].id, this.videoPlaylist[inPlaylist + 1].snippet.title)
-            this.playlistElement.scrollTop = topPos - 100;
-          }
-        } else {
-          if (inPlaylist === 0) {
-            this.youtubePlayer.playVideo(this.videoPlaylist[this.videoPlaylist.length - 1].id,
-              this.videoPlaylist[this.videoPlaylist.length - 1].snippet.title);
-            this.playlistElement.scrollTop = this.playlistElement.offsetHeight;
-          } else {
-            this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist - 1].id, this.videoPlaylist[inPlaylist - 1].snippet.title)
-            this.playlistElement.scrollTop = topPos - 230;
-          }
-        }
-      }
-    } else {
-      this.playFirstInPlaylist();
-    }
-  }
+  //   // if-else hell
+  //   if (inPlaylist !== undefined) {
+  //     let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
+  //     if (this.shuffle) {
+  //       let shuffled = this.videoPlaylist[this.youtubePlayer.getShuffled(inPlaylist, this.videoPlaylist.length)];
+  //       this.youtubePlayer.playVideo(shuffled.id, shuffled.snippet.title);
+  //       this.playlistElement.scrollTop = document.getElementById(shuffled.id).offsetTop - 100;
+  //     } else {
+  //       if (value) {
+  //         if (this.videoPlaylist.length - 1 === inPlaylist) {
+  //           this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
+  //           this.playlistElement.scrollTop = 0;
+  //         } else {
+  //           this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist + 1].id, this.videoPlaylist[inPlaylist + 1].snippet.title)
+  //           this.playlistElement.scrollTop = topPos - 100;
+  //         }
+  //       } else {
+  //         if (inPlaylist === 0) {
+  //           this.youtubePlayer.playVideo(this.videoPlaylist[this.videoPlaylist.length - 1].id,
+  //             this.videoPlaylist[this.videoPlaylist.length - 1].snippet.title);
+  //           this.playlistElement.scrollTop = this.playlistElement.offsetHeight;
+  //         } else {
+  //           this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist - 1].id, this.videoPlaylist[inPlaylist - 1].snippet.title)
+  //           this.playlistElement.scrollTop = topPos - 230;
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     this.playFirstInPlaylist();
+  //   }
+  // }
 
   clearPlaylist(): void {
     this.videoPlaylist = [];
