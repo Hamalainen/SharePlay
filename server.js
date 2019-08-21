@@ -144,7 +144,6 @@ io.on('connection', (socket) => {
             if(user.master){
               room.currentVideo = res.video;
               io.in(res.roomId).emit('playing', res.video);
-              
               break;
             }
             

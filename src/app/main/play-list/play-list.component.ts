@@ -50,7 +50,7 @@ export class PlayListComponent implements OnInit {
         videon = video;
       }
     });
-    this.youtubePlayer.playVideo(id, videon.snippet.title);
+    // this.youtubePlayer.playVideo(id, videon.snippet.title);
     this.syncService.playVideo(videon);
   }
 
@@ -72,6 +72,7 @@ export class PlayListComponent implements OnInit {
   playNextVideo(): void {
     let current = this.youtubePlayer.getCurrentVideo();
     let inPlaylist;
+    console.log("play next");
 
     this.videoPlaylist.forEach((video, index) => {
       if (video.id === current) {
@@ -89,11 +90,11 @@ export class PlayListComponent implements OnInit {
       // } else {
         if (this.videoPlaylist.length - 1 === inPlaylist) {
           this.syncService.playVideo(this.videoPlaylist[0].id);
-          this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
+          // this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
           playlistEl.scrollTop = 0;
         } else {
-          this.syncService.playVideo(this.videoPlaylist[0].id);
-          this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist + 1].id, this.videoPlaylist[inPlaylist + 1].snippet.title)
+          this.syncService.playVideo(this.videoPlaylist[inPlaylist + 1].id);
+          // this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist + 1].id, this.videoPlaylist[inPlaylist + 1].snippet.title)
           playlistEl.scrollTop = topPos - 100;
         }
       // }
