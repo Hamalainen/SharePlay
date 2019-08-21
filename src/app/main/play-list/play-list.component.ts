@@ -50,7 +50,7 @@ export class PlayListComponent implements OnInit {
         videon = video;
       }
     });
-    // this.youtubePlayer.playVideo(id, videon.snippet.title);
+    this.youtubePlayer.playVideo(id, videon.snippet.title);
     this.syncService.playVideo(videon);
   }
 
@@ -73,11 +73,6 @@ export class PlayListComponent implements OnInit {
     let current = this.youtubePlayer.getCurrentVideo();
     let inPlaylist;
 
-    if (this.repeat) {
-      this.play(current);
-      return;
-    }
-
     this.videoPlaylist.forEach((video, index) => {
       if (video.id === current) {
         inPlaylist = index;
@@ -87,19 +82,21 @@ export class PlayListComponent implements OnInit {
     if (inPlaylist !== undefined) {
       let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
       let playlistEl = document.getElementById('playlist');
-      if (this.shuffle) {
-        let shuffled = this.videoPlaylist[this.youtubePlayer.getShuffled(inPlaylist, this.videoPlaylist.length)];
-        this.youtubePlayer.playVideo(shuffled.id, shuffled.snippet.title);
-        playlistEl.scrollTop = document.getElementById(shuffled).offsetTop - 100;
-      } else {
+      // if (this.shuffle) {
+      //   let shuffled = this.videoPlaylist[this.youtubePlayer.getShuffled(inPlaylist, this.videoPlaylist.length)];
+      //   this.youtubePlayer.playVideo(shuffled.id, shuffled.snippet.title);
+      //   playlistEl.scrollTop = document.getElementById(shuffled).offsetTop - 100;
+      // } else {
         if (this.videoPlaylist.length - 1 === inPlaylist) {
+          this.syncService.playVideo(this.videoPlaylist[0].id);
           this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
           playlistEl.scrollTop = 0;
         } else {
+          this.syncService.playVideo(this.videoPlaylist[0].id);
           this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist + 1].id, this.videoPlaylist[inPlaylist + 1].snippet.title)
           playlistEl.scrollTop = topPos - 100;
         }
-      }
+      // }
     }
   }
 }

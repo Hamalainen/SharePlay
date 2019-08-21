@@ -144,15 +144,15 @@ io.on('connection', (socket) => {
             if(user.master){
               room.currentVideo = res.video;
               io.in(res.roomId).emit('playing', res.video);
+              
               break;
             }
-            else{
-              if (!room.playlist.includes(res.video)) {
-                room.playlist.push(res.video);
-                socket.to(res.roomId).emit('added', res.video);
-              }
-              break;
+            
+            if (!room.playlist.includes(res.video)) {
+              room.playlist.push(res.video);
+              socket.to(res.roomId).emit('added', res.video);
             }
+            break;
           }
         }
       }
