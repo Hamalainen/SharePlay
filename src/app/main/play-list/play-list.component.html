@@ -1,4 +1,4 @@
-<div class="row" *ngFor="let video of videoPlaylist; let i = index;" id="{{video.id}}" class="playist-item" (click)="play(video.id)" [ngClass]="{'playing': currentPlaying(video.id)}">
+<div class="row" *ngFor="let video of videoPlaylist; let i = index;" id="{{video.id}}" class="playlist-item" (click)="play(video.id)" [ngClass]="{'playing': currentPlaying(video.id)}">
   <div class="col-md-12">
     <div class="playlist-thumbnail"
       [ngStyle]="{'background': '#000 url(' + video.snippet.thumbnails.default.url + ') center center no-repeat', 'background-size': '100%'}">
