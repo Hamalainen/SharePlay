@@ -98,7 +98,7 @@ export class YoutubePlayerService implements AfterContentInit {
   }
 
   getCurrentVideo(): string {
-    return this.currentVideoId;
+    return this.yt_player.getVideoData()['video_id'];
   }
 
   resizePlayer(width: number, height: number) {
