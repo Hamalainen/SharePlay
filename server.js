@@ -5,7 +5,7 @@ const socketIO = require('socket.io');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-// const PORT = 3000;
+
 const INDEX = path.join(__dirname, '/dist/SharePlay/index.html');
 
 const server = express()
@@ -247,9 +247,3 @@ io.on('connection', (socket) => {
 
   
 });
-
-setInterval(() => function () {
-
-  io.emit('time', new Date().toTimeString());
-}
-  , 1000);
