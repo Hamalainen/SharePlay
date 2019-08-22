@@ -143,6 +143,8 @@ io.on('connection', (socket) => {
         for (var user of room.users) {
           if (user.socketId == socket.id) {
             if(user.master){
+              console.log("play");
+              console.log("video " + res.video);
               room.currentVideo = res.video;
               io.in(res.roomId).emit('playing', res.video);
               break;
@@ -155,6 +157,7 @@ io.on('connection', (socket) => {
             break;
           }
         }
+        break;
       }
     }
   });

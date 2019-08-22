@@ -43,15 +43,11 @@ export class PlayListComponent implements OnInit {
   }
 
   play(id: string): void {
-    let videon;
-
-    this.videoPlaylist.forEach((video, index) => {
+    this.videoPlaylist.forEach((video) => {
       if (video.id === id) {
-        videon = video;
+        this.syncService.playVideo(video);
       }
     });
-    // this.youtubePlayer.playVideo(id, videon.snippet.title);
-    this.syncService.playVideo(videon);
   }
 
   currentPlaying(id: string): boolean {
@@ -72,7 +68,6 @@ export class PlayListComponent implements OnInit {
   playNextVideo(): void {
     let current = this.youtubePlayer.getCurrentVideo();
     let inPlaylist;
-    console.log("play next");
 
     this.videoPlaylist.forEach((video, index) => {
       if (video.id === current) {
@@ -83,25 +78,13 @@ export class PlayListComponent implements OnInit {
     if (inPlaylist !== undefined) {
       let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
       let playlistEl = document.getElementById('playlist');
-      // if (this.shuffle) {
-      //   let shuffled = this.videoPlaylist[this.youtubePlayer.getShuffled(inPlaylist, this.videoPlaylist.length)];
-      //   this.youtubePlayer.playVideo(shuffled.id, shuffled.snippet.title);
-      //   playlistEl.scrollTop = document.getElementById(shuffled).offsetTop - 100;
-      // } else {
-        if (this.videoPlaylist.length - 1 === inPlaylist) {
-          console.log("första if");
-          this.syncService.playVideo(this.videoPlaylist[0].id);
-          // this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
+        if (this.repeat && this.videoPlaylist.length - 1 === inPlaylist) {
+          this.play(this.videoPlaylist[0].id);
           playlistEl.scrollTop = 0;
         } else {
-          console.log("andra if   " + inPlaylist + 1);
-          console.log(this.videoPlaylist[inPlaylist + 1].id)
-          this.syncService.playVideo(this.videoPlaylist[inPlaylist + 1].id);
-
-          // this.youtubePlayer.playVideo(this.videoPlaylist[inPlaylist + 1].id, this.videoPlaylist[inPlaylist + 1].snippet.title)
+          this.play(this.videoPlaylist[inPlaylist + 1].id);
           playlistEl.scrollTop = topPos - 100;
         }
-      // }
     }
   }
 }
