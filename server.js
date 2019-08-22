@@ -123,8 +123,7 @@ io.on('connection', (socket) => {
     }
   });
 
-
-  socket.on('addedToPlaylist', (res) => {
+  function addToPlaylist(res) {
     for (var room of rooms) {
       if (room.id === res.roomId) {
         if (!room.playlist.includes(res.video.id)) {
@@ -133,7 +132,11 @@ io.on('connection', (socket) => {
         }
       }
     }
-    socket.to(res.roomId).emit('added', res.video);
+    io.in(res.roomId).emit('added', res.video);
+  }
+ 
+  socket.on('addedToPlaylist', (res) => {
+    addToPlaylist(res);
   });
 
   socket.on('play', (res) => {
@@ -143,23 +146,16 @@ io.on('connection', (socket) => {
         for (var user of room.users) {
           if (user.socketId == socket.id) {
             if(user.master){
-              console.log("play");
-              console.log("video " + res.video);
               room.currentVideo = res.video;
               io.in(res.roomId).emit('playing', res.video);
               break;
             }
-            
-            if (!room.playlist.includes(res.video)) {
-              room.playlist.push(res.video);
-              socket.to(res.roomId).emit('added', res.video);
-            }
-            break;
           }
         }
         break;
       }
     }
+    addToPlaylist(res);
   });
 
   socket.on('playerEvent', (res) => {

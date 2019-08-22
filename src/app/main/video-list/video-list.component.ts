@@ -35,15 +35,17 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   play(video: any): void {
-    this.addToPlaylist(video);
+    console.log(video);
+    // this.addToPlaylist(video);
     this.syncService.playVideo(video);
   }
 
   addToPlaylist(video: any): void {
+    console.log(video);
     if(this.mainComponent.videoPlaylist.length < 1){
-      this.youtubePlayer.loadVideo(video);
+      this.play(video);
     }
-    this.videoPlaylist.emit(video);
+    // this.videoPlaylist.emit(video);
     this.syncService.addedToPlaylist(video);
   }
 
