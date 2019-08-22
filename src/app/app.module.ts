@@ -20,6 +20,7 @@ import { MainComponent } from './main//main.component'
 import { VideoDurationPipe } from './shared/pipes/video-duration.pipe';
 import { VideoLikesViewsPipe } from './shared/pipes/video-likes-views.pipe';
 import { VideoNamePipe } from './shared/pipes/video-name.pipe';
+import { VideoPublishedPipe } from './shared/pipes/video-published';
 import { LazyScrollDirective } from './shared/directives/lazy-scroll/lazy-scroll.directive';
 import { VideoListComponent } from './main/video-list/video-list.component';
 import { VideoSearchComponent } from './main/video-search/video-search.component';
@@ -54,6 +55,7 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     VideoDurationPipe,
     VideoLikesViewsPipe,
     VideoNamePipe,
+    VideoPublishedPipe,
     LazyScrollDirective,
     VideoListComponent,
     VideoSearchComponent,
@@ -77,6 +79,7 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     BrowserNotificationService,
     VideoNamePipe,
     VideoDurationPipe,
+    VideoPublishedPipe,
     VideoListComponent,
     PlayListComponent,
     UserNameService,
