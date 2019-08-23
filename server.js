@@ -192,7 +192,7 @@ io.on('connection', (socket) => {
               room.playerState = res.event.data;
               room.currentVideo = res.currentVideo;
               room.currentTime = res.currentTime;
-              socket.to(res.roomId).emit('playerState', room);
+              io.in(res.roomId).emit('playerState', room);
             }
           }
         }

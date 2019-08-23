@@ -34,7 +34,6 @@ export class VideoSearchComponent {
 
   doSearch(event): void {
     if (this.loadingInProgress ||
-      (this.searchForm.value.query.trim().length === 0) ||
       (this.last_search && this.last_search === this.searchForm.value.query)) {
       return;
     }
@@ -47,7 +46,7 @@ export class VideoSearchComponent {
         if (data.length < 1) {
           this.notificationService.showNotification('No matches found.');
         }
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         this.videosUpdated.emit(data);
       })
   }

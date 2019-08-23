@@ -40,8 +40,8 @@
 
 <div class="row">
   <div *ngIf="videoPlaylist.length" class="col-md-8">
-    <div style="height:25vh; overflow-y: auto;">
-      <div class="ml-3 mr-3">
+    <div id="searchlist" style="height:25vh; overflow-y: auto;" (scroll)="onScroll()">
+      <div class="ml-3 mr-3"S>
         <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
           [videoList]="videoList" [loadingInProgress]="loadingInProgress">
         </app-video-list>
@@ -62,7 +62,7 @@
 
   
 
-  <div *ngIf="!videoPlaylist.length" class="col-md-12 row" style="height:85vh; overflow-y: auto;">
+  <div id="searchlist" *ngIf="!videoPlaylist.length" class="col-md-12 row" style="height:85vh; overflow-y: auto;" (scroll)="onScroll()">
       <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
       [videoList]="videoList" [loadingInProgress]="loadingInProgress">
     </app-video-list>
