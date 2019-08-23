@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Services
 import { YoutubeApiService } from './shared/services/youtube-api.service';
@@ -59,8 +58,7 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     ReactiveFormsModule,
     FormsModule,
     SocketIoModule.forRoot(config),
-    HttpClientModule,
-    InfiniteScrollModule
+    HttpClientModule
   ],
   providers: [
     YoutubeApiService,
