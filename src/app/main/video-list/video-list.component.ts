@@ -35,7 +35,6 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   play(video: any): void {
-    console.log(video);
     this.syncService.playVideo(video);
   }
 

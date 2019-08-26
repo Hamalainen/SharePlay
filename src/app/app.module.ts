@@ -15,7 +15,8 @@ import { UserNameService } from './shared/services/user-name.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './main/player/player.component';
-import { MainComponent } from './main//main.component'
+import { MainComponent } from './main//main.component';
+import { SocketStatusComponent } from './main/socket-status/socket-status.component';
 // Pipes
 import { VideoDurationPipe } from './shared/pipes/video-duration.pipe';
 import { VideoLikesViewsPipe } from './shared/pipes/video-likes-views.pipe';
@@ -27,7 +28,8 @@ import { VideoSearchComponent } from './main/video-search/video-search.component
 import { PlayListComponent } from './main/play-list/play-list.component';
 import { SocketIoModule, SocketIoConfig, Socket } from 'ngx-socket-io';
 import { UserlistComponent } from './main/user-list/userlist.component';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
+
 
 const socketUrl = environment.socketUrl;
 
@@ -40,7 +42,6 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     AppComponent,
     PlayerComponent,
     MainComponent,
-
     VideoDurationPipe,
     VideoLikesViewsPipe,
     VideoNamePipe,
@@ -49,7 +50,8 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     VideoListComponent,
     VideoSearchComponent,
     PlayListComponent,
-    UserlistComponent
+    UserlistComponent,
+    SocketStatusComponent
   ],
   imports: [
     BrowserModule,

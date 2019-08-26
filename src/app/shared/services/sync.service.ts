@@ -57,7 +57,9 @@ export class SyncService {
   playerState() {
     return this.socket.fromEvent('playerState');
   }
-
+  Rooms() {
+    return this.socket.fromEvent('rooms');
+  }
   playVideo(video: any) {
     this.socket.emit('play',
       {
@@ -108,4 +110,10 @@ export class SyncService {
         roomId: this.roomId
       })
   }
+  getrooms(){
+    this.socket.emit('getrooms');
+  }
+
+  
+  
 }

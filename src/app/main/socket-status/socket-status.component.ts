@@ -1,27 +1,26 @@
-<html style="background-color:#202020">
+import { Component, OnInit } from '@angular/core';
+import { SyncService } from '../../shared/services/sync.service';
 
-<body>
-  <p id='server-time'></p>
-  <li style="list-style-type:none; color:aliceblue">Rum</li>
-  <ul id="room-list" style="list-style-type:none; color:aliceblue">
-  
-  </ul>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io();
+@Component({
+  selector: 'app-socket-status',
+  templateUrl: './socket-status.component.html',
+  styleUrls: ['./socket-status.component.css']
+})
+export class SocketStatusComponent implements OnInit {
+
+  constructor(
+    private syncService: SyncService
+    ) { }
+
+  ngOnInit() {
     var el = document.getElementById('server-time');
     var rl = document.getElementById('room-list');
 
-    socket.on('time', function (timeString) {
-      el.innerHTML = 'Server time: ' + timeString;
-    });
-
     setInterval(() => 
-      socket.emit('getrooms'),1000);
+    this.syncService.getrooms(),1000);
     
-
-    socket.on('rooms', function (obj) {
-      var rooms = JSON.parse(obj);
+    this.syncService.Rooms().subscribe(res => {
+      var rooms = JSON.parse(<string>res);
       console.log(rooms);
       rl.innerHTML = '';
       for (var room of rooms) {
@@ -31,31 +30,32 @@
             rl.innerHTML += '<li>rum</li><br>' +
               '<li><a target="_blank" href="http://' + window.location.hostname + ':4200/' + room.id + '">' + window.location.hostname + ':4200/' + room.id + '</a><ul>' +
               'playlist:' + '<br>' +
-              videoData(room) +
+              this.videoData(room) +
               'currentVideo: ' + room.currentVideo + '<br>' +
               'playerState: ' + room.playerState + '<br>' +
               'currentTime: ' + room.currentTime + '<br>' +
               'users: ' + '<br>' +
-              userData(room) +
+              this.userData(room) +
               '</ul></li><br>';
           }
           else {
             rl.innerHTML += '<li>rum</li><br>' +
               '<li><a target="_blank" href="https://hamalainen.herokuapp.com/' + room.id + '">' + 'https://hamalainen.herokuapp.com/' + room.id + '</a><ul>' +
               'playlist:' + '<br>' +
-              videoData(room) +
+              this.videoData(room) +
               'currentVideo: ' + room.currentVideo + '<br>' +
               'playerState: ' + room.playerState + '<br>' +
               'currentTime: ' + room.currentTime + '<br>' +
               'users: ' + '<br>' +
-              userData(room) +
+              this.userData(room) +
               '</ul></li><br>';
           }
         }
       }
     });
-
-    function videoData(room) {
+  }
+   
+    videoData(room) {
       var videostr = '';
       for (var video of room.playlist) {
         videostr += '&nbsp {video: ' + video + '},<br>';
@@ -63,7 +63,7 @@
       return videostr;
     }
 
-    function userData(room) {
+    userData(room) {
       var userstr = '';
       for (var user of room.users) {
         userstr +=
@@ -73,7 +73,4 @@
       }
       return userstr;
     }
-  </script>
-</body>
-
-</html>
+}
