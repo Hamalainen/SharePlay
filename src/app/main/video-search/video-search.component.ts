@@ -33,7 +33,7 @@ export class VideoSearchComponent {
 
       setInterval(() => {
        this.keeepServerOnline();
-      }, (1000*60)*10);
+      }, (1000*60)*5);
   }
 
   doSearch(event): void {
