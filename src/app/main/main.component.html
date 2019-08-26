@@ -14,11 +14,17 @@
       <h2 style="color:aliceblue">
         Playlist
       </h2>
-      <div class="border-left border-top" style="height:50vh; overflow-y: auto;">
+      <div class="border-left border-top" style="height:35vh; overflow-y: auto;">
         <app-play-list id="playlist" [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle"
           [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
       </div>
-
+      <h3 style="color:aliceblue">
+        Users
+      </h3>
+      <div class="border-left border-top" [hidden]="!videoPlaylist.length" style="color:aliceblue; height:15vh;">
+        <app-userlist></app-userlist>  
+      
+      </div>
     </div>
   </div>
   <div [hidden]="!videoPlaylist.length" class="row col-md-8 mr-4 border-top">
@@ -39,7 +45,7 @@
 
 
 <div class="row">
-  <div *ngIf="videoPlaylist.length" class="col-md-8">
+  <div *ngIf="videoPlaylist.length" class="col-md-12">
     <div id="searchlist" style="height:25vh; overflow-y: auto;" (scroll)="onScroll()">
       <div class="ml-3 mr-3"S>
         <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
@@ -54,10 +60,6 @@
     </div>
     
   </div>
-  <div [hidden]="!videoPlaylist.length"  class="col-md-4 " style="color:aliceblue">
-      <app-userlist></app-userlist>  
-    
-    </div>
 </div>
 
   
