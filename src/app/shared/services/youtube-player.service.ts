@@ -1,4 +1,4 @@
-import { Injectable, Output, EventEmitter, OnInit, AfterContentInit } from '@angular/core';
+import { Injectable, Output, EventEmitter, OnInit, AfterContentInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NotificationService } from './notification.service';
 import { BrowserNotificationService } from './browser-notification.service';
@@ -11,6 +11,7 @@ let _window: any = window;
 export class YoutubePlayerService implements AfterContentInit {
   public yt_player;
   private currentVideoId: string;
+
 
   @Output() videoChangeEvent: EventEmitter<any> = new EventEmitter(true);
   @Output() playPauseEvent: EventEmitter<any> = new EventEmitter(true);
@@ -30,8 +31,8 @@ export class YoutubePlayerService implements AfterContentInit {
     let interval = setInterval(() => {
       if ((typeof _window.YT !== 'undefined') && _window.YT && _window.YT.Player) {
         this.yt_player = new _window.YT.Player('yt-player', {
-          width: '1000',
-          height: '568',
+          width:  (window.innerHeight/1.6)*1.777,
+          height: (window.innerHeight/1.6),
           playerVars: {
             iv_load_policy: '3',
             rel: '0'
@@ -101,7 +102,11 @@ export class YoutubePlayerService implements AfterContentInit {
     return this.yt_player.getVideoData()['video_id'];
   }
 
-  resizePlayer(width: number, height: number) {
+  resizePlayer(height: number, width: number) {
+    width = (height/1.6)*1.777;
+    height = height/1.6;
+
+    console.log("width: " + width + ", height: " + height);
     this.yt_player.setSize(width, height);
   }
 

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ViewChild, AfterViewChecked, HostListener } from '@angular/core';
 import { YoutubeApiService } from '../shared/services/youtube-api.service';
 import { YoutubePlayerService } from '../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../shared/services/playlist-store.service';
@@ -134,4 +134,9 @@ var element = document.getElementById("searchlist");
     return text;
   }
   
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.youtubePlayer.resizePlayer(window.innerHeight, window.innerWidth);
+  }
+
 }
