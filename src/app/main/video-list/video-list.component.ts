@@ -4,7 +4,6 @@ import { PlaylistStoreService } from '../../shared/services/playlist-store.servi
 import { YoutubeApiService } from '../../shared/services/youtube-api.service';
 import { SyncService } from '../../shared/services/sync.service';
 import { MainComponent } from '../main.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @Component({
