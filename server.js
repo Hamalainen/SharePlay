@@ -195,8 +195,10 @@ io.on('connection', (socket) => {
               io.in(res.roomId).emit('playerState', room);
 
               setTimeout(() => {
-                room.playerState = 2;
-                io.in(res.roomId).emit('playerState', room);
+                if(room.playerState == 3){
+                  room.playerState = 2;
+                  io.in(res.roomId).emit('playerState', room);
+                }
               }, 5000);
             }
           }
