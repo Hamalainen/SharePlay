@@ -111,7 +111,7 @@ io.on('connection', (socket) => {
             continue;
           }
           for(var user of room.users){
-            if(user.socketId == socket.id && user.userName === undefined){
+            if(user.socketId == socket.id && user.userName == ""){
               user.userName = res.userName;
               io.in(res.roomId).emit('room', room);
               break;
