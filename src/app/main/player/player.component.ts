@@ -56,6 +56,8 @@ export class PlayerComponent implements OnInit {
         case 2:
           this.youtubePlayer.pausePlayingVideo(res['currentTime']);
           break;
+        case -1:
+          break;
       }
     });
 
