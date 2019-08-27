@@ -199,7 +199,7 @@ io.on('connection', (socket) => {
                   room.playerState = 2;
                   io.in(res.roomId).emit('playerState', room);
                 }
-              }, 5000);
+              }, 3000);
             }
           }
         }
