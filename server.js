@@ -189,7 +189,7 @@ io.on('connection', (socket) => {
             }
             if (res.event.data == 3) {
               // someone is buffering - pause all others
-              room.playerState = res.event.data;
+              room.playerState = 2;
               room.currentVideo = res.currentVideo;
               room.currentTime = res.currentTime;
               io.in(res.roomId).emit('playerState', room);
