@@ -1,6 +1,6 @@
 <div class="ml-4 mr-4">
   <div class="row">
-    <div class="col-md-12  border-bottom border-secondary">
+    <div class="col-md-12  border-bottom border-dark">
       <h4 style="color:aliceblue">
         Shareplay
       </h4>
@@ -14,20 +14,20 @@
       <h2 style="color:aliceblue">
         Playlist
       </h2>
-      <div class="border-left border-top border-secondary" style="height:35vh; overflow-y: auto;">
+      <div class="border-left border-top border-dark" style="height:35vh; overflow-y: auto;">
         <app-play-list id="playlist" [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle"
           [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
       </div>
       <h3 style="color:aliceblue">
         Users
       </h3>
-      <div class="border-left border-top border-secondary" [hidden]="!videoPlaylist.length" style="color:aliceblue; height:15vh;">
+      <div class="border-left border-top border-dark" [hidden]="!videoPlaylist.length" style="color:aliceblue; height:15vh;">
         <app-userlist></app-userlist>  
       
       </div>
     </div>
   </div>
-  <div [hidden]="!videoPlaylist.length" class="row col-md-8 mr-4 border-top">
+  <div [hidden]="!videoPlaylist.length" class="row col-md-8 mr-4 border-top border-dark">
   </div>
   <div class="row">
     <div class="col-md-8">
