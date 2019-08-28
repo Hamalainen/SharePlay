@@ -21,7 +21,8 @@
             "assets": [
               "src/H.ico",
               "src/assets",
-              "src/H.png"
+              "src/H.png",
+              "src/Hsync.png"
             ],
             "styles": [
               "src/styles.css"
