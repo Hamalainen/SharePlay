@@ -14,14 +14,14 @@
       <h2 style="color:aliceblue">
         Playlist
       </h2>
-      <div class="border-left border-top" style="height:35vh; overflow-y: auto;">
+      <div class="border-left border-top" style="height:35vh; overflow-y: auto; color:#909090;">
         <app-play-list id="playlist" [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle"
           [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
       </div>
       <h3 style="color:aliceblue">
         Users
       </h3>
-      <div class="border-left border-top" [hidden]="!videoPlaylist.length" style="color:aliceblue; height:15vh;">
+      <div class="border-left border-top" [hidden]="!videoPlaylist.length" style="color:#909090; height:15vh;">
         <app-userlist></app-userlist>  
       
       </div>
@@ -37,7 +37,7 @@
    
     </div>
   </div>
-  <div [hidden]="videoPlaylist.length" class="col-md-3 mt-3 mr-4" style="color:aliceblue">
+  <div [hidden]="videoPlaylist.length" class="col-md-3 mt-3 mr-4" style="color:#909090">
       <app-userlist></app-userlist>
   </div>
   </div>
