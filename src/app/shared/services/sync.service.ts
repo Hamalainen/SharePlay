@@ -35,6 +35,11 @@ export class SyncService {
       });
   }
 
+  isMaster(){
+    console.log('inside isMaster');
+    return this.socket.fromEvent('isMaster');
+  }
+
   getRoom() {
     return this.socket.fromEvent('room');
   }
@@ -108,10 +113,16 @@ export class SyncService {
       {
         userName: userName,
         roomId: this.roomId
-      })
+      });
   }
   getrooms(){
     this.socket.emit('getrooms');
+  }
+
+  meMaster(){
+    this.socket.emit('meMaster', {
+      roomId: this.roomId
+    });
   }
 
   

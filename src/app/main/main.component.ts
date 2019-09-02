@@ -5,6 +5,7 @@ import { PlaylistStoreService } from '../shared/services/playlist-store.service'
 import { NotificationService } from '../shared/services/notification.service';
 import { SyncService } from '../shared/services/sync.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserlistComponent } from './user-list/userlist.component';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class MainComponent implements AfterViewInit, OnInit {
   private pageLoadingFinished = false;
   private roomId = null;
   public numberOfUsers = 4;
+  public isMaster = false;
+
 
   constructor(
     private youtubeService: YoutubeApiService,
@@ -41,6 +44,8 @@ export class MainComponent implements AfterViewInit, OnInit {
         this.videoPlaylist = res;
       });
     });
+
+    setInterval(() => {this.syncService.meMaster()}, 2000);
   }
 
   ngAfterViewInit() {
@@ -57,6 +62,9 @@ export class MainComponent implements AfterViewInit, OnInit {
 
     this.playlistElement = document.getElementById('playlist');
     
+    this.syncService.isMaster().subscribe(res => {
+      this.isMaster = <boolean>res;
+    });
   }
 
   playFirstInPlaylist(): void {
