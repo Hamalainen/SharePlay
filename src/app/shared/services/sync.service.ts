@@ -25,9 +25,7 @@ export class SyncService {
     private route: ActivatedRoute,
     private router: Router
   ) { 
-    setInterval(() =>{
-      this.meMaster();
-    }, 1000)
+    
 
 
     this.isMaster().subscribe(res => {
@@ -46,13 +44,10 @@ export class SyncService {
       });
   }
 
-<<<<<<< HEAD
   isMaster(){
     return this.socket.fromEvent('isMaster');
   }
 
-=======
->>>>>>> parent of 19e4aa7... working on play/pause from master
   getRoom() {
     return this.socket.fromEvent('room');
   }

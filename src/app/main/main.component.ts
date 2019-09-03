@@ -24,11 +24,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   private pageLoadingFinished = false;
   private roomId = null;
   public numberOfUsers = 4;
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 19e4aa7... working on play/pause from master
-
+  
   constructor(
     private youtubeService: YoutubeApiService,
     private youtubePlayer: YoutubePlayerService,
