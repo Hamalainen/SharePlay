@@ -5,7 +5,6 @@ import { PlaylistStoreService } from '../shared/services/playlist-store.service'
 import { NotificationService } from '../shared/services/notification.service';
 import { SyncService } from '../shared/services/sync.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserlistComponent } from './user-list/userlist.component';
 
 
 @Component({
@@ -25,7 +24,10 @@ export class MainComponent implements AfterViewInit, OnInit {
   private pageLoadingFinished = false;
   private roomId = null;
   public numberOfUsers = 4;
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 19e4aa7... working on play/pause from master
 
   constructor(
     private youtubeService: YoutubeApiService,

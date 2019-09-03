@@ -46,10 +46,13 @@ export class SyncService {
       });
   }
 
+<<<<<<< HEAD
   isMaster(){
     return this.socket.fromEvent('isMaster');
   }
 
+=======
+>>>>>>> parent of 19e4aa7... working on play/pause from master
   getRoom() {
     return this.socket.fromEvent('room');
   }
@@ -123,16 +126,10 @@ export class SyncService {
       {
         userName: userName,
         roomId: this.roomId
-      });
+      })
   }
   getrooms(){
     this.socket.emit('getrooms');
-  }
-
-  meMaster(){
-    this.socket.emit('meMaster', {
-      roomId: this.roomId
-    });
   }
 
   

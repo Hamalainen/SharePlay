@@ -158,21 +158,6 @@ io.on('connection', (socket) => {
     addToPlaylist(res);
   });
 
-  socket.on('meMaster', (res) =>{
-    for (var room of rooms){
-      if(room.id === res.roomId){
-        if(room.users === undefined){
-          continue;
-        }
-        for(var user of room.users){
-          if(user.socketId == socket.id){
-            io.to(`${socket.id}`).emit('isMaster', user.master);
-          }
-        }
-      }
-    }
-  });
-
   socket.on('playerEvent', (res) => {
     for (var room of rooms) {
       if (room.id === res.roomId) {

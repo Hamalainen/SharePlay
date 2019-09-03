@@ -24,28 +24,13 @@
           {{ video.snippet?.title | videoName: [65, 62] }}
         </div>
       </div>
-
-      <!-- <div *ngIf="mainComponent.isMaster; else elseBlock">
-        <div class="video-play-button">
-          <i class="material-icons">play_circle_filled</i>
-        </div>
-      </div>
-      <ng-template #elseBlock>
-        <div class="video-play-button">
-          <i class="material-icons">playlist_add</i>
-        </div>
-      </ng-template> -->
-
-
       <div class="video-play-button">
         <i class="material-icons">play_circle_filled</i>
       </div>
-
-
     </div>
-    <!-- <div ngIf="mainComponent.isMaster;" class="mdl-card__supporting-text">
+    <div class="mdl-card__supporting-text">
        <i (click)="addToPlaylist(video)" class="material-icons">playlist_add</i>
-    </div> -->
+    </div>
  </div>
 </div>
 

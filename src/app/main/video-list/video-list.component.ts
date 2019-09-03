@@ -31,6 +31,7 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+
   }
 
   play(video: any): void {
