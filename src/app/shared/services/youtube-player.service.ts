@@ -14,8 +14,8 @@ export class YoutubePlayerService implements AfterContentInit {
 
 
   @Output() videoChangeEvent: EventEmitter<any> = new EventEmitter(true);
-  @Output() playPauseEvent: EventEmitter<any> = new EventEmitter(true);
-  @Output() currentVideoText: EventEmitter<any> = new EventEmitter(true);
+  // @Output() playPauseEvent: EventEmitter<any> = new EventEmitter(true);
+  // @Output() currentVideoText: EventEmitter<any> = new EventEmitter(true);
 
   constructor(
     public notificationService: NotificationService,
@@ -39,7 +39,7 @@ export class YoutubePlayerService implements AfterContentInit {
           },
           events: {
             onStateChange: (ev) => {
-              this.onPlayerStateChange(ev);
+              // this.onPlayerStateChange(ev);
               this.onChangeSync(ev);
             }
           }
@@ -50,6 +50,10 @@ export class YoutubePlayerService implements AfterContentInit {
   }
 
   onChangeSync(ev: any) {
+  if(ev.data === 0){
+    this.videoChangeEvent.emit(true);
+  }
+
     var time = this.yt_player.getCurrentTime();
     var video = this.yt_player.getVideoData()['video_id'];
 
@@ -57,21 +61,21 @@ export class YoutubePlayerService implements AfterContentInit {
   }
 
 
-  onPlayerStateChange(event: any) {
-    const state = event.data;
-    switch (state) {
-      case 0:
-        this.videoChangeEvent.emit(true);
-        this.playPauseEvent.emit('pause');
-        break;
-      case 1:
-        this.playPauseEvent.emit('play');
-        break;
-      case 2:
-        this.playPauseEvent.emit('pause');
-        break;
-    }
-  }
+  // onPlayerStateChange(event: any) {
+  //   const state = event.data;
+  //   switch (state) {
+  //     case 0:
+  //       this.videoChangeEvent.emit(true);
+  //       this.playPauseEvent.emit('pause');
+  //       break;
+  //     case 1:
+  //       this.playPauseEvent.emit('play');
+  //       break;
+  //     case 2:
+  //       this.playPauseEvent.emit('pause');
+  //       break;
+  //   }
+  // }
 
   // playVideo(videoId: string, videoText?: string): void {
   //   if (!this.yt_player) {
