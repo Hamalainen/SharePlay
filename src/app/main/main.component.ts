@@ -25,7 +25,6 @@ export class MainComponent implements AfterViewInit, OnInit {
   private pageLoadingFinished = false;
   private roomId = null;
   public numberOfUsers = 4;
-  public isMaster = false;
 
 
   constructor(
@@ -62,9 +61,6 @@ export class MainComponent implements AfterViewInit, OnInit {
 
     this.playlistElement = document.getElementById('playlist');
     
-    this.syncService.isMaster().subscribe(res => {
-      this.isMaster = <boolean>res;
-    });
   }
 
   playFirstInPlaylist(): void {

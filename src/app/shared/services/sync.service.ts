@@ -17,13 +17,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SyncService {
   private roomId = null;
+  public isMasterbool = false;
   constructor(
     private socket: Socket,
     private youtubeApiService: YoutubeApiService,
     private playlistStoreService: PlaylistStoreService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) { 
+    
+    this.isMaster().subscribe(res => {
+      this.isMasterbool = <boolean>res;
+    });
+
+  }
 
   sendRealTime(realtime: any) {
     this.socket.emit('realTime',
@@ -36,7 +43,6 @@ export class SyncService {
   }
 
   isMaster(){
-    console.log('inside isMaster');
     return this.socket.fromEvent('isMaster');
   }
 
