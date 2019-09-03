@@ -7,7 +7,10 @@
   </div>
   <div [hidden]="!videoPlaylist.length" class="row">
 
-      <div *ngIf="isMaster; else elseBlock">
+      <div class="col-md-7 mt-3 mb-3 mr-5" style="margin-left:70px">
+          <app-player></app-player>
+        </div>
+      <!-- <div *ngIf="isMaster; else elseBlock">
         <div class="col-md-7 mt-3 mb-3 mr-5" style="margin-left:70px">
           <app-player></app-player>
         </div>
@@ -16,7 +19,7 @@
         <div class="col-md-7 mt-3 mb-3 mr-5 ytplayer" style="margin-left:70px">
           <app-player></app-player>
         </div>
-      </ng-template>
+      </ng-template> -->
 
     <div class="col-md-4 mt-3 mb-3 mr-4">
       <h2 style="color:rgb(166, 169, 172)">
