@@ -62,7 +62,7 @@ export class PlayerComponent implements OnInit {
     });
 
     setInterval(() => {
-         this.syncService.sendRealTime(this.youtubePlayer.getRealTime());
+      this.syncService.sendRealTime(this.youtubePlayer.getRealTime());
     }, 500);
 
     setTimeout(() => {

@@ -16,7 +16,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   providedIn: 'root'
 })
 export class SyncService {
-  public isMasterbool = false;
   private roomId = null;
   constructor(
     private socket: Socket,
@@ -24,11 +23,7 @@ export class SyncService {
     private playlistStoreService: PlaylistStoreService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.socket.fromEvent('isMaster').subscribe(res => {
-      this.isMasterbool = <boolean>res;
-      });
-   }
+  ) { }
 
   sendRealTime(realtime: any) {
     this.socket.emit('realTime',
@@ -38,6 +33,11 @@ export class SyncService {
         currentTime: realtime.time,
         currentState: realtime.state
       });
+  }
+
+  isMaster(){
+    console.log('inside isMaster');
+    return this.socket.fromEvent('isMaster');
   }
 
   getRoom() {
@@ -126,35 +126,5 @@ export class SyncService {
   }
 
   
-  // onChangeSync(ev: any) {
-  //   if(this.mainComponent.isMaster){
-  //     var time = this.yt_player.getCurrentTime();
-  //     var video = this.yt_player.getVideoData()['video_id'];
-  //     this.syncService.playerEvent(ev, video, time);
-  //     this.prevEvent = ev.data;
-  //   }
-  //   else{
-  //     this.yt_player.set
-  //     switch (this.prevEvent){
-  //       case -1:
-  //         this.yt_player.pauseVideo();
-  //         break;
-  //       case 0:
-  //           this.yt_player.pauseVideo();
-  //         break;
-  //       case 1:
-  //           this.yt_player.playVideo();
-  //         break;
-  //       case 2:
-  //           this.yt_player.pauseVideo();
-  //         break;
-  //       case 3:
-  //           this.yt_player.pauseVideo();
-  //         break;
-  //       case 5:
-  //           this.yt_player.pauseVideo();
-  //         break;
-  //     }
-  //   }
-  // }
+  
 }
