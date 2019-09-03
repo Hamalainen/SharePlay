@@ -10,12 +10,9 @@ let _window: any = window;
 @Injectable()
 export class YoutubePlayerService implements AfterContentInit {
   public yt_player;
-  private currentVideoId: string;
 
 
   @Output() videoChangeEvent: EventEmitter<any> = new EventEmitter(true);
-  @Output() playPauseEvent: EventEmitter<any> = new EventEmitter(true);
-  @Output() currentVideoText: EventEmitter<any> = new EventEmitter(true);
 
   constructor(
     public notificationService: NotificationService,
@@ -38,8 +35,9 @@ export class YoutubePlayerService implements AfterContentInit {
             rel: '0'
           },
           events: {
+            
             onStateChange: (ev) => {
-              this.onPlayerStateChange(ev);
+              console.log(ev.data);
               this.onChangeSync(ev);
             }
           }
@@ -50,39 +48,14 @@ export class YoutubePlayerService implements AfterContentInit {
   }
 
   onChangeSync(ev: any) {
+    const state = ev.data;
+   if(state == 0){
+      this.videoChangeEvent.emit(true);
+   }
     var time = this.yt_player.getCurrentTime();
     var video = this.yt_player.getVideoData()['video_id'];
-
     this.syncService.playerEvent(ev, video, time);
   }
-
-
-  onPlayerStateChange(event: any) {
-    const state = event.data;
-    switch (state) {
-      case 0:
-        this.videoChangeEvent.emit(true);
-        this.playPauseEvent.emit('pause');
-        break;
-      case 1:
-        this.playPauseEvent.emit('play');
-        break;
-      case 2:
-        this.playPauseEvent.emit('pause');
-        break;
-    }
-  }
-
-  // playVideo(videoId: string, videoText?: string): void {
-  //   if (!this.yt_player) {
-  //     console.error('Player not ready.');
-  //     return;
-  //   }
-  //   this.yt_player.loadVideoById(videoId);
-  //   this.currentVideoId = videoId;
-  //   this.currentVideoText.emit(videoText);
-  //   this.browserNotification.show(videoText);
-  // }
 
   pausePlayingVideo(time?: any): void {
     if (time != null) {
