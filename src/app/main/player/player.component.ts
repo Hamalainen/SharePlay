@@ -25,26 +25,24 @@ export class PlayerComponent implements OnInit {
     doc.body.appendChild(playerApi);
     this.youtubePlayer.createPlayer();
 
-    this.syncService.getRoom().subscribe(res => {
-      this.youtubePlayer.yt_player.loadVideoById(res['currentVideo']);
+    // this.syncService.getRoom().subscribe(res => {
+    //   this.youtubePlayer.yt_player.loadVideoById(res['currentVideo']);
       
-      switch (res['playerState']) {
-        case 1:
-          this.youtubePlayer.playPausedVideo(res['currentTime']);
-          break;
-        case 2:
-          this.youtubePlayer.pausePlayingVideo(res['currentTime']);
-          break;
-        case -1:
-          break;
-        }
+    //   switch (res['playerState']) {
+    //     case 1:
+    //       this.youtubePlayer.playPausedVideo(res['currentTime']);
+    //       break;
+    //     case 2:
+    //       this.youtubePlayer.pausePlayingVideo(res['currentTime']);
+    //       break;
+    //     case -1:
+    //       break;
+    //     }
 
-    });
+    // });
 
 
     this.syncService.playingVideo().subscribe(res => {
-      console.log("playing video " + res['id']);
-      // this.youtubePlayer.playVideo(res['id'], res['snippet']['title'])
       this.youtubePlayer.yt_player.loadVideoById(res['id']);
     });
 
@@ -78,7 +76,6 @@ export class PlayerComponent implements OnInit {
           case -1:
             break;
           }
-  
       });
     },1000);
   }

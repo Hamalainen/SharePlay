@@ -25,7 +25,11 @@ export class SyncService {
     private route: ActivatedRoute,
     private router: Router
   ) { 
-    
+    setInterval(() =>{
+      this.meMaster();
+    }, 1000)
+
+
     this.isMaster().subscribe(res => {
       this.isMasterbool = <boolean>res;
     });

@@ -30,10 +30,6 @@ export class VideoSearchComponent {
       .then(data => {
         this.videosUpdated.emit(data);
       })
-
-      setInterval(() => {
-       this.keeepServerOnline();
-      }, (1000*60)*5);
   }
 
   doSearch(event): void {
@@ -50,16 +46,7 @@ export class VideoSearchComponent {
         if (data.length < 1) {
           this.notificationService.showNotification('No matches found.');
         }
-        // console.log(JSON.stringify(data));
         this.videosUpdated.emit(data);
       })
   }
-
-  keeepServerOnline(): void{
-    this.youtubeService.searchVideos('keep me alive')
-    .then(data => {
-      console.log('trying to keep server alive');
-    });
-  }
-
 }

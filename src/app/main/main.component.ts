@@ -43,8 +43,6 @@ export class MainComponent implements AfterViewInit, OnInit {
         this.videoPlaylist = res;
       });
     });
-
-    setInterval(() => {this.syncService.meMaster()}, 2000);
   }
 
   ngAfterViewInit() {
@@ -67,7 +65,6 @@ export class MainComponent implements AfterViewInit, OnInit {
     if (this.videoPlaylist[0]) {
       this.playlistElement.scrollTop = 0;
       this.syncService.playVideo(this.videoPlaylist[0].id);
-      // this.youtubePlayer.playVideo(this.videoPlaylist[0].id, this.videoPlaylist[0].snippet.title);
     }
   }
 
@@ -89,7 +86,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   }
 
   onScroll(): void{
-var element = document.getElementById("searchlist");
+    var element = document.getElementById("searchlist");
     let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
     if (atBottom) {
       this.searchMore();
@@ -119,12 +116,6 @@ var element = document.getElementById("searchlist");
       }).catch(error => {
         this.loadingInProgress = false;
       })
-  }
-
-  clearPlaylist(): void {
-    this.videoPlaylist = [];
-    this.playlistService.clearPlaylist();
-    this.notificationService.showNotification('Playlist cleared.');
   }
 
   private newRoomId() {

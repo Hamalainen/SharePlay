@@ -46,7 +46,6 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   onScroll(): void {
-    console.log("searching next");
     this.youtubeApiService.searchNext();
   }
 
