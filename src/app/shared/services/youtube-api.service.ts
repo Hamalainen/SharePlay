@@ -61,7 +61,6 @@ export class YoutubeApiService {
   }
 
   getRelated(id): Promise<any> {
-    console.log("id: " + id)
     const url = `${this.base_url}search?&relatedToVideoId=${id}&maxResults=${this.max_results}&type=video&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
 
     return this.http.get(url)

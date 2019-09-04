@@ -52,7 +52,6 @@ export class VideoSearchComponent {
       })
   }
   searchRelated(): void {
-    console.log("searching");
     this.youtubeService.getRelated(this.youtubePlayer.getCurrentVideo())
       .then(data => {
         if (data.length < 1) {
