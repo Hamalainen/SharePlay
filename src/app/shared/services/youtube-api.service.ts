@@ -19,7 +19,7 @@ export class YoutubeApiService {
   ) { }
 
   searchVideos(query: string): Promise<any> {
-    const url = `${this.base_url}search?q=${query}&order=date&maxResults=${this.max_results}&type=video&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
+    const url = `${this.base_url}search?q=${query}&order=date&maxResults=${this.max_results}&type=video&part=snippet%2Cid&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
 
     return this.http.get(url)
       .map(response => {
