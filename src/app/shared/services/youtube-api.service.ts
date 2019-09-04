@@ -60,6 +60,28 @@ export class YoutubeApiService {
       .catch(this.handleError)
   }
 
+  getRelated(id): Promise<any> {
+    console.log("id: " + id)
+    const url = `${this.base_url}search?&relatedToVideoId=${id}&maxResults=${this.max_results}&type=video&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
+
+    return this.http.get(url)
+    .map(response => {
+      let jsonRes = response.json();
+      let res = jsonRes['items'];
+      this.nextToken = jsonRes['nextPageToken'] ? jsonRes['nextPageToken'] : undefined;
+
+      let ids = [];
+
+      res.forEach((item) => {
+        ids.push(item.id.videoId);
+      });
+
+      return this.getVideos(ids);
+    })
+    .toPromise()
+    .catch(this.handleError)
+  }
+
   getVideos(ids): Promise<any> {
     const url = `${this.base_url}videos?id=${ids.join(',')}&maxResults=${this.max_results}&type=video&part=snippet,contentDetails,statistics&key=${YOUTUBE_API_KEY}`; // tslint:disable-line
 

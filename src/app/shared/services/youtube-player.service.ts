@@ -14,6 +14,7 @@ export class YoutubePlayerService implements AfterContentInit {
 
 
   @Output() videoChangeEvent: EventEmitter<any> = new EventEmitter(true);
+  @Output() videoLoadedEvent: EventEmitter<any> = new EventEmitter(true);
   // @Output() playPauseEvent: EventEmitter<any> = new EventEmitter(true);
   // @Output() currentVideoText: EventEmitter<any> = new EventEmitter(true);
 
@@ -52,6 +53,9 @@ export class YoutubePlayerService implements AfterContentInit {
   onChangeSync(ev: any) {
   if(ev.data === 0){
     this.videoChangeEvent.emit(true);
+  }
+  if(ev.data === -1){
+    this.videoLoadedEvent.emit(true);
   }
 
     var time = this.yt_player.getCurrentTime();

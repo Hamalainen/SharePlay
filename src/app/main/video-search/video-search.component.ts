@@ -26,6 +26,8 @@ export class VideoSearchComponent {
     private youtubePlayer: YoutubePlayerService,
     private notificationService: NotificationService
   ) {
+    this.youtubePlayer.videoLoadedEvent.subscribe(event => event ? this.searchRelated() : false);
+
     this.youtubeService.searchVideos('')
       .then(data => {
         this.videosUpdated.emit(data);
@@ -48,5 +50,15 @@ export class VideoSearchComponent {
         }
         this.videosUpdated.emit(data);
       })
+  }
+  searchRelated(): void {
+    console.log("searching");
+    this.youtubeService.getRelated(this.youtubePlayer.getCurrentVideo())
+      .then(data => {
+        if (data.length < 1) {
+          this.notificationService.showNotification('No matches found.');
+        }
+        this.videosUpdated.emit(data);
+      });
   }
 }

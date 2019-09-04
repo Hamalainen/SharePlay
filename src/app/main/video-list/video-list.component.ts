@@ -39,7 +39,6 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   addToPlaylist(video: any): void {
-    console.log(video);
     if(this.mainComponent.videoPlaylist.length < 1){
       this.play(video);
     }
