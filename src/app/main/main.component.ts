@@ -76,7 +76,6 @@ export class MainComponent implements AfterViewInit, OnInit {
         if (!this.videoPlaylist.some((e) => e.id === video.id)) {
           this.youtubeService.getVideos([video.id]).then(res => {
             newVideo = res;
-            console.log(newVideo);
           this.syncService.playRelated(newVideo[0]);
           });
           break;
