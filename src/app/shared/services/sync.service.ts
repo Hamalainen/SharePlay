@@ -84,10 +84,7 @@ export class SyncService {
   playRelated(video: any) {
     if (this.isMasterbool) {
       this.addedToPlaylist(video);
-      setTimeout(() => {
-        this.playVideo(video);
-      }, 1000);
-      
+      this.playVideo(video);
     }
   }
 
