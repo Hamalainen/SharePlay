@@ -28,8 +28,6 @@ export class YoutubeApiService {
         this.lastQuery = query;
         this.nextToken = jsonRes['nextPageToken'] ? jsonRes['nextPageToken'] : undefined;
 
-        console.log("res: " + res);
-
         let ids = [];
 
         res.forEach((item) => {

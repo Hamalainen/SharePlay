@@ -31,7 +31,7 @@ export class VideoSearchComponent {
     this.youtubeService.searchVideos('')
       .then(data => {
         this.videosUpdated.emit(data);
-      })
+      });
   }
 
   doSearch(event): void {
