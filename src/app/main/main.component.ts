@@ -24,7 +24,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   private pageLoadingFinished = false;
   private roomId = null;
   public numberOfUsers = 4;
-  
+
   constructor(
     private youtubeService: YoutubeApiService,
     private youtubePlayer: YoutubePlayerService,
@@ -33,7 +33,9 @@ export class MainComponent implements AfterViewInit, OnInit {
     private syncService: SyncService,
     private route: ActivatedRoute
 
-  ) { }
+  ) {
+    this.youtubePlayer.videoChangeEvent.subscribe(event => event ? this.playRelated() : false);
+  }
 
   ngOnInit() {
     this.syncService.getRoom().subscribe(res => {
@@ -51,12 +53,34 @@ export class MainComponent implements AfterViewInit, OnInit {
       }
       else {
         this.syncService.joinroom(this.roomId, '');
-        
+
       }
     });
 
     this.playlistElement = document.getElementById('playlist');
-    
+
+  }
+
+  playRelated() {
+    let current = this.youtubePlayer.getCurrentVideo();
+    let inPlaylist;
+    var newVideo;
+
+    this.videoPlaylist.forEach((video, index) => {
+      if (video.id === current) {
+        inPlaylist = index;
+      }
+    });
+    if (inPlaylist == this.videoPlaylist.length - 1) {
+      // this.videoList[0];
+      for (var video of this.videoList) {
+        newVideo = this.youtubeService.getVideos([video]);
+        if (!this.videoPlaylist.some((e) => e.id === newVideo.id)) {
+          this.syncService.playRelated(newVideo);
+          break;
+        }
+      }
+    }
   }
 
   playFirstInPlaylist(): void {
@@ -70,7 +94,7 @@ export class MainComponent implements AfterViewInit, OnInit {
     this.videoList = videos;
   }
 
-  checkAddToPlaylist(video: any): void {
+  checkAddToPlaylist(video: any) {
     if (!this.videoPlaylist.some((e) => e.id === video.id)) {
       this.videoPlaylist.push(video);
 
@@ -80,10 +104,14 @@ export class MainComponent implements AfterViewInit, OnInit {
         let topPos = document.getElementById(this.videoPlaylist[inPlaylist].id).offsetTop;
         this.playlistElement.scrollTop = topPos - 100;
       });
+      return true;
+    } else {
+      return false;
     }
+
   }
 
-  onScroll(): void{
+  onScroll(): void {
     var element = document.getElementById("searchlist");
     let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
     if (atBottom) {
@@ -126,7 +154,7 @@ export class MainComponent implements AfterViewInit, OnInit {
 
     return text;
   }
-  
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.youtubePlayer.resizePlayer(window.innerHeight, window.innerWidth);

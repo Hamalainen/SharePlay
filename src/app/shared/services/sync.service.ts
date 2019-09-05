@@ -11,6 +11,7 @@ import { subscribeOn } from 'rxjs/operators';
 import { PlayListComponent } from 'src/app/main/play-list/play-list.component';
 import { VideoListComponent } from 'src/app/main/video-list/video-list.component';
 import { ActivatedRoute, Router } from '@angular/router';
+// import { timingSafeEqual } from 'crypto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,12 @@ export class SyncService {
     private playlistStoreService: PlaylistStoreService,
     private route: ActivatedRoute,
     private router: Router
-  ) { 
-    
-
+  ) {
+    setInterval(() => {
+      this.socket.emit("meMaster", {
+        roomId: this.roomId
+      });
+    }, 2000)
 
     this.isMaster().subscribe(res => {
       this.isMasterbool = <boolean>res;
@@ -35,16 +39,19 @@ export class SyncService {
   }
 
   sendRealTime(realtime: any) {
-    this.socket.emit('realTime',
-      {
-        roomId: this.roomId,
-        currentVideo: realtime.video,
-        currentTime: realtime.time,
-        currentState: realtime.state
-      });
+    if (this.isMasterbool) {
+      this.socket.emit('realTime',
+        {
+          roomId: this.roomId,
+          currentVideo: realtime.video,
+          currentTime: realtime.time,
+          currentState: realtime.state
+        });
+    }
   }
 
-  isMaster(){
+
+  isMaster() {
     return this.socket.fromEvent('isMaster');
   }
 
@@ -73,6 +80,17 @@ export class SyncService {
   Rooms() {
     return this.socket.fromEvent('rooms');
   }
+
+  playRelated(video: any) {
+    if (this.isMasterbool) {
+      this.addedToPlaylist(video);
+      setTimeout(() => {
+        this.playVideo(video);
+      }, 1000);
+      
+    }
+  }
+
   playVideo(video: any) {
     this.socket.emit('play',
       {
@@ -123,10 +141,10 @@ export class SyncService {
         roomId: this.roomId
       })
   }
-  getrooms(){
+  getrooms() {
     this.socket.emit('getrooms');
   }
 
-  
-  
+
+
 }

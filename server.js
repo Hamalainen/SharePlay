@@ -73,6 +73,18 @@ io.on('connection', (socket) => {
 
   });
 
+  socket.on('meMaster', (res) => {
+    for (var room of rooms) {
+      if (room.id === res.roomId) {
+        for (var user of room.users) {
+          if (user.socketId == socket.id) {
+            io.to(`${socket.id}`).emit('isMaster', user.master);
+          }
+        }
+      }
+    }
+  });
+
   socket.on('requestRoom', (roomId) => {
     io.in(roomId).emit('room', room);
   })
@@ -91,27 +103,30 @@ io.on('connection', (socket) => {
   socket.on('realTime', (res) => {
     for (var room of rooms) {
       if (room.id === res.roomId) {
-        for (var user of room.users) {
-          if (user.master) {
-            room.currentVideo = res.currentVideo;
-            room.currentTime = res.currentTime;
-            room.playerState = res.currentState;
-            socket.to(res.roomId).emit('currentPlayer', room);
-          }
-        }
-      }
+        // for (var user of room.users) {
+        //   if (user.socketId == socket.id) {
+        //     if (user.master) {
+              room.currentVideo = res.currentVideo;
+              room.currentTime = res.currentTime;
+              room.playerState = res.currentState;
+              socket.to(res.roomId).emit('currentPlayer', room);
+              break;
+            }
+      //     }
+      //   }
+      // }
     }
   });
 
   socket.on('addedUsername', (res) => {
-    if(res.userName !== undefined){
-      for(var room of rooms){
-        if(room.id == res.roomId){
-          if(room.users === undefined){
+    if (res.userName !== undefined) {
+      for (var room of rooms) {
+        if (room.id == res.roomId) {
+          if (room.users === undefined) {
             continue;
           }
-          for(var user of room.users){
-            if(user.socketId == socket.id && user.userName == ""){
+          for (var user of room.users) {
+            if (user.socketId == socket.id && user.userName == "") {
               user.userName = res.userName;
               io.in(res.roomId).emit('room', room);
               break;
@@ -119,7 +134,7 @@ io.on('connection', (socket) => {
           }
           break;
         }
-      } 
+      }
     }
   });
 
@@ -134,18 +149,18 @@ io.on('connection', (socket) => {
     }
     io.in(res.roomId).emit('added', res.video);
   }
- 
+
   socket.on('addedToPlaylist', (res) => {
     addToPlaylist(res);
   });
 
   socket.on('play', (res) => {
-    
+
     for (var room of rooms) {
       if (room.id === res.roomId) {
         for (var user of room.users) {
           if (user.socketId == socket.id) {
-            if(user.master){
+            if (user.master) {
               room.currentVideo = res.video;
               io.in(res.roomId).emit('playing', res.video);
               break;
@@ -172,7 +187,8 @@ io.on('connection', (socket) => {
                 socket.to(res.roomId).emit('playerState', room);
               }
               else {
-                io.in(res.roomId).emit('playerState', room);
+                io.to(`${socket.id}`).emit('playerState', room);
+                // io.in(res.roomId).emit('playerState', room);
               }
             }
             if (res.event.data == 2) {
@@ -184,7 +200,8 @@ io.on('connection', (socket) => {
                 socket.to(res.roomId).emit('playerState', room);
               }
               else {
-                io.in(res.roomId).emit('playerState', room);
+                io.to(`${socket.id}`).emit('playerState', room);
+                // io.in(res.roomId).emit('playerState', room);
               }
             }
             if (res.event.data == 3) {
@@ -195,8 +212,8 @@ io.on('connection', (socket) => {
               io.in(res.roomId).emit('playerState', room);
 
               setTimeout(() => {
-                if(room.playerState === 3){
-                  room.playerState = 2;
+                if (room.playerState === 3) {
+                   room.playerState = 2;
                   io.in(res.roomId).emit('playerState', room);
                 }
               }, 5000);
@@ -248,5 +265,5 @@ io.on('connection', (socket) => {
     socket.emit('rooms', JSON.stringify(rooms));
   });
 
-  
+
 });
