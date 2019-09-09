@@ -12,6 +12,9 @@ import {HttpClient} from '@angular/common/http';
 })
 export class UserlistComponent implements OnInit {
   username: string;
+  ip: string;
+  zip: string;
+  city: string;
   public userList = [];
 
   constructor(
@@ -30,10 +33,12 @@ export class UserlistComponent implements OnInit {
 
     this.http.get<{ip:string}>('https://jsonip.com')
     .subscribe( data => {
-      console.log('th data', data);
+      this.ip= data.ip;
     })
-    this.ipLookupService.ipLookUp('ip').subscribe(res =>{
-      console.log(res);
+    this.ipLookupService.ipLookUp(this.ip).subscribe(res =>{
+     this.city = res['city'];
+     this.zip = res['zip'];
+     console.log(this.city + this.zip + this.ip);
     });
 
 
