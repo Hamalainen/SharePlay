@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
+import { IP2LOC_API_KEY } from '../constants'
 
 
 @Injectable()
 export class IpLookupService {
-  private apiKey = 'g7Gaaya0PWf5L2bfEHq4uKzWct7uwKiv';
   constructor(private http: HttpClient) { }
   ipLookUp() {
-    return this.http.get("https://api.ip2loc.com/" + this.apiKey + "/detect");
+    return this.http.get(`https://api.ip2loc.com/${IP2LOC_API_KEY}/detect`);
   }
 }
