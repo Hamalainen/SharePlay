@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
       io.in(res.roomId).emit('room', room);
       
       console.log("conn " + socket.conn);
-      console.log("handshake: " + socket.handshake);
+      console.log("handshake: " + socket.handshake.address);
       console.log("handshakeadress: " + socket.handshake.address.adress);
       console.log("remoteAdress: " + socket.conn.remoteAddress);
       console.log(`socket ${socket.id} joined ${room.id}`);
