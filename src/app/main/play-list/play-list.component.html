@@ -9,9 +9,9 @@
       <b>{{ video.snippet?.channelTitle}} </b>
       - {{ video.snippet?.title | videoName: [35, 32] }}
     </div>
-    <div>
-      <i class="material-icons">access_time</i>
-						{{ video.contentDetails?.duration | videoDuration }}
+    <div class="opened-item-info mr-4 ml-4">
+      <i class="material-icons">cloud_upload</i>
+						{{ video.snippet?.publishedAt | videoPublished }}
     </div>
   </div>
 </div>
