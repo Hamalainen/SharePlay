@@ -6,7 +6,12 @@
       <i class="material-icons delete-from-playlist" (click)="removeFromPlaylist(video)">cancel</i>
     </div>
     <div class="opened-item-info mr-4 ml-4">
-      {{ video.snippet.title | videoName: [65, 62] }}
+      <b>{{ video.snippet?.channelTitle}} </b>
+      - {{ video.snippet?.title | videoName: [35, 32] }}
+    </div>
+    <div>
+      <i class="material-icons">access_time</i>
+						{{ video.contentDetails?.duration | videoDuration }}
     </div>
   </div>
 </div>
