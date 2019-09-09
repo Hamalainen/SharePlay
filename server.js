@@ -146,6 +146,28 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('addedLocation', (res) => {
+    if (res.ip !== undefined) {
+      for (var room of rooms) {
+        if (room.id == res.roomId) {
+          if (room.users === undefined) {
+            continue;
+          }
+          for (var user of room.users) {
+            if (user.socketId == socket.id && (user.ip == "" || user.ip != res.ip)) {
+              user.ip = res.ip;
+              user.zip = res.zip;
+              user.city = res.city;
+              io.in(res.roomId).emit('room', room);
+              break;
+            }
+          }
+          break;
+        }
+      }
+    }
+  });
+
   function addToPlaylist(res) {
     for (var room of rooms) {
       if (room.id === res.roomId) {

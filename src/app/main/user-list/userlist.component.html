@@ -11,10 +11,10 @@
           </i>
         </span>
         <span style="font-style:italic" *ngIf="user.userName == username" style="font-weight:bold">
-          {{user.userName}}
+          {{user.userName}} - {{user.city}}
         </span>
         <span style="font-style:italic" *ngIf="user.userName != username" style="font-weight:normal">
-          {{user.userName}}
+          {{user.userName}} - {{user.city}}
         </span>
       </div>
     </div>

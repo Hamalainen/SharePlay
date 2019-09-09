@@ -32,19 +32,14 @@ export class UserlistComponent implements OnInit {
       this.syncService.addUserName(res['name'] + " " + res['surname']);
     });
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
+    
       this.ipLookupService.ipLookUp().subscribe(res => {
         this.ip = res['connection']['ip'];
         this.zip = res['location']['country']['zip_code'];
         this.city = res['location']['city'];
+        this.syncService.addLocation(this.ip, this.zip,  this.city);
       });
-    }
-
-    function showPosition(position) {
-     console.log(position);
-    }
+    
 
     // this.ipLookupService.ipLookUp().subscribe(res => {
     //   this.ip = res['connection']['ip'];

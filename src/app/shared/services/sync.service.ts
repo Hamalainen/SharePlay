@@ -138,6 +138,17 @@ export class SyncService {
         roomId: this.roomId
       })
   }
+
+  addLocation(ip: any, zip: any, city: any){
+    this.socket.emit('addedLocation',
+    {
+      ip: ip,
+      zip: zip,
+      city: city,
+      roomId: this.roomId
+    })
+  }
+  
   getrooms() {
     this.socket.emit('getrooms');
   }
