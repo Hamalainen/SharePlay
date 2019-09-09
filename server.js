@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
         var user = {
           userName: res.userName,
           socketId: socket.id,
-          ip: socket.conn.remoteAddress,
+          ip: socket.request.connection.remoteAddress,
           zip: '',
           city: '',
           master: false
