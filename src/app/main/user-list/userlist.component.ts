@@ -3,7 +3,7 @@ import { UserNameService } from '../../shared/services/user-name.service';
 import { SyncService } from '../../shared/services/sync.service';
 import { MainComponent } from '../main.component';
 import { IpLookupService } from '../../shared/services/ip-lookup.service';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-userlist',
@@ -26,22 +26,17 @@ export class UserlistComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.userNameService.getRandomUserName().subscribe(res => {
+    this.userNameService.getRandomUserName().subscribe(res => {
       this.username = res['name'] + " " + res['surname'];
       this.syncService.addUserName(res['name'] + " " + res['surname']);
     });
 
-    this.http.get<{ip:string}>('https://jsonip.com')
-    .subscribe( data => {
-      this.ip= data.ip;
-      this.ipLookupService.ipLookUp(this.ip).subscribe(res =>{
-        this.city = res['city'];
-        this.zip = res['zip'];
-        console.log(this.city + this.zip + this.ip);
-       });
-    })
+    this.ipLookupService.ipLookUp();
+
+
+
     this.syncService.getRoom().subscribe(res => {
       this.userList = res['users'];
-    });
+    })
   }
 }

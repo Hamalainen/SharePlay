@@ -1,11 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as $ from 'jquery';
+
 
 @Injectable()
 export class IpLookupService {
   constructor(private http: HttpClient) { }
 
-  ipLookUp(ip){
-    return this.http.get('http://ip-api.com/json/' + ip + '?fields=16510975&lang=en');
+  ipLookUp() {
+    $.ajax('http://ip-api.com/json')
+      .then(
+        function success(response) {
+          console.log('User\'s Location Data is ', response);
+          console.log('User\'s Country', response.country);
+        },
+
+        function fail(data, status) {
+          console.log('Request failed.  Returned status of',
+            status);
+        }
+      );
   }
 }
