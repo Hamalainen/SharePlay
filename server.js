@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
         var user = {
           userName: res.userName,
           socketId: socket.id,
-          ip: socket.request.connection.remoteAddress,
+          ip: socket.conn.remoteAddress,
           zip: '',
           city: '',
           master: false
@@ -67,7 +67,7 @@ io.on('connection', (socket) => {
           {
             userName: res.userName,
             socketId: socket.id,
-            ip: socket.request.connection.remoteAddress,
+            ip: socket.conn.remoteAddress,
             zip: '',
             city: '',
             master: true
@@ -76,6 +76,13 @@ io.on('connection', (socket) => {
       };
       rooms.push(room);
       io.in(res.roomId).emit('room', room);
+      
+      console.log("conn " + socket.conn);
+      console.log("handshake: " + socket.handshake);
+      console.log("handshakeadress: " + socket.handshake.address.adress);
+      console.log("remoteAdress: " + socket.conn.remoteAddress);
+      console.log(`socket ${socket.id} joined ${room.id}`);
+
       console.log(`socket ${socket.id} created ${room.id}`);
     }
 
