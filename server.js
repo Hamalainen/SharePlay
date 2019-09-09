@@ -46,14 +46,13 @@ io.on('connection', (socket) => {
         var user = {
           userName: res.userName,
           socketId: socket.id,
-          ip: socket.handshake.address.address,
+          ip: socket.conn.remoteAddress,
           zip: '',
           city: '',
           master: false
         }
         room.users.push(user);
         io.in(res.roomId).emit('room', room);
-        console.log(`socket ${socket.id} joined ${room.id}`);
         break;
       }
     }
@@ -68,6 +67,9 @@ io.on('connection', (socket) => {
           {
             userName: res.userName,
             socketId: socket.id,
+            ip: socket.conn.remoteAddress,
+            zip: '',
+            city: '',
             master: true
           }
         ]
