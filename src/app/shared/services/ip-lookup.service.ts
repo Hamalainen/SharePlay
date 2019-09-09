@@ -5,14 +5,13 @@ import * as $ from 'jquery';
 
 @Injectable()
 export class IpLookupService {
+  private apiKey = 'g7Gaaya0PWf5L2bfEHq4uKzWct7uwKiv';
   constructor(private http: HttpClient) { }
-
   ipLookUp() {
-    $.ajax('//ip-api.com/json')
+    $.ajax("https://api.ip2loc.com/" + this.apiKey + "/detect")
       .then(
         function success(response) {
           console.log('User\'s Location Data is ', response);
-          console.log('User\'s Country', response.country);
         },
 
         function fail(data, status) {
