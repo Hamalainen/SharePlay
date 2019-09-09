@@ -8,7 +8,7 @@ export class IpLookupService {
   constructor(private http: HttpClient) { }
 
   ipLookUp() {
-    $.ajax('https://ip-api.com/json')
+    $.ajax('//ip-api.com/json')
       .then(
         function success(response) {
           console.log('User\'s Location Data is ', response);
