@@ -34,15 +34,12 @@ export class UserlistComponent implements OnInit {
     this.http.get<{ip:string}>('https://jsonip.com')
     .subscribe( data => {
       this.ip= data['ip'];
+      this.ipLookupService.ipLookUp(this.ip).subscribe(res =>{
+        this.city = res['city'];
+        this.zip = res['zip'];
+        console.log(this.city + this.zip + this.ip);
+       });
     })
-    this.ipLookupService.ipLookUp(this.ip).subscribe(res =>{
-     this.city = res['city'];
-     this.zip = res['zip'];
-     console.log(this.city + this.zip + this.ip);
-    });
-
-
-    
     this.syncService.getRoom().subscribe(res => {
       this.userList = res['users'];
     });
