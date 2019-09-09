@@ -21,7 +21,7 @@
       </div>
       <div class="video-name-block">
         <div class="video-informations">
-          <b>{{ video.snippet?.channelTitle}} </b>
+          <b>{{ video.snippet?.channelTitle | videoName: [20, 17]}} </b>
           - {{ video.snippet?.title | videoName: [35, 32] }}
         </div>
       </div>
