@@ -32,19 +32,25 @@ export class UserlistComponent implements OnInit {
       this.syncService.addUserName(res['name'] + " " + res['surname']);
     });
 
-    this.ipLookupService.ipLookUp().subscribe(res => {
-      console.log(res['connection']);
-      console.log(res['connection']['ip']);
-      this.ip = res['connection']['ip'];
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      this.ipLookupService.ipLookUp().subscribe(res => {
+        this.ip = res['connection']['ip'];
+        this.zip = res['location']['country']['zip_code'];
+        this.city = res['location']['city'];
+      });
+    }
 
-      console.log(res['location']);
-      console.log(res['location']['country']);
-      console.log(res['location']['country']['zip_code']);
-      
-      this.zip = res['location']['country']['zip_code'];
-      console.log(res['location']['city']);
-      this.city = res['location']['city'];
-    });
+    function showPosition(position) {
+     console.log(position);
+    }
+
+    // this.ipLookupService.ipLookUp().subscribe(res => {
+    //   this.ip = res['connection']['ip'];
+    //   this.zip = res['location']['country']['zip_code'];
+    //   this.city = res['location']['city'];
+    // });
 
 
     this.syncService.getRoom().subscribe(res => {
