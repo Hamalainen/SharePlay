@@ -69,6 +69,9 @@ export class SocketStatusComponent implements OnInit {
         userstr +=
           '&nbsp {userName: ' + user.userName + '<br>' +
           '&nbsp socketId: ' + user.socketId + '<br>' +
+          '&nbsp ip: ' + user.ip + '<br>' +
+          '&nbsp zip: ' + user.zip + '<br>' +
+          '&nbsp city: ' + user.city + '<br>' +
           '&nbsp master: ' + user.master + '},<br>';
       }
       return userstr;

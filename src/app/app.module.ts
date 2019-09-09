@@ -11,6 +11,7 @@ import { PlaylistStoreService } from './shared/services/playlist-store.service';
 import { NotificationService } from './shared/services/notification.service';
 import { BrowserNotificationService } from './shared/services/browser-notification.service';
 import { UserNameService } from './shared/services/user-name.service';
+import { IpLookupService } from './shared/services/ip-lookup.service';
 //Components
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,6 +69,7 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     PlaylistStoreService,
     NotificationService,
     BrowserNotificationService,
+    IpLookupService,
     VideoNamePipe,
     VideoDurationPipe,
     VideoPublishedPipe,

@@ -26,6 +26,9 @@ let rooms = [
     //   {
     //     userName: '',
     //     socketId: '',
+    //     ip: '',
+    //     zip: '',
+    //     city: '',
     //     master: true 
     //   }
     // ]
@@ -43,6 +46,9 @@ io.on('connection', (socket) => {
         var user = {
           userName: res.userName,
           socketId: socket.id,
+          ip: socket.conn.remoteAddress,
+          zip: '',
+          city: '',
           master: false
         }
         room.users.push(user);
