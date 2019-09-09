@@ -27,26 +27,17 @@ export class UserlistComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userNameService.getRandomUserName().subscribe(res => {
-      this.username = res['name'] + " " + res['surname'];
-      this.syncService.addUserName(res['name'] + " " + res['surname']);
-    });
-
-    
       this.ipLookupService.ipLookUp().subscribe(res => {
         this.ip = res['connection']['ip'];
         this.zip = res['location']['country']['zip_code'];
         this.city = res['location']['city'];
         this.syncService.addLocation(this.ip, this.zip,  this.city);
+
+        this.userNameService.getRandomUserName(res['location']['country']['name']).subscribe(res => {
+          this.username = res['name'] + " " + res['surname'];
+          this.syncService.addUserName(res['name'] + " " + res['surname']);
+        });
       });
-    
-
-    // this.ipLookupService.ipLookUp().subscribe(res => {
-    //   this.ip = res['connection']['ip'];
-    //   this.zip = res['location']['country']['zip_code'];
-    //   this.city = res['location']['city'];
-    // });
-
 
     this.syncService.getRoom().subscribe(res => {
       this.userList = res['users'];

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserNameService {
   constructor(private http: HttpClient) { }
 
-  getRandomUserName(){
-    return this.http.get('https://uinames.com/api/?region=finland');
+  getRandomUserName(region: any){
+    return this.http.get('https://uinames.com/api/?region=' + region +"'");
   }
 }
