@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
         var user = {
           userName: res.userName,
           socketId: socket.id,
-          ip: socket.request.headers['x-forwarded-for'] || socket.request.connection.remoteAddress,
+          ip: socket.handshake.address.address,
           zip: '',
           city: '',
           master: false
