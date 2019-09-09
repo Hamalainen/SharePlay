@@ -4,6 +4,7 @@ import { SyncService } from '../../shared/services/sync.service';
 import { MainComponent } from '../main.component';
 import { IpLookupService } from '../../shared/services/ip-lookup.service';
 import { HttpClient } from '@angular/common/http';
+import { XHRConnection } from '@angular/http';
 
 @Component({
   selector: 'app-userlist',
@@ -31,7 +32,19 @@ export class UserlistComponent implements OnInit {
       this.syncService.addUserName(res['name'] + " " + res['surname']);
     });
 
-    this.ipLookupService.ipLookUp();
+    var ipObject = this.ipLookupService.ipLookUp();
+
+    this.ip = ipObject['connection']['ip'];
+
+    console.log(this.ip);
+
+    this.zip = ipObject['location']['country']['zip_code'];
+
+    console.log(this.zip);
+
+    this.city = ipObject['location']['city'];
+
+    console.log(this.city);
 
 
 
