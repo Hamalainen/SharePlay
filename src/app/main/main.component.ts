@@ -114,7 +114,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   }
 
   onScroll(): void {
-    var element = document.getElementById("searchlist");
+    var element = document.getElementById("main");
     let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
     if (atBottom) {
       this.searchMore();
