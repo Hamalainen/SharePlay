@@ -23,7 +23,6 @@ export class SocketStatusComponent implements OnInit {
       var rooms = JSON.parse(<string>res);
       rl.innerHTML = '';
       for (var room of rooms) {
-        // console.log(room.id);
         if (room.id != null) {
           if (window.location.hostname === 'localhost') {
             rl.innerHTML += '<li>rum</li><br>' +

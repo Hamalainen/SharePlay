@@ -6,22 +6,18 @@
         <div class="col-md-4 ml-4">
           <img src="../../Hsync.png" style="height:40px;">
         </div>
-        <div [hidden]="videoPlaylist.length" class="col-md-5 ml-1">
+        <div [hidden]="videoPlaylist.length" class="col-md-4 ml-1 mr-5">
           <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
         </div>
         <div [hidden]="videoPlaylist.length" class="col-md-2 ml-5 mt-2" style="color:rgb(166, 169, 172)">
           <app-userlist></app-userlist>
         </div>
       </div>
-
-
-
-
     </div>
   </div>
   <div [hidden]="!videoPlaylist.length" class="row"
     style="position: -webkit-sticky; position:sticky; top: 0; background-color: #1f1f1f; z-index: 1;">
-    <div class="col-md-7 mt-3 mb-3 mr-5" style="margin-left:70px">
+    <div class="col-md-7 mt-3 mb-3 mr-5 ml-5">
       <app-player></app-player>
     </div>
     <div class="col-md-4 mt-3 mb-3 mr-4">
@@ -45,51 +41,24 @@
   <div [hidden]="!videoPlaylist.length" class="row col-md-12 mr-4 border-top border-dark">
   </div>
   <div [hidden]="!videoPlaylist.length" class="row">
-    <div class="col-md-8">
-      <div class="col-md-6 mr-4">
+
+     <div class="col-md-3 ml-4 mt-2 mb-2">
 
         <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
 
       </div>
-    </div>
-    <!-- <div [hidden]="videoPlaylist.length" class="col-md-3 mt-3 mr-4" style="color:rgb(166, 169, 172)">
-      <app-userlist></app-userlist>
-    </div> -->
+   
   </div>
 
 
+  <div id="searchlist" class="mr-3 ml-3" style="background-color: #1f1f1f">
 
-  <div class="row" style="background-color: #1f1f1f">
-    <div *ngIf="videoPlaylist.length" class="col-md-12">
-      <div id="searchlist">
-        <div class="ml-3 mr-3">
-          <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
-            [videoList]="videoList" [loadingInProgress]="loadingInProgress">
-          </app-video-list>
-        </div>
-
-
-        <div class="loader mt-5" *ngIf="!videoList.length">
-          <div class="loading"></div>
-        </div>
-      </div>
+            <app-video-list class="row" (videoPlaylist)="checkAddToPlaylist($event)"
+              [videoList]="videoList" [loadingInProgress]="loadingInProgress">
+            </app-video-list>
+          <div class="loader mt-5" *ngIf="!videoList.length">
+            <div class="loading"></div>
+          </div>
 
     </div>
-  </div>
-
-
-
-  <div id="searchlist" *ngIf="!videoPlaylist.length" class="col-md-12 row" style="background-color: #1f1f1f">
-    <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
-      [videoList]="videoList" [loadingInProgress]="loadingInProgress">
-    </app-video-list>
-
-
-
-    <div class="loader mt-5" *ngIf="!videoList.length">
-      <div class="loading"></div>
-    </div>
-
-
-  </div>
 </div>
