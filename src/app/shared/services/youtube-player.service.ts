@@ -32,8 +32,8 @@ export class YoutubePlayerService implements AfterContentInit {
     let interval = setInterval(() => {
       if ((typeof _window.YT !== 'undefined') && _window.YT && _window.YT.Player) {
         this.yt_player = new _window.YT.Player('yt-player', {
-          width:  (window.innerHeight/1.65)*1.777,
-          height: (window.innerHeight/1.65),
+          width:  (window.innerWidth/1.5),
+          height: (window.innerWidth/1.5)*0.5625,
           playerVars: {
             iv_load_policy: '3',
             rel: '0'
