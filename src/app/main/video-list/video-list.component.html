@@ -1,22 +1,22 @@
-
-<!-- <div [ngClass]="{'col-md-3' : this.mainComponent.videoPlaylist.length, 'col-md-2' : !this.mainComponent.videoPlaylist.length}" style="padding-bottom: 15px" id="{{i + video.id}}" *ngFor="let video of videoList; let i = index;" [ngClass]="{'last-item': i === videoList.length-1}"> -->
-    <div class="col-md-2" style="padding-bottom: 15px" id="{{i + video.id}}" *ngFor="let video of videoList; let i = index;" [ngClass]="{'last-item': i === videoList.length-1}">
+<div class="col-md-2" style="padding-bottom: 15px" id="{{i + video.id}}" *ngFor="let video of videoList; let i = index;"
+  [ngClass]="{'last-item': i === videoList.length-1}">
   <div class="demo-card-square mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title mdl-card--expand" (click)="play(video)" [ngStyle]="{'background': '#000 url(' + video.snippet?.thumbnails.high.url + ') center center no-repeat', 'background-size': '125%', 'height': '84%'}">
+    <div class="mdl-card__title mdl-card--expand" (click)="play(video)"
+      [ngStyle]="{'background': '#000 url(' + video.snippet?.thumbnails.high.url + ') center center no-repeat', 'background-size': '125%', 'height': '84%'}">
       <div class="video-info-block">
         <div class="video-informations">
           <span style="float: left;">
             <i class="material-icons">cloud_upload</i>
-						{{ video.snippet?.publishedAt | videoPublished }}
+            {{ video.snippet?.publishedAt | videoPublished }}
           </span>
           <span style="margin-left: 10px;">
-						<i class="material-icons">remove_red_eye</i>
-						{{ video.statistics?.viewCount | videoLikesViews }}
-					</span>
+            <i class="material-icons">remove_red_eye</i>
+            {{ video.statistics?.viewCount | videoLikesViews }}
+          </span>
           <span style="margin-left: 10px; float: right;">
-						<i class="material-icons">access_time</i>
-						{{ video.contentDetails?.duration | videoDuration }}
-					</span>
+            <i class="material-icons">access_time</i>
+            {{ video.contentDetails?.duration | videoDuration }}
+          </span>
         </div>
       </div>
       <div class="video-name-block">
@@ -30,9 +30,9 @@
       </div>
     </div>
     <div class="mdl-card__supporting-text">
-       <i (click)="addToPlaylist(video)" class="material-icons">playlist_add</i>
+      <i (click)="addToPlaylist(video)" class="material-icons">playlist_add</i>
     </div>
- </div>
+  </div>
 </div>
 
 

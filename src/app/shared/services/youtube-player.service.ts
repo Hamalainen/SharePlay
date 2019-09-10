@@ -113,8 +113,8 @@ export class YoutubePlayerService implements AfterContentInit {
   }
 
   resizePlayer(height: number, width: number) {
-    width = (height/1.65)*1.777;
-    height = height/1.65;
+    width = (width/1.65);
+    height = (width/1.65)*0.5625;
 
     console.log("width: " + width + ", height: " + height);
     this.yt_player.setSize(width, height);
