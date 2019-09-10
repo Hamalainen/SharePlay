@@ -1,13 +1,14 @@
-<div class="ml-4 mr-4">
+<div class="ml-4 mr-4" style="height: 100vh; width: 97vw; overflow-y: auto; overflow-x: hidden;" (scroll)="onScroll()">
   <div class="row">
     <div class="col-md-12  border-bottom border-dark">
-        <img class="mb-2 mt-2" src="../../Hsync.png" style="height:40px;">
-        <!-- <h2 style="color:rgb(166, 169, 172)">-Sync</h2> -->
+      <img class="mb-2 mt-2" src="../../Hsync.png" style="height:40px;">
+      <!-- <h2 style="color:rgb(166, 169, 172)">-Sync</h2> -->
     </div>
   </div>
-  <div [hidden]="!videoPlaylist.length" class="row">
+  <div [hidden]="!videoPlaylist.length" class="row"
+    style="position: -webkit-sticky; position:sticky; top: 0; background-color: #202020; z-index: 1;">
     <div class="col-md-7 mt-3 mb-3 mr-5" style="margin-left:70px">
-      <app-player></app-player>
+      <app-player style="padding: 2px; background-color: #202020"></app-player>
     </div>
     <div class="col-md-4 mt-3 mb-3 mr-4">
       <h2 style="color:rgb(166, 169, 172)">
@@ -20,9 +21,10 @@
       <h3 style="color:rgb(166, 169, 172)">
         Users
       </h3>
-      <div class="border-left border-top border-dark" [hidden]="!videoPlaylist.length" style="color:rgb(166, 169, 172); height:15vh;">
-        <app-userlist></app-userlist>  
-      
+      <div class="border-left border-top border-dark" [hidden]="!videoPlaylist.length"
+        style="color:rgb(166, 169, 172); height:15vh;">
+        <app-userlist></app-userlist>
+
       </div>
     </div>
   </div>
@@ -30,45 +32,46 @@
   </div>
   <div class="row">
     <div class="col-md-8">
-    <div class="col-md-6 mr-4">
-   
-      <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
-   
+      <div class="col-md-6 mr-4">
+
+        <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
+
+      </div>
     </div>
-  </div>
-  <div [hidden]="videoPlaylist.length" class="col-md-3 mt-3 mr-4" style="color:rgb(166, 169, 172)">
+    <div [hidden]="videoPlaylist.length" class="col-md-3 mt-3 mr-4" style="color:rgb(166, 169, 172)">
       <app-userlist></app-userlist>
-  </div>
-  </div>
-  
-
-
-<div class="row">
-  <div *ngIf="videoPlaylist.length" class="col-md-12">
-    <div id="searchlist" style="height:25vh; overflow-y: auto;" (scroll)="onScroll()">
-      <div class="ml-3 mr-3"S>
-        <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
-          [videoList]="videoList" [loadingInProgress]="loadingInProgress">
-        </app-video-list>
-      </div>
-      
-
-      <div class="loader mt-5" *ngIf="!videoList.length">
-        <div class="loading"></div>
-      </div>
     </div>
-    
   </div>
-</div>
 
-  
 
-  <div id="searchlist" *ngIf="!videoPlaylist.length" class="col-md-12 row" style="height:85vh; overflow-y: auto;" (scroll)="onScroll()">
-      <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
+
+  <div class="row">
+    <div *ngIf="videoPlaylist.length" class="col-md-12">
+      <!-- <div id="searchlist" style="height:25vh; overflow-y: auto;" (scroll)="onScroll()"> -->
+      <div id="searchlist"> 
+        <div class="ml-3 mr-3">
+          <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
+            [videoList]="videoList" [loadingInProgress]="loadingInProgress">
+          </app-video-list>
+        </div>
+
+
+        <div class="loader mt-5" *ngIf="!videoList.length">
+          <div class="loading"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div id="searchlist" *ngIf="!videoPlaylist.length" class="col-md-12 row">
+    <app-video-list *ngIf="videoList.length" class="row" (videoPlaylist)="checkAddToPlaylist($event)"
       [videoList]="videoList" [loadingInProgress]="loadingInProgress">
     </app-video-list>
-   
-    
+
+
 
     <div class="loader mt-5" *ngIf="!videoList.length">
       <div class="loading"></div>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, AfterViewChecked, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewChecked, OnInit, AfterViewInit, HostListener } from '@angular/core';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
 import { PlaylistStoreService } from '../../shared/services/playlist-store.service';
 import { YoutubeApiService } from '../../shared/services/youtube-api.service';
@@ -45,8 +45,13 @@ export class VideoListComponent implements OnInit, AfterViewInit {
     this.syncService.addedToPlaylist(video);
   }
 
-  onScroll(): void {
-    this.youtubeApiService.searchNext();
-  }
+  // onScroll(): void {
+  //   this.youtubeApiService.searchNext();
+  // }
+
+  @HostListener('scroll', ['$event']) private onScroll($event:Event):void {
+    console.log("scrolllllinngg");
+  };
+  
 
 }

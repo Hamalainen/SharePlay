@@ -5,6 +5,7 @@ import { PlaylistStoreService } from '../shared/services/playlist-store.service'
 import { NotificationService } from '../shared/services/notification.service';
 import { SyncService } from '../shared/services/sync.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -160,5 +161,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   onResize(event) {
     this.youtubePlayer.resizePlayer();
   }
+  
+  
 
 }
