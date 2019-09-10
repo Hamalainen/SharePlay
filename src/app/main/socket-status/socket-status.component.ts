@@ -21,7 +21,6 @@ export class SocketStatusComponent implements OnInit {
     
     this.syncService.Rooms().subscribe(res => {
       var rooms = JSON.parse(<string>res);
-      console.log(rooms);
       rl.innerHTML = '';
       for (var room of rooms) {
         // console.log(room.id);

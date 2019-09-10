@@ -158,7 +158,7 @@ export class MainComponent implements AfterViewInit, OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.youtubePlayer.resizePlayer(window.innerHeight, window.innerWidth);
+    this.youtubePlayer.resizePlayer();
   }
 
 }
