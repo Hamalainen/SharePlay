@@ -32,15 +32,14 @@ export class YoutubePlayerService implements AfterContentInit {
     let interval = setInterval(() => {
       if ((typeof _window.YT !== 'undefined') && _window.YT && _window.YT.Player) {
         this.yt_player = new _window.YT.Player('yt-player', {
-          width:  (window.innerWidth/1.5),
-          height: (window.innerWidth/1.5)*0.5625,
+          width:  (window.innerWidth/1.8),
+          height: (window.innerWidth/1.8)*0.5625,
           playerVars: {
             iv_load_policy: '3',
             rel: '0'
           },
           events: {
             onStateChange: (ev) => {
-              // this.onPlayerStateChange(ev);
               this.onChangeSync(ev);
             }
           }
@@ -64,34 +63,6 @@ export class YoutubePlayerService implements AfterContentInit {
     this.syncService.playerEvent(ev, video, time);
   }
 
-
-  // onPlayerStateChange(event: any) {
-  //   const state = event.data;
-  //   switch (state) {
-  //     case 0:
-  //       this.videoChangeEvent.emit(true);
-  //       this.playPauseEvent.emit('pause');
-  //       break;
-  //     case 1:
-  //       this.playPauseEvent.emit('play');
-  //       break;
-  //     case 2:
-  //       this.playPauseEvent.emit('pause');
-  //       break;
-  //   }
-  // }
-
-  // playVideo(videoId: string, videoText?: string): void {
-  //   if (!this.yt_player) {
-  //     console.error('Player not ready.');
-  //     return;
-  //   }
-  //   this.yt_player.loadVideoById(videoId);
-  //   this.currentVideoId = videoId;
-  //   this.currentVideoText.emit(videoText);
-  //   this.browserNotification.show(videoText);
-  // }
-
   pausePlayingVideo(time?: any): void {
     if (time != null) {
       this.yt_player.seekTo(time);
@@ -113,8 +84,8 @@ export class YoutubePlayerService implements AfterContentInit {
   }
 
   resizePlayer() {
-    var width = (window.innerWidth/1.5);
-    var height = (window.innerWidth/1.5)*0.5625;
+    var width = (window.innerWidth/1.8);
+    var height = (window.innerWidth/1.8)*0.5625;
 
     console.log("width: " + width + ", height: " + height);
     this.yt_player.setSize(width, height);
