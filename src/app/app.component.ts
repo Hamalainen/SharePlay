@@ -7,9 +7,4 @@ import { Component, HostListener } from '@angular/core';
 })
 export class AppComponent {
   title = 'SharePlay';
-
-  @HostListener('scroll', ['$event']) private onScroll($event:Event):void {
-    console.log("scrolllllinngg");
-  };
-  
 }
