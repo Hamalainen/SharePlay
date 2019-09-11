@@ -47,7 +47,13 @@ export class VideoSearchComponent {
       .then(data => {
         if (data.length < 1) {
           this.youtubeService.searchVideos(this.last_search, true)
-          // this.notificationService.showNotification('No matches found.');
+          .then(data => {
+            if(data.length < 1){
+              // this.notificationService.showNotification('No matches found.');
+            }
+            this.videosUpdated.emit(data);
+          })
+          
         }
         this.videosUpdated.emit(data);
       })
