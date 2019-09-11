@@ -15,7 +15,7 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   @Input() videoList;
   @Input() loadingInProgress;
   @Output() videoPlaylist = new EventEmitter();
-
+  private hoverbool = false;
   constructor(
     private youtubePlayer: YoutubePlayerService,
     private syncService: SyncService,
@@ -45,13 +45,10 @@ export class VideoListComponent implements OnInit, AfterViewInit {
     this.syncService.addedToPlaylist(video);
   }
 
-  // onScroll(): void {
-  //   this.youtubeApiService.searchNext();
-  // }
-
-  @HostListener('scroll', ['$event']) private onScroll($event:Event):void {
-    console.log("scrolllllinngg");
-  };
+  hover(hover: boolean){
+    console.log('setting bool');
+    this.hoverbool = hover;
+  }
   
 
 }
