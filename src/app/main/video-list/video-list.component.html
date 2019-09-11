@@ -27,21 +27,21 @@
 
   </div>
   <div id="opacity" (click)="play(video)">
-      <div *ngIf="this.syncService.isMasterbool" class="addbutton" (click)="addToPlaylist(video)">
-         <i style="color: #ffffff; padding-left: 90%" class="material-icons">playlist_add</i>
-      </div>
-         
-      <div *ngIf="!this.syncService.isMasterbool" class="playbutton">
-          <i style="color: #ffffff; padding-top: 6vh" class="material-icons">playlist_add</i>
-       </div>
-       <div *ngIf="this.syncService.isMasterbool" class="playbutton">
-          <i style="color: #ffffff; padding-top: 3vh" class="material-icons">play_circle_filled</i>
-       </div>
+    <div *ngIf="this.syncService.isMasterbool" class="addbutton" (click)="addToPlaylist(video)">
+      <i style="color: #ffffff; padding-left: 90%" class="material-icons">playlist_add</i>
+    </div>
+
+    <div *ngIf="!this.syncService.isMasterbool" class="playbutton">
+      <i style="color: #ffffff; padding-top: 6vh" class="material-icons">playlist_add</i>
+    </div>
+    <div *ngIf="this.syncService.isMasterbool" class="playbutton">
+      <i style="color: #ffffff; padding-top: 3vh" class="material-icons">play_circle_filled</i>
+    </div>
 
   </div>
 </div>
 
 
-<div class="loader loader-progress mt-5" *ngIf="loadingInProgress">
+<div class="mt-5 loader loader-progress" *ngIf="loadingInProgress">
   <div class="loading"></div>
 </div>
