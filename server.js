@@ -134,7 +134,7 @@ io.on('connection', (socket) => {
             continue;
           }
           for (var user of room.users) {
-            if (user.socketId == socket.id && user.userName == "") {
+            if (user.socketId == socket.id) {
               user.userName = res.userName;
               io.in(res.roomId).emit('room', room);
               break;
