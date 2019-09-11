@@ -18,9 +18,11 @@ export class YoutubeApiService {
     private notificationService: NotificationService
   ) { }
 
-  searchVideos(query: string): Promise<any> {
-    const url = `${this.base_url}search?q=${query}&order=date&maxResults=${this.max_results}&type=video&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
-
+  searchVideos(query: string, withoutDate?: boolean): Promise<any> {
+    var url = `${this.base_url}search?q=${query}&order=date&maxResults=${this.max_results}&type=video&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
+    if(withoutDate){
+      url = `${this.base_url}search?q=${query}&maxResults=${this.max_results}&type=video&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
+    }
     return this.http.get(url)
       .map(response => {
         let jsonRes = response.json();
