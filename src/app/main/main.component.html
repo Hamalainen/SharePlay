@@ -42,23 +42,24 @@
   </div>
   <div [hidden]="!videoPlaylist.length" class="row">
 
-     <div class="col-md-3 ml-4 mt-2 mb-2">
+    <div class="col-md-3 ml-4 mt-2 mb-2">
 
-        <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
+      <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
 
-      </div>
-   
+    </div>
+
   </div>
 
 
   <div id="searchlist" class="mr-5 ml-5" style="background-color: #121212;">
 
-            <app-video-list class="row" (videoPlaylist)="checkAddToPlaylist($event)"
-              [videoList]="videoList" [loadingInProgress]="loadingInProgress">
-            </app-video-list>
-          <div class="loader mt-5" *ngIf="!videoList.length">
-            <div class="loading"></div>
-          </div>
+    <app-video-list class="row" (videoPlaylist)="checkAddToPlaylist($event)" [videoList]="videoList"
+      [loadingInProgress]="loadingInProgress">
+    </app-video-list>
 
+    <div class="row col-md-12 mt-5 mb-5" *ngIf="!videoList.length">
+      <div class="col-md-6"></div>
+      <div class="spinner-border text-light"></div>
     </div>
+  </div>
 </div>
