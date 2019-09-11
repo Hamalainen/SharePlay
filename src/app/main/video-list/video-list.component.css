@@ -114,6 +114,7 @@
 }
 
 #opacity:hover{
+
   display: block;
   cursor: pointer;
 }
@@ -122,3 +123,15 @@
   display: block;
   }
 
+ .playbutton {
+  text-align: center;
+  margin: auto;
+ }
+
+ .playbutton i {
+  font-size: 48px;
+ }
+
+ .addbutton i{ 
+  font-size: 36;
+ }

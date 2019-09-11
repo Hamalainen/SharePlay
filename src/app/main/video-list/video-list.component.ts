@@ -15,7 +15,6 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   @Input() videoList;
   @Input() loadingInProgress;
   @Output() videoPlaylist = new EventEmitter();
-  private hoverbool = false;
   constructor(
     private youtubePlayer: YoutubePlayerService,
     private syncService: SyncService,
@@ -39,16 +38,10 @@ export class VideoListComponent implements OnInit, AfterViewInit {
   }
 
   addToPlaylist(video: any): void {
+    event.stopPropagation();
     if(this.mainComponent.videoPlaylist.length < 1){
       this.play(video);
     }
     this.syncService.addedToPlaylist(video);
   }
-
-  hover(hover: boolean){
-    console.log('setting bool');
-    this.hoverbool = hover;
-  }
-  
-
 }

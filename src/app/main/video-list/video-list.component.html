@@ -26,47 +26,19 @@
 
 
   </div>
-  <div id="opacity">
-      
-          <i (click)="addToPlaylist(video)" class="material-icons">playlist_add</i>
-       
-      <div class="video-play-button">
-          <i class="material-icons">play_circle_filled</i>
-        </div>
+  <div id="opacity" (click)="play(video)">
+      <div *ngIf="this.syncService.isMasterbool" class="addbutton" (click)="addToPlaylist(video)">
+         <i style="color: #ffffff; padding-left: 90%" class="material-icons">playlist_add</i>
+      </div>
+         
+      <div *ngIf="!this.syncService.isMasterbool" class="playbutton">
+          <i style="color: #ffffff; padding-top: 6vh" class="material-icons">playlist_add</i>
+       </div>
+       <div *ngIf="this.syncService.isMasterbool" class="playbutton">
+          <i style="color: #ffffff; padding-top: 3vh" class="material-icons">play_circle_filled</i>
+       </div>
+
   </div>
-  <!-- <div class="demo-card-square mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title mdl-card--expand" (click)="play(video)"
-      [ngStyle]="{'background': '#000 url(' + video.snippet?.thumbnails.high.url + ') center center no-repeat', 'background-size': '125%', 'height': '84%'}">
-      <div class="video-info-block">
-        <div class="video-informations">
-          <span style="float: left;">
-            <i class="material-icons">cloud_upload</i>
-            {{ video.snippet?.publishedAt | videoPublished }}
-          </span>
-          <span style="margin-left: 10px;">
-            <i class="material-icons">remove_red_eye</i>
-            {{ video.statistics?.viewCount | videoLikesViews }}
-          </span>
-          <span style="margin-left: 10px; float: right;">
-            <i class="material-icons">access_time</i>
-            {{ video.contentDetails?.duration | videoDuration }}
-          </span>
-        </div>
-      </div>
-      <div class="video-name-block">
-        <div class="video-informations">
-          <b>{{ video.snippet?.channelTitle | videoName: [20, 17]}} </b>
-          - {{ video.snippet?.title | videoName: [35, 32] }}
-        </div>
-      </div>
-      <div class="video-play-button">
-        <i class="material-icons">play_circle_filled</i>
-      </div>
-    </div>
-    <div class="mdl-card__supporting-text">
-      <i (click)="addToPlaylist(video)" class="material-icons">playlist_add</i>
-    </div>
-  </div> -->
 </div>
 
 
