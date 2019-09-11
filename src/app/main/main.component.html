@@ -9,6 +9,7 @@
         <div [hidden]="videoPlaylist.length" class="col-md-4 ml-1 mr-5">
           <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
         </div>
+        <div class="col-md-1"></div>
         <div [hidden]="videoPlaylist.length" class="col-md-2 ml-5 mt-2" style="color:rgb(166, 169, 172)">
           <app-userlist></app-userlist>
         </div>
