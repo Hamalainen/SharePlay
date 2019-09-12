@@ -1,5 +1,32 @@
-<div class="row" *ngFor="let video of videoPlaylist; let i = index;" id="{{video.id}}" class="playist-item" (click)="play(video.id)" [ngClass]="{'playing': currentPlaying(video.id)}">
-  <div class="col-md-12">
+<div class="row col-md-12 mb-2" *ngFor="let video of videoPlaylist; let i = index;" id="{{video.id}}" (click)="play(video.id)"
+  [ngClass]="{'playing': currentPlaying(video.id)}" style="margin-left: 0 !important; padding-left: 0px !important; padding-right: 0px !important;">
+    <div class="col-md-4" style="padding-left: 0px !important;">
+      <img src={{video.snippet.thumbnails.high.url}} style="clip-path: inset(21px 0% 21px 0%); height: 163px; position: absolute; top: -21px;"/>
+      <div style="background-color: rgba(0, 0, 0, 0.8); position: absolute; top: 91px; right: -3px;">
+          <span style="margin: 0vh 5px; color: #ffffff; font-weight: 400; ">
+            {{ video.contentDetails?.duration | videoDuration }}
+          </span>
+        </div>
+    </div>
+    <div class="col-md-7 ml-4" style="height: 121px;">
+      <div>
+        <b style="color: #ffffff">{{ video.snippet?.title | videoName: [55, 52] }}</b>
+      </div>
+      <div>
+        <span style="color: #AAAAAA">{{ video.snippet?.channelTitle | videoName: [20, 17]}}</span>
+      </div>
+      <div>
+        <span style="color: #AAAAAA">{{ video.statistics?.viewCount | videoLikesViews }} views</span>
+      </div>
+      <div>
+        <span style="color: #AAAAAA">for {{ video.snippet?.publishedAt | videoPublished }}</span>
+      </div>
+    </div>
+
+
+
+
+  <!-- <div class="col-md-12">
     <div class="playlist-thumbnail"
       [ngStyle]="{'background': '#000 url(' + video.snippet.thumbnails.default.url + ') center center no-repeat', 'background-size': '100%'}">
       <span class="video-duration">{{ video.contentDetails.duration | videoDuration }}</span>
@@ -22,5 +49,5 @@
   </div>
   <div class="opened-item-info mr-4 ml-4">
     Playlist is empty
-  </div>
+  </div> -->
 </div>
