@@ -25,7 +25,7 @@
       <h2 style="color:rgb(166, 169, 172)">
         Playlist
       </h2>
-      <div class="border-left border-top border-dark" style="height:35vh; overflow-y: scroll; -webkit-overflow-scrolling: touch;">
+      <div class="border-left border-top border-dark" style="height:35vh; overflow-y: auto;">
         <app-play-list id="playlist" [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle"
           [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
       </div>
@@ -38,8 +38,6 @@
 
       </div>
     </div>
-  </div>
-  <div [hidden]="!videoPlaylist.length" class="row col-md-12 mr-4 border-top border-dark">
   </div>
   <div [hidden]="!videoPlaylist.length" class="row">
 

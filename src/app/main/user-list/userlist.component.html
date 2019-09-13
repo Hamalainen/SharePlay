@@ -1,5 +1,5 @@
 <div *ngIf="this.mainComponent.videoPlaylist.length">
-  <div style="height:20vh; overflow-y: scroll; -webkit-overflow-scrolling: touch;">
+  <div style="height:20vh; overflow-y: auto;">
     <div *ngFor="let user of userList; let i = index;">
       <div>
         <span style="display: inline-block; position: relative; top:4px">
