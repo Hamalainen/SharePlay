@@ -10,34 +10,29 @@
   margin: 0 auto;
 }
 
-#opacity{
+
+
+#imagecontrols{
   display: none;
+}
+
+#videocontainer:hover #imagecontainer {
   background-color: rgba(0, 0, 0, 0.5);
-  width: 90.6%;
-  height: 52.6%;
-  position: absolute;
-  top: 5.2%;
-}
-
-#opacity:hover{
-
-  display: block;
-  cursor: pointer;
-}
-
-#videocontainer:hover + #opacity {
-  display: block;
   }
-
+  
+#videocontainer:hover #imagecontrols{
+  display: block;
+}
+  
  .playbutton {
   text-align: center;
   margin: auto;
  }
 
  .playbutton i {
-  font-size: 48px;
+  font-size: 4.8vh;
  }
 
- .addbutton i{ 
-  font-size: 36px;
- }
+ /* .addbutton i{ 
+  font-size: 3.6vh;
+ } */
