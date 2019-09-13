@@ -1,21 +1,14 @@
 <div class="col-md-2" id="{{i + video.id}}" *ngFor="let video of videoList; let i = index;">
   <div class="mt-3" id="videocontainer" style="cursor: pointer;" (click)="play(video)">
     <div class="row col-md-12"
-      [ngStyle]="{'background': '#000 url(' + video.snippet.thumbnails.high.url + ') center center no-repeat', 'background-size': '100%', 'margin-right': '0px', 'margin-left': '0px'}">
+      [ngStyle]="{'background': '#000 url(' + video.snippet.thumbnails.high.url + ') center center no-repeat', 'background-size': '100%', 'margin-right': '0px', 'margin-left': '0px', 'padding-right': '0px'}">
 
-      <!-- <div class="col-md-9" style="height:16vh;"></div> -->
       <div class="col-md-12" style="height:16vh;">
-        <div style="display: block; background-color: rgba(0, 0, 0, 0.8); color: #ffffff; float: right; margin-top: 55%;">
+        <div style="background-color: rgba(0, 0, 0, 0.8); color: #ffffff; font-size: 90%; position: absolute; right: 2%; bottom: 2%;">
           <span style="margin: 0vh 5px;">
             {{ video.contentDetails?.duration | videoDuration }}
           </span>
         </div>
-          
-        <!-- <span style="display: block; background-color: rgba(0, 0, 0, 0.8); color: #ffffff; font-weight: 400;float: right !important; top: 13vh !important;">
-          {{ video.contentDetails?.duration | videoDuration }}
-        </span> -->
-
-
       </div>
     </div>
 
