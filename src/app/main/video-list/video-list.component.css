@@ -23,16 +23,3 @@
 #videocontainer:hover #imagecontrols{
   display: block;
 }
-  
- .playbutton {
-  text-align: center;
-  margin: auto;
- }
-
- .playbutton i {
-  font-size: 4.8vh;
- }
-
- /* .addbutton i{ 
-  font-size: 3.6vh;
- } */
