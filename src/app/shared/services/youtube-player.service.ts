@@ -32,8 +32,8 @@ export class YoutubePlayerService implements AfterContentInit {
     let interval = setInterval(() => {
       if ((typeof _window.YT !== 'undefined') && _window.YT && _window.YT.Player) {
         this.yt_player = new _window.YT.Player('yt-player', {
-          width:  (window.innerWidth/1.8),
-          height: (window.innerWidth/1.8)*0.5625,
+          width: (window.innerWidth / 1.8),
+          height: (window.innerWidth / 1.8) * 0.5625,
           playerVars: {
             iv_load_policy: '3',
             rel: '0'
@@ -50,12 +50,12 @@ export class YoutubePlayerService implements AfterContentInit {
   }
 
   onChangeSync(ev: any) {
-  if(ev.data === 0){
-    this.videoChangeEvent.emit(true);
-  }
-  if(ev.data === -1){
-    this.videoLoadedEvent.emit(true);
-  }
+    if (ev.data === 0) {
+      this.videoChangeEvent.emit(true);
+    }
+    if (ev.data === -1) {
+      this.videoLoadedEvent.emit(true);
+    }
 
     var time = this.yt_player.getCurrentTime();
     var video = this.yt_player.getVideoData()['video_id'];
@@ -78,16 +78,18 @@ export class YoutubePlayerService implements AfterContentInit {
   }
 
   getCurrentVideo(): string {
-    if(this.yt_player !== undefined){
+    if (this.yt_player !== undefined) {
       return this.yt_player.getVideoData()['video_id'];
     }
   }
 
-  resizePlayer() {
-    var width = (window.innerWidth/1.8);
-    var height = (window.innerWidth/1.8)*0.5625;
-
-    console.log("width: " + width + ", height: " + height);
+  resizePlayer(definedWidth?: any) {
+    var width = (window.innerWidth / 1.8);
+    var height = (window.innerWidth / 1.8) * 0.5625;
+    if (definedWidth) {
+      width = definedWidth;
+      height = definedWidth * 0.5625;
+    }
     this.yt_player.setSize(width, height);
   }
 

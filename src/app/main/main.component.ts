@@ -36,6 +36,8 @@ export class MainComponent implements AfterViewInit, OnInit {
 
   ) {
     this.youtubePlayer.videoChangeEvent.subscribe(event => event ? this.playRelated() : false);
+
+    
   }
 
   ngOnInit() {
@@ -113,7 +115,8 @@ export class MainComponent implements AfterViewInit, OnInit {
 
   }
 
-  onScroll(): void {
+  onScrolling(): void {
+    this.onScroll();
     var element = document.getElementById("main");
     let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
     if (atBottom) {
@@ -162,6 +165,17 @@ export class MainComponent implements AfterViewInit, OnInit {
     this.youtubePlayer.resizePlayer();
   }
   
-  
-
+  private onScroll():void {
+    var element = document.getElementById("main");
+    var player = document.getElementById("player")
+    if (element.scrollTop >= 65) {
+      var width = window.innerWidth/5;
+      this.youtubePlayer.resizePlayer(width);
+      player.classList.add('fixed-header');
+    }
+    else {
+      player.classList.remove('fixed-header');
+      this.youtubePlayer.resizePlayer();
+    }
+  };
 }

@@ -1,4 +1,4 @@
-<div id="main" style="height: 100vh; width: 100vw; overflow-y: scroll; overflow-x: hidden; -webkit-overflow-scrolling: touch;" (scroll)="onScroll()">
+<div id="main" style="height: 100vh; width: 100vw; overflow-y: scroll; overflow-x: hidden; -webkit-overflow-scrolling: touch;" (scroll)="onScrolling()">
   <div class="row" style="background-color: #272727;">
     <div class="col-md-12 row">
 
@@ -17,8 +17,9 @@
     </div>
   </div>
   <div [hidden]="!videoPlaylist.length" class="row"
-    style="position: -webkit-sticky; position:sticky; top: 0; background-color: #1f1f1f; z-index: 1;">
-    <div class="col-md-7 mt-3 mb-3 mr-5 ml-5">
+    style="top: 0; background-color: #1f1f1f; z-index: 1; background-color: #1f1f1f;">
+    <!-- style="position: -webkit-sticky; position:sticky; top: 0; background-color: #1f1f1f; z-index: 1;"> -->
+    <div id="player" class="col-md-7 mt-3 mb-3 mr-5 ml-5 text-center" style="z-index: 1;">
       <app-player></app-player>
     </div>
     <div class="col-md-4 mt-3 mb-3 mr-4">
@@ -41,7 +42,7 @@
   </div>
   <div [hidden]="!videoPlaylist.length" class="row">
 
-    <div class="col-md-3 ml-4 mt-2 mb-2">
+    <div class="col-md-3 ml-4 mt-2">
 
       <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
 
