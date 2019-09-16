@@ -39,7 +39,7 @@ export class VideoListComponent implements OnInit, AfterViewInit {
 
   addToPlaylist(video: any): void {
     event.stopPropagation();
-    if(this.mainComponent.videoPlaylist.length < 1){
+    if (this.mainComponent.videoPlaylist.length < 1) {
       this.play(video);
     }
     this.syncService.addedToPlaylist(video);

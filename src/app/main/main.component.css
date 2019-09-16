@@ -75,9 +75,38 @@
   -webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
 }
 
-.fixed-header {
+.smallplayer {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  text-align: left;
+  top: 76vh;
+  left: 156vh;
   width: 100%; 
+  overflow-x: hidden;
+  overflow-y: hidden;
+  animation-name: smallplayerpositions;
+  animation-duration: 0.5s;
+  animation-direction: normal;
+}
+
+.bigplayer {
+  position: relative;
+  width: 100%;
+  top: 0vh;
+  left: 0vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  animation-name: bigplayerpositions;
+  animation-duration: 0.5s;
+  animation-direction: normal;
+}
+
+
+@keyframes smallplayerpositions {
+  from {width: 1067px; height: 600px; top: 0vh; left: 0vh; width: 100%;}
+  to {width: 384px; height: 216px; top: 76vh; left: 156vh; width: 100%;}
+}
+
+@keyframes bigplayerpositions {
+  from {width: 384px; height: 216px; top: 76vh; left: 156vh; width: 100%;}
+  to {width: 1067px; height: 600px; top: 0vh; left: 0vh; width: 100%;}
 }

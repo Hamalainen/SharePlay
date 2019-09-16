@@ -12,6 +12,7 @@ import * as $ from 'jquery';
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
+
 })
 export class MainComponent implements AfterViewInit, OnInit {
   public videoList = [];
@@ -25,6 +26,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   private pageLoadingFinished = false;
   private roomId = null;
   public numberOfUsers = 4;
+  isBig = true;
 
   constructor(
     private youtubeService: YoutubeApiService,
@@ -37,7 +39,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   ) {
     this.youtubePlayer.videoChangeEvent.subscribe(event => event ? this.playRelated() : false);
 
-    
+
   }
 
   ngOnInit() {
@@ -79,7 +81,7 @@ export class MainComponent implements AfterViewInit, OnInit {
         if (!this.videoPlaylist.some((e) => e.id === video.id)) {
           this.youtubeService.getVideos([video.id]).then(res => {
             newVideo = res;
-          this.syncService.playRelated(newVideo[0]);
+            this.syncService.playRelated(newVideo[0]);
           });
           break;
         }
@@ -164,18 +166,23 @@ export class MainComponent implements AfterViewInit, OnInit {
   onResize(event) {
     this.youtubePlayer.resizePlayer();
   }
-  
-  private onScroll():void {
+
+  private onScroll(): void {
     var element = document.getElementById("main");
     var player = document.getElementById("player")
     if (element.scrollTop >= 65) {
-      var width = window.innerWidth/5;
+      var width = window.innerWidth / 5;
+      player.classList.remove('bigplayer');
+      player.classList.add('smallplayer');
       this.youtubePlayer.resizePlayer(width);
-      player.classList.add('fixed-header');
+
     }
     else {
-      player.classList.remove('fixed-header');
+      player.classList.remove('smallplayer');
+      player.classList.add('bigplayer');
       this.youtubePlayer.resizePlayer();
     }
   };
+
+
 }

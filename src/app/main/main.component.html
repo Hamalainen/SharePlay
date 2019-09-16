@@ -1,8 +1,10 @@
-<div id="main" style="height: 100vh; width: 100vw; overflow-y: scroll; overflow-x: hidden; -webkit-overflow-scrolling: touch;" (scroll)="onScrolling()">
+<div id="main"
+  style="height: 100vh; width: 100vw; overflow-y: scroll; overflow-x: hidden; -webkit-overflow-scrolling: touch;"
+  (scroll)="onScrolling()">
   <div class="row" style="background-color: #272727;">
     <div class="col-md-12 row">
 
-      <div class="row col-md-12 mt-2">
+      <div class="row col-md-12 mb-2 mt-2">
         <div class="col-md-4 ml-4">
           <img src="../../Hsync.png" style="height:40px;">
         </div>
@@ -17,11 +19,16 @@
     </div>
   </div>
   <div [hidden]="!videoPlaylist.length" class="row"
-    style="top: 0; background-color: #1f1f1f; z-index: 1; background-color: #1f1f1f;">
+    style="background-color: #1f1f1f;">
     <!-- style="position: -webkit-sticky; position:sticky; top: 0; background-color: #1f1f1f; z-index: 1;"> -->
-    <div id="player" class="col-md-7 mt-3 mb-3 mr-5 ml-5 text-center" style="z-index: 1;">
+    <div class="col-md-7 mt-3 mb-3 mr-5 ml-5 text-center">
+      
+
+      <div id="player" style="z-index: 1;">
       <app-player></app-player>
     </div>
+    </div>
+    
     <div class="col-md-4 mt-3 mb-3 mr-4">
       <h2 style="color:rgb(166, 169, 172)">
         Playlist
@@ -30,10 +37,10 @@
         <app-play-list id="playlist" [repeat]="repeat" [shuffle]="shuffle" [playlistToggle]="playlistToggle"
           [playlistNames]="playlistNames" [videoPlaylist]="videoPlaylist"></app-play-list>
       </div>
-      <h3 style="color:rgb(166, 169, 172)">
+      <h3 class="mt-4" style="color:rgb(166, 169, 172)">
         Users
       </h3>
-      <div class="border-left border-top border-dark" [hidden]="!videoPlaylist.length"
+      <div class="border-left border-top border-dark mb-4" [hidden]="!videoPlaylist.length"
         style="color:rgb(166, 169, 172); height:15vh;">
         <app-userlist></app-userlist>
 
