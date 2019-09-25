@@ -170,7 +170,7 @@ export class MainComponent implements AfterViewInit, OnInit {
   private onScroll(): void {
     var element = document.getElementById("main");
     var player = document.getElementById("player")
-    if (element.scrollTop >= 65) {
+    if (element.scrollTop >= 100) {
       var width = window.innerWidth / 5;
       player.classList.remove('bigplayer');
       player.classList.add('smallplayer');
