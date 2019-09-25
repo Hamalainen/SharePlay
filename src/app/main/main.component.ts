@@ -175,7 +175,6 @@ export class MainComponent implements AfterViewInit, OnInit {
       player.classList.remove('bigplayer');
       player.classList.add('smallplayer');
       this.youtubePlayer.resizePlayer(width);
-
     }
     else {
       player.classList.remove('smallplayer');
