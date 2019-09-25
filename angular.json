@@ -19,10 +19,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/H.ico",
-              "src/assets",
-              "src/H.png",
-              "src/Hsync.png"
+              "src/assets/"
             ],
             "styles": [
               "src/styles.css"

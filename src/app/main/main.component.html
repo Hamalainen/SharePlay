@@ -3,16 +3,9 @@
   (scroll)="onScrolling()">
   <div class="row" style="background-color: #272727;">
     <div class="col-md-12 row">
-
       <div class="row col-md-12 mb-2 mt-2">
         <div class="col-md-4 ml-4">
-          <img src="../../Hsync.png" style="height:40px;">
-        </div>
-        <div class="col-md-4 ml-4">
-          <img src="../../logga.png" style="height:40px;">
-        </div>
-        <div class="col-md-4 ml-4">
-          <img src="../../logga2.png" style="height:40px;">
+          <img src="../../assets/logga.png" style="height:40px;">
         </div>
         <div [hidden]="videoPlaylist.length" class="col-md-4 ml-1 mr-5">
           <app-video-search (videosUpdated)="handleSearchVideo($event)"></app-video-search>
