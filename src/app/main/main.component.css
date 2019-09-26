@@ -79,12 +79,12 @@
   position: fixed;
   text-align: left;
   top: 76vh;
-  left: 156vh;
+  left: 2vh;
   width: 100%; 
   overflow-x: hidden;
   overflow-y: hidden;
   animation-name: smallplayerpositions;
-  animation-duration: 0.5s;
+  animation-duration: 0.25s;
   animation-direction: normal;
 }
 
@@ -96,17 +96,17 @@
   overflow-x: hidden;
   overflow-y: hidden;
   animation-name: bigplayerpositions;
-  animation-duration: 0.5s;
+  animation-duration: 0.25s;
   animation-direction: normal;
 }
 
 
 @keyframes smallplayerpositions {
   from {width: 1067px; height: 600px; top: 0vh; left: 0vh; width: 100%;}
-  to {width: 384px; height: 216px; top: 76vh; left: 156vh; width: 100%;}
+  to {width: 384px; height: 216px; top: 76vh; left: 2vh; width: 100%;}
 }
 
 @keyframes bigplayerpositions {
-  from {width: 384px; height: 216px; top: 76vh; left: 156vh; width: 100%;}
-  to {width: 1067px; height: 600px; top: 0vh; left: 0vh; width: 100%;}
+  from {width: 384px; height: 216px; top: 76vh; left: 0vh; width: 100%;}
+  to {width: 1067px; height: 600px; top: 0vh; left: 2vh; width: 100%;}
 }

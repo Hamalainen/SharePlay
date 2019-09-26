@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import { NotificationService } from './notification.service';
 import { YOUTUBE_API_KEY } from '../constants';
+import { distinctUntilChanged, switchMap, takeUntil, debounceTime } from 'rxjs/operators';
 
 @Injectable()
 export class YoutubeApiService {
@@ -18,11 +19,37 @@ export class YoutubeApiService {
     private notificationService: NotificationService
   ) { }
 
+  // search(query: string, withoutDate?: boolean): Promise<any> {
+  //   var url = `${this.base_url}search?q=${query}&order=date&relevanceLanguage=en&maxResults=${this.max_results}&type=video&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
+  //   if (withoutDate) {
+  //     url = `${this.base_url}search?q=${query}&maxResults=${this.max_results}&type=video&relevanceLanguage=en&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
+  //   }
+
+  //   return this.http.get(url)
+  //     .subscribe(response => {
+  //       let jsonRes = response.json();
+  //       let res = jsonRes['items'];
+  //       this.lastQuery = query;
+  //       this.nextToken = jsonRes['nextPageToken'] ? jsonRes['nextPageToken'] : undefined;
+
+  //       let ids = [];
+
+  //       res.forEach((item) => {
+  //         ids.push(item.id.videoId);
+  //       });
+
+  //       return this.getVideos(ids);
+  //     })
+  //     .toPromise()
+  //     .catch(this.handleError)
+  // }
+
   searchVideos(query: string, withoutDate?: boolean): Promise<any> {
     var url = `${this.base_url}search?q=${query}&order=date&relevanceLanguage=en&maxResults=${this.max_results}&type=video&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
-    if(withoutDate){
+    if (withoutDate) {
       url = `${this.base_url}search?q=${query}&maxResults=${this.max_results}&type=video&relevanceLanguage=en&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
     }
+
     return this.http.get(url)
       .map(response => {
         let jsonRes = response.json();
@@ -66,21 +93,21 @@ export class YoutubeApiService {
     const url = `${this.base_url}search?&relatedToVideoId=${id}&maxResults=${this.max_results}&type=video&relevanceLanguage=en&part=snippet,id&key=${YOUTUBE_API_KEY}&videoEmbeddable=true`; // tslint:disable-line
 
     return this.http.get(url)
-    .map(response => {
-      let jsonRes = response.json();
-      let res = jsonRes['items'];
-      this.nextToken = jsonRes['nextPageToken'] ? jsonRes['nextPageToken'] : undefined;
+      .map(response => {
+        let jsonRes = response.json();
+        let res = jsonRes['items'];
+        this.nextToken = jsonRes['nextPageToken'] ? jsonRes['nextPageToken'] : undefined;
 
-      let ids = [];
+        let ids = [];
 
-      res.forEach((item) => {
-        ids.push(item.id.videoId);
-      });
+        res.forEach((item) => {
+          ids.push(item.id.videoId);
+        });
 
-      return this.getVideos(ids);
-    })
-    .toPromise()
-    .catch(this.handleError)
+        return this.getVideos(ids);
+      })
+      .toPromise()
+      .catch(this.handleError)
   }
 
   getVideos(ids): Promise<any> {
