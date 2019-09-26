@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { YoutubeApiService } from '../../shared/services/youtube-api.service';
 import { YoutubePlayerService } from '../../shared/services/youtube-player.service';
 import { NotificationService } from '../../shared/services/notification.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-video-search',
@@ -42,6 +43,8 @@ export class VideoSearchComponent {
 
     this.videosUpdated.emit([]);
     this.last_search = this.searchForm.value.query;
+
+this.youtubeService.searchVideos
 
     this.youtubeService.searchVideos(this.last_search)
       .then(data => {
