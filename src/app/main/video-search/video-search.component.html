@@ -1,5 +1,5 @@
-<form [formGroup]="searchForm">
+  <form [formGroup]="searchForm">
   <div class="md-form">
-     <input class="form-control border-dark" (ngModelChange)="doSearch($event)" formControlName="query" id="query" type="text" placeholder="Search" aria-label="Search" style="background-color:#121212; color:rgb(166, 169, 172);">
+     <input class="form-control border-dark" formControlName="query" id="query" type="text" placeholder="Search" aria-label="Search" style="background-color:#121212; color:rgb(166, 169, 172);">
   </div>
 </form>
