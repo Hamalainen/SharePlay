@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class BeerRatingComponent implements OnInit {
 
-  private ramisImage;
+  public ramisImage;
   constructor(private http: HttpClient) {
     console.log('vad händer?');
 
