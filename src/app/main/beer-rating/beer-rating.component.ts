@@ -12,10 +12,11 @@ export class BeerRatingComponent implements OnInit {
   public ramisImage;
   constructor(private http: HttpClient) {
     console.log('vad händer?');
+  
+    this.getImageFromService();
 
     setInterval(() => {
       this.getImageFromService();
-      console.log("testing");
     }, 1000 * 5)
 
 
