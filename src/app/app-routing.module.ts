@@ -6,7 +6,7 @@ import { SocketStatusComponent } from './main/socket-status/socket-status.compon
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'server', component: SocketStatusComponent },
-  { path: ':room', component: MainComponent }
+  { path: 'room/:room', component: MainComponent }
 
 ];
 

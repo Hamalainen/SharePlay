@@ -305,23 +305,22 @@ io.on('connection', (socket) => {
 
 
 
-var app = express();
-var fs = require("fs");
+// var app = express();
+// var fs = require("fs");
 
 
-const PORTen = process.env.PORT || 8081;
 
 
-var apiServer = app.listen(PORTen, function () {
-  var host = apiServer.address().address
-  var port = apiServer.address().port
-  console.log("Example app listening at http://%s:%s", host, port)
-});
 
-
-app.get('/listUsers', function (req, res) {
+// app.get('/listUsers', function (req, res) {
   //  fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-     console.log( "kalsjadjaskdkjdsalkjsdlkajdslksajdlksajdlkjsa" );
-     res.end("hshdhahdahdhadhahdahd");
+    //  console.log( "kalsjadjaskdkjdsalkjsdlkajdslksajdlksajdlkjsa" );
+    //  res.end("hshdhahdahdhadhahdahd");
   // });
-});
+// });
+
+// var apiServer = app.listen(8081, function () {
+//   var host = apiServer.address().address
+//   var port = apiServer.address().port
+//   console.log("Example app listening at http://%s:%s", host, port)
+// });
