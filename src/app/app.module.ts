@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
 import { PlayerComponent } from './main/player/player.component';
 import { MainComponent } from './main//main.component';
 import { SocketStatusComponent } from './main/socket-status/socket-status.component';
-import { BeerRatingComponent } from './main/beer-rating/beer-rating.component';
 // Pipes
 import { VideoDurationPipe } from './shared/pipes/video-duration.pipe';
 import { VideoLikesViewsPipe } from './shared/pipes/video-likes-views.pipe';
@@ -53,8 +52,7 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     VideoSearchComponent,
     PlayListComponent,
     UserlistComponent,
-    SocketStatusComponent,
-    BeerRatingComponent
+    SocketStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -78,8 +76,7 @@ const config: SocketIoConfig = { url: socketUrl, options: {} };
     VideoListComponent,
     PlayListComponent,
     UserNameService,
-    UserlistComponent,
-    BeerRatingComponent
+    UserlistComponent
   ],
   bootstrap: [AppComponent]
 })
