@@ -9,7 +9,7 @@ const path = require('path');
 
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const INDEX = path.join(__dirname, '/dist/SharePlay/index.html');
 
